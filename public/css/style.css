@@ -1,0 +1,162 @@
+/*
+Template Name: Yogi | Yoga & Meditation Website Template
+Author: Pillarix
+Author URI: https://wrapbootstrap.com/user/pillarix
+Version: 1.0
+*/
+/*
+-- Body
+-- Custom Classes
+-- Navbar
+-- Footer
+-- Mobile Media  
+*/
+
+/* Body */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap');
+body {
+  font-family: 'Open Sans', sans-serif;
+
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syncopate', sans-serif;
+  font-weight: bold;
+  letter-spacing: -1px !important;
+}
+
+.btn,
+.link-primary {
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #1b1b1b;
+}
+
+a:hover {
+  color: #FB625A;
+}
+
+.bg-osahan {
+  background-image: url(../img/banner.jpeg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.yoga-nav a.nav-link {
+  padding-top: 35px !important;
+  padding-bottom: 35px !important;
+}
+
+/* Custom Classes */
+.title-line {
+	height: 5px;
+	display: inline-block;
+}
+.btn-lg {
+  padding: 10px 32px;
+  font-size: 20px;
+}
+
+.btn-primary {
+  background-color: #FB625A !important;
+  border-color: #FB625A !important;
+}
+
+.btn-primary:hover {
+  background-color: #FF3D33 !important;
+  border-color: #FF3D33 !important;
+}
+
+.btn-outline-primary {
+  border-color: #FB625A !important;
+  color: #FB625A !important;
+}
+
+.btn-outline-primary:hover {
+  border-color: #FF3D33 !important;
+  background-color: #FF3D33 !important;
+  color: #fff !important;
+}
+
+.fs-96 {
+  font-size: 74px;
+  line-height: 76px;
+}
+
+.w-5 {
+  width: 5% !important;
+}
+
+.text-primary {
+  color: #FB625A !important;
+}
+
+.bg-primary {
+  background-color: #FB625A !important;
+}
+
+.link-primary {
+  color: #FB625A !important;
+}
+
+.link-primary:hover {
+  color: #4b7878 !important;
+}
+
+
+.text-success {
+  color: #145E67 !important;
+}
+
+.bg-success {
+  background-color: #145E67 !important;
+}
+
+
+/* Navbar */
+.yoga-nav .navbar-nav .nav-link {
+  padding: 10px 0;
+  margin: 0px 11px;
+}
+
+.yoga-nav .navbar-nav .nav-link.active {
+  color: #FB625A;
+}
+
+.yoga-nav .navbar-nav .nav-link:hover {
+  color: #FB625A;
+}
+
+/* Sidebar Nav */
+.sidebar-nav .navbar-nav .nav-link {
+	font-size: 20px;
+	color: #ffffff;
+}
+.sidebar-nav .navbar-nav .nav-link.active,
+.sidebar-nav .navbar-nav .nav-link:hover {
+	color: #FB625A;
+}
+
+
+/* Footer */
+footer .footer-top .social-icons a {
+  height: 35px;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer .footer-top .social-icons a:hover {
+  border-color: #FB625A !important;
+}
+
+/* Mobile Media  */
+@media (max-width:992px) {
+  .m-none {
+    display: none;
+  }
+}
