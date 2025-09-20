@@ -4,60 +4,117 @@ import { useEffect } from "react";
 import { useState } from 'react';
 import Link from "next/link";
 import Hero from "./hero";
-// import "./../public/vender/bootstrap/js/bootstrap.bundle.min.js"
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  const pathname = usePathname(); // récupère l'URL actuelle
+
+  // Configuration des liens de navigation
+  const links = [
+    { href: "/", label: "Accueil", icon: "ri-apps-2-line" },
+    { href: "/a-propos", label: "A propos" },
+    {
+      href: "/classes",
+      label: "Classes",
+      dropdown: [
+        { href: "/classes/all-class", label: "Liste des classes" },
+        { href: "/classes/book-class", label: "Réserver une classe" },
+      ],
+    },
+    { href: "/tarifs", label: "Acheter Crédit" },
+    { href: "/contact", label: "Contact" },
+  ];
+
+  // Fonction pour déterminer si un lien est actif
+  const isActiveLink = (href) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(href);
+  };
+
+  // Fonction pour obtenir les classes CSS du lien
+  const getLinkClasses = (href) => {
+    return `nav-link ${isActiveLink(href) ? 'active' : ''}`;
+  };
 
   return (
     <>
-    <nav className="navbar osahan-main-nav navbar-expand yoga-nav py-3 py-lg-0">
+      <nav className="navbar osahan-main-nav navbar-expand yoga-nav py-3 py-lg-0">
         <div className="container">
           {/* Brand */}
           <div className="position-relative d-flex align-items-center gap-2 site-brand">
             <i className="ri-body-scan-line fs-2 lh-1 text-primary"></i>
             <div className="lh-1">
-              <h5 className="fw-bold m-0 text-success">YOGA</h5>
-              <small className="text-dark-50">Template</small>
+              <h5 className="fw-bold m-0 text-success">MOON</h5>
+              <small className="text-dark-50">Studio</small>
             </div>
             <Link href="/" className="stretched-link"></Link>
           </div>
 
           {/* Desktop Menu */}
-          <div className=" navbar-collapse">
-            <ul className="navbar-nav ms-auto gap-4 m-none text-uppercase">
-              <li className="nav-item">
-                <Link href="/" className="nav-link active">
-                  <i className="ri-apps-2-line"></i> Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/about" className="nav-link">About</Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/classes" className="nav-link">Classes</Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/contact" className="nav-link">Contact</Link>
-              </li>
+          <div className="navbar-collapse">
+           <ul className="navbar-nav ms-auto gap-4 m-none text-uppercase">
+              {links.map((link) =>
+                link.dropdown ? (
+                  <li
+                    key={link.href}
+                    className="nav-item dropdown single-dropdown-nav"
+                  >
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      {link.label}
+                    </a>
+                    <ul className="dropdown-menu">
+                      {link.dropdown.map((sub) => (
+                        <li key={sub.href}>
+                          <Link
+                            href={sub.href}
+                            className="dropdown-item"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            {sub.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ) : (
+                  <li key={link.href} className="nav-item">
+                    <Link
+                      href={link.href}
+                      className={getLinkClasses(link.href)}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.icon && <i className={`${link.icon} me-1`}></i>}
+                      {link.label}
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
 
             {/* Action Buttons */}
             <div className="d-flex align-items-center gap-4 ms-auto">
-              <button 
+              {/* <button 
                 className="link-dark bg-transparent border-0" 
                 onClick={() => setIsSearchOpen(true)}
                 aria-label="Search"
               >
                 <i className="ri-search-line ri-lg"></i>
-              </button>
+              </button> */}
               <Link href="/profile" className="link-dark">
                 <i className="ri-account-circle-line ri-lg"></i>
               </Link>
-              <Link href="/join" className="btn btn-primary rounded-pill px-3 d-none d-lg-block">
+              <Link href="/connexion" className="btn btn-primary rounded-pill px-3 d-none d-lg-block">
                 Connexion
               </Link>
               <button 
@@ -78,7 +135,7 @@ export default function Navbar() {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Search</h5>
+                <h5 className="modal-title">Rechercher</h5>
                 <button 
                   type="button" 
                   className="btn-close" 
@@ -90,7 +147,7 @@ export default function Navbar() {
                 <input 
                   type="search" 
                   className="form-control" 
-                  placeholder="Search..." 
+                  placeholder="Rechercher..." 
                   autoFocus 
                 />
               </div>
@@ -98,7 +155,6 @@ export default function Navbar() {
           </div>
         </div>
       )}
-
 
       {/* Mobile Sidebar */}
       {isMobileMenuOpen && (
@@ -114,26 +170,18 @@ export default function Navbar() {
           </div>
           <div className="offcanvas-body">
             <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link href="/" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/about" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                  About
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/classes" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                  Classes
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/contact" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                  Contact
-                </Link>
-              </li>
+              {links.map((link) => (
+                <li key={link.href} className="nav-item">
+                  <Link 
+                    href={link.href} 
+                    className={getLinkClasses(link.href)}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.icon && <i className={`${link.icon} me-2`}></i>}
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
             <div className="mt-3">
               <Link href="/join" className="btn btn-primary rounded-pill w-100">
@@ -145,14 +193,14 @@ export default function Navbar() {
       )}
 
       {/* Overlay for mobile menu */}
-      {isMobileMenuOpen && (
+      {/* {isMobileMenuOpen && (
         <div 
           className="offcanvas-backdrop fade show" 
           onClick={() => setIsMobileMenuOpen(false)}
         ></div>
-      )}
+      )} */}
 
-      <Hero />
+      {/* <Hero /> */}
     </>
   );
 }

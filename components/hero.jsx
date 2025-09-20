@@ -13,7 +13,7 @@ export default function Hero() {
             data-aos="fade-right"
             data-aos-duration="500"
           >
-            Transform Your Life with Yoga
+            Le Pilates, force et équilibre
           </h1>
           <p
             className="lead text-muted pe-lg-5 aos-init aos-animate"
@@ -30,10 +30,10 @@ export default function Hero() {
             data-aos-duration="600"
           >
             <a href="#" className="btn btn-primary rounded-pill btn-lg">
-              Join Class
+              Rejoindre une classe
             </a>
             <a href="#" className="btn btn-outline-primary rounded-pill btn-lg">
-              Learn More
+              En savoir plus
             </a>
           </div>
         </div>
@@ -45,7 +45,7 @@ export default function Hero() {
           data-aos-duration="600"
         >
           <img
-            src="/img/hero-header2.png" // Assure-toi que l'image est dans /public/img/
+            src="/img/hero-header3.png" // Assure-toi que l'image est dans /public/img/
             alt="hero-header"
             className="img-fluid rounded-3"
           />

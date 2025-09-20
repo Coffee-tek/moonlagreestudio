@@ -1,9 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-// import "../styles/bootstrap.min.css";
-
+import ConditionalLayout from "@/components/ConditionalLayout";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +20,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-     <html lang="fr">
+    <html lang="fr" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
         {/* Vendor CSS */}
         <link href="/vender/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -35,23 +33,27 @@ export default function RootLayout({ children }) {
         <link href="/css/common.css" rel="stylesheet" />
       </head>
       <body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
-        <div className="bg-osahan">
-          < Navbar />
+        <ConditionalLayout>
           {children}
-          <Footer />
-        </div>
+        </ConditionalLayout>
 
-        {/* Bootstrap Bundle */}
-        <script src="/vender/bootstrap/js/bootstrap.bundle.min.js" strategy="afterInteractive" />
-
-        {/* jQuery */}
-        <script src="/vender/jquery/jquery-3.6.4.min.js" strategy="afterInteractive" />
-
-        {/* AOS */}
-        <script src="/vender/aos/dist/aos.js" strategy="afterInteractive" />
-
-        {/* script custom */}
-        <script src="/js/script.js" strategy="afterInteractive" />
+        {/* Scripts avec Next.js Script component */}
+        <Script
+          src="/vender/bootstrap/js/bootstrap.bundle.min.js"
+          strategy="afterInteractive"
+        />
+        <Script
+          src="/vender/jquery/jquery-3.6.4.min.js"
+          strategy="afterInteractive"
+        />
+        <Script
+          src="/vender/aos/dist/aos.js"
+          strategy="afterInteractive"
+        />
+        <Script
+          src="/js/script.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
