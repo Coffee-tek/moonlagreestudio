@@ -67,7 +67,7 @@ const EnhancedPopularClasses = ({
           <div className="col-auto" data-aos="fade-right" data-aos-duration="600">
             <h2 className="h4 mb-0">
               {activeCategory !== "Tous" ? `Cours ${activeCategory}` : "Tous les cours"}
-              <span className="badge bg-primary ms-2">{filteredClasses.length}</span>
+              {/* <span className="badge bg-primary ms-2">{filteredClasses.length}</span> */}
             </h2>
           </div>
           {showViewAllButton && (
@@ -113,18 +113,18 @@ const EnhancedPopularClasses = ({
                   </span>
 
                   {/* Badge de prix */}
-                  {classItem.price && (
+                  {/* {classItem.price && (
                     <span className="badge bg-success position-absolute top-0 end-0 m-3">
                       {classItem.price}
                     </span>
-                  )}
+                  )} */}
 
                   {/* Overlay au hover */}
-                  <div className="card-image-overlay">
+                  {/* <div className="card-image-overlay">
                     <Link href={classItem.link || '#'} className="stretched-link">
                       <i className="ri-play-circle-fill"></i>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="card-body px-0 d-flex flex-column">

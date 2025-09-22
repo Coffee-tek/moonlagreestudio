@@ -28,30 +28,30 @@ a{
 
 /* Custom Classes */
 .text-purple{
-	color: #FB625A !important;
+	color: #7A170A !important;
 }
 .btn-theme {
 	padding: 10px 25px !important;
 }
 .btn-purple{
-	background-color: #FB625A;
+	background-color: #7A170A;
 	color: #ffffff;
-	border: 1px solid #FB625A;
+	border: 1px solid #7A170A;
 }
 .btn-purple:hover, .btn-purple:focus, .btn-outline-purple:hover {
-	background-color: #FF3D33;
+	background-color: #a31906;
 	color: #ffffff;
-	border: 1px solid #FF3D33;
+	border: 1px solid #a31906;
 }
 .btn-outline-purple{
-	color: #FF3D33;
-	border: 1px solid #FF3D33;
+	color: #a31906;
+	border: 1px solid #a31906;
 }
 .bg-purple{
-	background-color: #FB625A;
+	background-color: #7A170A;
 }
 .purple-tab .nav-link {
-	color: #FB625A;
+	color: #7A170A;
 }
 .bg-opacity-purple {
 	background: rgb(139 61 255 / 8%);
