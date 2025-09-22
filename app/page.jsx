@@ -75,7 +75,7 @@ export default function Home() {
                         Vôtre meilleur Studio Pilates
                     </h1>
                     <p data-aos="fade-right" data-aos-duration="600">
-                        rue 12x34 Mermoz Dakar, Dakar - Sénégal 10500
+                        rue 12x34 Mermoz Dakar, Dakar - Sénégal
                     </p>
                     </div>
                     <a
@@ -142,7 +142,7 @@ export default function Home() {
                 >
                 <div className="relative overflow-hidden rounded-2xl shadow-2xl group">
                     <Image
-                    src="/img/best-yoga.jpeg"
+                    src="/img/studio.png"
                     alt="Best Yoga Studio - Peaceful yoga practice"
                     width={600}
                     height={400}
@@ -165,7 +165,7 @@ export default function Home() {
                     }`}
                 >
                     <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
-                    The Best<br />Yoga Studio
+                    MOON Lagree<br />Studio
                     </h1>
                 </div>
 
@@ -206,7 +206,7 @@ export default function Home() {
                     {/* Signature */}
                     <div className="pt-6 text-white">
                     <p className="text-right font-semibold tracking-wider">
-                        - VICTORIA ROSS
+                        - Celia Moon
                     </p>
                     </div>
                 </div>
@@ -216,7 +216,6 @@ export default function Home() {
         </section>
 
         <InstructorsSection />
-        
         <SubscribeSection />
 
     </main>

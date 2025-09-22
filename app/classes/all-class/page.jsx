@@ -43,7 +43,7 @@ export default function AllClasse () {
                         luctus accumsan…
                     </p>
                     <a href="#" className="link-primary">
-                        Read More <i className="ri-arrow-right-line ms-1"></i>
+                        Voir plus <i className="ri-arrow-right-line ms-1"></i>
                     </a>
                     </div>
                 </div>

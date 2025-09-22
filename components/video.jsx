@@ -7,7 +7,7 @@ export default function VideoSection() {
             <div className="card text-bg-dark rounded-4 border-0 overflow-hidden">
               {/* Image d’arrière-plan */}
               <img
-                src="/img/video.jpeg"
+                src="/img/video.png"
                 className="card-img opacity-50"
                 alt="video"
               />

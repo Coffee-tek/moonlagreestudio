@@ -63,7 +63,7 @@ export const popularClasses = [
     id: 1,
     title: "Pilates au sol (Matwork)",
     description: "Pratiqué sur tapis, parfois avec petits accessoires (ballon, élastique, cercle magique, rouleau). C’est la forme la plus accessible et répandue.",
-    image: "/img/popular-classes/1.jpeg",
+    image: "/img/popular-classes/cours1.jpg",
     link: "/classes/vinyasa-vitality",
     category: "Intermédiaire",
     duration: "45 min",
@@ -79,7 +79,7 @@ export const popularClasses = [
     id: 2,
     title: "Pilates sur machines",
     description: "Utilise des appareils inventés par Joseph Pilates (souvent avec ressorts pour ajouter résistance ou assistance) :",
-    image: "/img/popular-classes/2.jpeg",
+    image: "/img/popular-classes/cours2.jpg",
     link: "/classes/foundation-flow",
     category: "Débutant",
     duration: "60 min",
@@ -95,7 +95,7 @@ export const popularClasses = [
     id: 3,
     title: "Pilates doux / thérapeutique",
     description: "Adapté pour les personnes en rééducation, seniors, ou en reprise d’activité..",
-    image: "/img/popular-classes/3.jpeg",
+    image: "/img/popular-classes/cours3.jpg",
     link: "/classes/rise-shine",
     category: "Débutant",
     duration: "30 min",
@@ -111,7 +111,7 @@ export const popularClasses = [
     id: 4,
     title: "Pilates dynamique / cardio-pilates",
     description: "Enchaînements plus rapides pour brûler des calories, proche du fitness.",
-    image: "/img/popular-classes/4.jpeg",
+    image: "/img/popular-classes/cours4.jpg",
     link: "/classes/bend-stretch",
     category: "Avancé",
     duration: "75 min",
@@ -189,7 +189,7 @@ export const heroHeaders = {
     title: "About",
     breadcrumbs: [
       { label: "Accueil", href: "/" },
-      { label: "ABOUT", href: "/about", active: true },
+      { label: "A Propos", href: "/about", active: true },
     ],
   },
   all_class: {
@@ -204,7 +204,7 @@ export const heroHeaders = {
     title: "Contact",
     breadcrumbs: [
       { label: "Accueil", href: "/" },
-      { label: "CONTACT", href: "/contact", active: true },
+      { label: "Contact", href: "/contact", active: true },
     ],
   },
   tarifs: {
@@ -251,13 +251,13 @@ export const testimonials = [
 ];
 
 export const classes = [
-    { id: 1, title: "Vinyasa for Vitality", img: "/img/popular-classes/1.jpeg" },
-    { id: 2, title: "Foundation in Flow", img: "/img/popular-classes/2.jpeg" },
-    { id: 3, title: "Rise & Shine", img: "/img/popular-classes/3.jpeg" },
-    { id: 4, title: "Bend & Stretch", img: "/img/popular-classes/4.jpeg" },
-    { id: 5, title: "Nulla Pharetra Diam", img: "/img/popular-classes/5.jpeg" },
-    { id: 6, title: "Cursus Metus Aliquam", img: "/img/popular-classes/6.jpeg" },
-    { id: 7, title: "Massa Sed Elementum", img: "/img/popular-classes/7.jpeg" },
-    { id: 8, title: "Praesent Semper Feugiat", img: "/img/popular-classes/8.jpeg" },
-    { id: 9, title: "Semper Eget Duis", img: "/img/popular-classes/9.jpeg" },
+    { id: 1, title: "Pilates au sol (Matwork)", img: "/img/popular-classes/cours1.jpg" },
+    { id: 2, title: "Pilates sur machines", img: "/img/popular-classes/cours2.jpg" },
+    { id: 3, title: "Pilates doux / thérapeutique", img: "/img/popular-classes/cours3.jpg" },
+    { id: 4, title: "Pilates dynamique / cardio-pilates", img: "/img/popular-classes/cours4.jpg" },
+    { id: 5, title: "Pilates prénatal", img: "/img/popular-classes/cours5.jpg" },
+    { id: 6, title: "Pilates postnatal", img: "/img/popular-classes/cours6.jpg" },
+    { id: 7, title: "Pilates pour sportifs", img: "/img/popular-classes/cours7.jpg" },
+    { id: 8, title: "Pilates Yoga (PiYo ou Yogalates)", img:  "/img/popular-classes/cours8.jpg"  },
+    { id: 9, title: "Pilates Ball / Swiss Ball", img: "/img/popular-classes/cours9.jpg" },
 ];

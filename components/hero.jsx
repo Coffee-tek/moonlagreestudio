@@ -1,56 +1,52 @@
 "use client";
-import FloatingBtn from "./FloatingBtn";
+
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
-    <div className="container py-5 py-md-0">
-      <div className="row align-items-center g-4">
-        {/* Texte */}
-        <div className="col-lg-6 col-12 pe-lg-5">
-          <h1
-            // className="fw-bold fs-96 mb-3 text-success"
-            className="fw-bold fs-96 mb-3 text-success aos-init aos-animate"
-            data-aos="fade-right"
-            data-aos-duration="500"
-          >
-            Le Pilates, force et équilibre
+    <section className="relative w-full h-[90vh] flex items-center">
+      {/* Image de fond */}
+      <Image
+        src="/img/hero.jpg" // mets ton image ici (public/images/hero.jpg)
+        alt="Hero background"
+        fill
+        className="object-cover"
+        priority
+      />
+
+      {/* Overlay sombre */}
+      <div className="absolute inset-0 bg-black/60"></div>
+
+      {/* Contenu */}
+      <div className="relative z-10 container mx-auto px-6 md:px-12 text-white">
+        <div className="max-w-xl">
+          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight " >
+            MOON LAGREE STUDIO <br /> 
           </h1>
-          <p
-            className="lead text-muted pe-lg-5 aos-init aos-animate"
-            data-aos="fade-right"
-            data-aos-duration="600"
-          >
+          <p className="mt-4 text-lg text-gray-200">
             Massa ultricies mi quis. hendrerit dolor magna eget. Nullam eget felis
             eget nunc lobortis. Faucibus ornare suspendisse sed nisi consectetur
             incididunt ut labore.
           </p>
-          <div
-            className="d-flex align-items-center gap-2 mt-5 aos-init aos-animate"
-            data-aos="fade-right"
-            data-aos-duration="600"
-          >
-            <a href="#" className="btn btn-primary rounded-pill btn-lg">
-              Rejoindre une classe
-            </a>
-            <a href="#" className="btn btn-outline-primary rounded-pill btn-lg">
+
+          {/* Boutons */}
+          <div className="mt-6 flex gap-4">
+            <Link
+              href="#"
+              className="btn btn-primary hover:bg-blue-800 text-white px-6 py-3 rounded-md font-medium"
+            >
               En savoir plus
-            </a>
+            </Link>
+            {/* <Link
+              href="#"
+              className="btn btn-outline-primary hover:bg-yellow-400 text-black px-6 py-3 rounded-md font-medium"
+            >
+              Réserver une classe
+            </Link> */}
           </div>
         </div>
-
-        {/* Image */}
-        <div
-          className="col-lg-6 col-12 aos-init aos-animate"
-          data-aos="fade-left"
-          data-aos-duration="600"
-        >
-          <img
-            src="/img/hero-header3.png" // Assure-toi que l'image est dans /public/img/
-            alt="hero-header"
-            className="img-fluid rounded-3"
-          />
-        </div>
       </div>
-    </div>
+    </section>
   );
 }
