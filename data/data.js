@@ -261,7 +261,6 @@ export const classes = [
     { id: 9, title: "Pilates Ball / Swiss Ball", img: "/img/popular-classes/cours9.jpg" },
 ];
 
-
 export const faqData = {
 
   about: {

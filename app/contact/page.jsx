@@ -1,5 +1,6 @@
 import HeroHeader from "@/components/HeroSection";
 import InstructorsSection from "@/components/instructors";
+import MapSection from "@/components/map";
 import SubscribeSection from "@/components/newsletter";
 import EnhancedPopularClasses from "@/components/popular-class";
 import Testimonials from "@/components/Témoignages";
@@ -134,7 +135,13 @@ export default function ContactPage() {
 
     <Testimonials/>
 
-    <SubscribeSection />
+    <MapSection
+      title="Nous trouver"
+      subtitle="Venez découvrir notre studio"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.859183823919!2d-17.472!3d14.692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe974f123456789%3A0xabcdef!2sDakar!5e0!3m2!1sfr!2ssn!4v123456789"
+    />
+
+    {/* <SubscribeSection /> */}
       
     </>
   );
