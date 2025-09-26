@@ -1,18 +1,21 @@
-import FAQ from "@/components/FAQ";
+import { FAQ } from "@/components/FAQ";
 import HeroHeader from "@/components/HeroSection";
-import InstructorsSection from "@/components/instructors";
-import SubscribeSection from "@/components/newsletter";
-import EnhancedPopularClasses from "@/components/popular-class";
 import Testimonials from "@/components/Témoignages";
 import VideoSection from "@/components/video";
-import { heroHeaders, aboutYoga } from "@/data/data";
+import { heroHeaders, aboutYoga, faqData } from "@/data/data";
 
 export default function AboutPage() {
   return (
     <>
+      {/* <HeroHeader
+        title={heroHeaders.about.title}
+        breadcrumbs={heroHeaders.about.breadcrumbs}
+      /> */}
+
       <HeroHeader
         title={heroHeaders.about.title}
         breadcrumbs={heroHeaders.about.breadcrumbs}
+        backgroundImage="/img/new/2.jpeg"
       />
 
       <div className="pt-5">
@@ -48,18 +51,17 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-        <VideoSection />
+        <VideoSection 
+          src="/video/pilate.mp4"
+          title="Reconnectez-vous à vous-même"
+          subtitle="Découvrez nos cours de yoga et méditation"
+        />
       </div>
-
-      <InstructorsSection />
 
       <Testimonials />
 
-      {/* <EnhancedPopularClasses /> */}
+     <FAQ data={faqData.about} />;
 
-      <FAQ />
-
-      {/* <SubscribeSection /> */}
       
     </>
   );

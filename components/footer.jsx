@@ -3,7 +3,7 @@ export default function Footer() {
   return (
     <>
       {/* Partie principale du footer */}
-      <footer className="footer bg-black py-5">
+      <footer className="footer py-5" style={{backgroundColor:"#0b0823"}}>
         <div className="container">
           <div className="row py-5">
             {/* Colonne gauche */}
@@ -50,18 +50,18 @@ export default function Footer() {
       </footer>
 
       {/* Partie bas du footer */}
-      <div className="bg-black pt-4 pb-5">
+      <div className="pt-4 pb-5" style={{backgroundColor:"#0b0823"}}>
         <div className="container">
           <div className="row align-items-center justify-content-between py-4">
             {/* Liens de navigation */}
-            <div className="col-auto">
+            {/* <div className="col-auto">
               <div className="d-flex align-items-center gap-5 footer-links text-uppercase">
                 <a href="/" className="link-secondary">ACCUEIL</a>
                 <a href="/about" className="link-secondary">A PROPOS</a>
                 <a href="/classes" className="link-secondary">CLASSES</a>
                 <a href="/contact" className="link-secondary">CONTACT</a>
               </div>
-            </div>
+            </div> */}
 
             {/* Copyright + réseaux sociaux */}
             <div className="col-auto d-flex gap-5">

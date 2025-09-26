@@ -40,7 +40,7 @@ export default function YogaTypesSection() {
                         <div className="col-12">
                             <div className="text-center mt-4"  data-aos-duration="600">
                                 <FloatingBtn 
-                                    text="View more"
+                                    text="Découvrir"
                                     href="/classes"
                                     variant="outline-primary"
                                     size="lg"

@@ -16,7 +16,7 @@ Version: 1.0
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap');
 body {
   font-family: 'Open Sans', sans-serif;
-  background-color: #fdf0d5;
+  background-color: #eee2d4;
 
 }
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
@@ -36,11 +36,11 @@ a {
 }
 
 a:hover {
-  color: #7A170A;
+  color: #0b0823 ;
 }
 
 .bg-osahan {
-  background-image: url(../img/banner.jpeg);
+  /* background-image: url(../img/banner.jpeg); */
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -62,23 +62,23 @@ a:hover {
 }
 
 .btn-primary {
-  background-color: #7A170A !important;
-  border-color: #7A170A !important;
+  background-color: #0b0823  !important;
+  border-color: #0b0823  !important;
 }
 
 .btn-primary:hover {
-  background-color: #a31906 !important;
-  border-color: #a31906 !important;
+  background-color: #13095f !important;
+  border-color: #13095f !important;
 }
 
 .btn-outline-primary {
-  border-color: #7A170A !important;
-  color: #7A170A !important;
+  border-color: #0b0823  !important;
+  color: #0b0823  !important;
 }
 
 .btn-outline-primary:hover {
-  border-color: #a31906 !important;
-  background-color: #a31906 !important;
+  border-color: #13095f !important;
+  background-color: #13095f !important;
   color: #fff !important;
 }
 
@@ -92,19 +92,19 @@ a:hover {
 }
 
 .text-primary {
-  color: #7A170A !important;
+  color: #0b0823  !important;
 }
 
 .bg-primary {
-  background-color: #7A170A !important;
+  background-color: #0b0823  !important;
 }
 
 .link-primary {
-  color: #7A170A !important;
+  color: #0b0823  !important;
 }
 
 .link-primary:hover {
-  color: #4b7878 !important;
+  color: #13095f !important;
 }
 
 
@@ -124,11 +124,11 @@ a:hover {
 }
 
 .yoga-nav .navbar-nav .nav-link.active {
-  color: #7A170A;
+  color: #13095f ;
 }
 
 .yoga-nav .navbar-nav .nav-link:hover {
-  color: #7A170A;
+  color: #13095f ;
 }
 
 /* Sidebar Nav */
@@ -138,7 +138,7 @@ a:hover {
 }
 .sidebar-nav .navbar-nav .nav-link.active,
 .sidebar-nav .navbar-nav .nav-link:hover {
-	color: #7A170A;
+	color: #0b0823 ;
 }
 
 
@@ -152,7 +152,7 @@ footer .footer-top .social-icons a {
 }
 
 footer .footer-top .social-icons a:hover {
-  border-color: #7A170A !important;
+  border-color: #0b0823  !important;
 }
 
 /* Mobile Media  */

@@ -53,8 +53,8 @@ export default function RootLayout({ children }) {
 
         {/* Scripts avec Next.js Script component */}
         <Script
-          src="/vender/bootstrap/js/bootstrap.bundle.min.js"
-          strategy="afterInteractive"
+          src="/vender/bootstrap/js/bootstrap.bundle.min.js "
+          async strategy="afterInteractive"
         />
         <Script
           src="/vender/jquery/jquery-3.6.4.min.js"

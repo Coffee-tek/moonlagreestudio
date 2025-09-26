@@ -192,14 +192,6 @@ export const heroHeaders = {
       { label: "A Propos", href: "/about", active: true },
     ],
   },
-  all_class: {
-    title: "Liste des classes",
-    breadcrumbs: [
-      { label: "Accueil", href: "/" },
-      { label: "Classes", href: "" , active: false },
-      { label: "Listes des Classes", href: "/classes/all-class" , active: true },
-    ],
-  },
   contact: {
     title: "Contact",
     breadcrumbs: [
@@ -212,6 +204,13 @@ export const heroHeaders = {
     breadcrumbs: [
       { label: "Accueil", href: "/" },
       { label: "Achat Crédit", href: "/tarifs", active: true },
+    ],
+  },
+  planning: {
+    title: "Planning",
+    breadcrumbs: [
+      { label: "Accueil", href: "/" },
+      { label: "Planning", href: "/planning", active: true },
     ],
   },
   services: {
@@ -261,3 +260,39 @@ export const classes = [
     { id: 8, title: "Pilates Yoga (PiYo ou Yogalates)", img:  "/img/popular-classes/cours8.jpg"  },
     { id: 9, title: "Pilates Ball / Swiss Ball", img: "/img/popular-classes/cours9.jpg" },
 ];
+
+
+export const faqData = {
+
+  about: {
+    image: "/img/new/6.jpeg",
+    title: "FAQ - À propos de nous",
+    description: "Découvrez plus d’informations sur notre entreprise.",
+    questions: [
+      {
+        question: "Depuis quand existez-vous ?",
+        answer: "Nous existons depuis plus de 10 ans dans le domaine du bien-être."
+      },
+      {
+        question: "Où se trouvent vos studios ?",
+        answer: "Nous avons plusieurs studios dans la région."
+      }
+    ]
+  },
+
+  credits: {
+    image: "/img/new/7.jpeg",
+    title: "FAQ - En savoir plus sur les crédits et leurs utilités",
+    description: "Quelques réponses avant de nous joindre directement.",
+    questions: [
+      {
+        question: "Peut on partager des crédits ?",
+        answer: "Vous pouvez nous appeler ou nous écrire via le formulaire."
+      },
+      {
+        question: "Combien de crédits est nécessaire pour un cours ?",
+        answer: "Nous sommes ouverts de 8h à 20h du lundi au samedi."
+      }
+    ]
+  }
+};

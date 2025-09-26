@@ -1,9 +1,10 @@
 "use client";
 
-import FAQ from "@/components/FAQ";
+
+import { FAQ } from "@/components/FAQ";
 import HeroHeader from "@/components/HeroSection";
 import SubscribeSection from "@/components/newsletter";
-import { heroHeaders } from "@/data/data";
+import { faqData, heroHeaders } from "@/data/data";
 import Link from "next/link";
 
 export default function PricingPage () {
@@ -20,6 +21,7 @@ export default function PricingPage () {
             <HeroHeader
                 title={heroHeaders.tarifs.title}
                 breadcrumbs={heroHeaders.tarifs.breadcrumbs}
+                backgroundImage="/img/new/5.jpeg"
             />
 
             {/* <!-- Commment fonctionne les crédits --> */}
@@ -125,7 +127,7 @@ export default function PricingPage () {
                 </div>
             </section>
 
-            <FAQ/>
+           <FAQ data={faqData.credits} />;
 
             {/* <SubscribeSection /> */}
         </>

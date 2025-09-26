@@ -7,12 +7,12 @@ import {popularClasses, categories as defaultCategories } from "@/data/data";
 // import { popularClasses, categories as defaultCategories } from '../data/classes';
 
 const EnhancedPopularClasses = ({ 
-  title = "Cours Populaires",
-  subtitle = "Découvrez nos cours les plus appréciés",
+  title = "Nos Sessions",
+  subtitle = "Découvrez les différentes sessions",
   classes = popularClasses,
   showViewAllButton = true,
   viewAllLink = "/classes",
-  viewAllText = "Voir tous les cours",
+  viewAllText = "Planning",
   sectionClassName = "py-5 ",
   containerClassName = "container",
   showFilters = false,
@@ -66,7 +66,7 @@ const EnhancedPopularClasses = ({
         <div className="row align-items-center justify-content-between mb-5">
           <div className="col-auto" data-aos="fade-right" data-aos-duration="600">
             <h2 className="h4 mb-0">
-              {activeCategory !== "Tous" ? `Cours ${activeCategory}` : "Tous les cours"}
+              {activeCategory !== "Tous" ? `Niveaux ${activeCategory}` : "Tous les niveaux"}
               {/* <span className="badge bg-primary ms-2">{filteredClasses.length}</span> */}
             </h2>
           </div>
@@ -160,12 +160,12 @@ const EnhancedPopularClasses = ({
                           </div>
                         </>
                       )}
-                      {classItem.students && (
+                      {/* {classItem.students && (
                         <>
                           <i className="ri-group-line me-1"></i>
                           <span>{classItem.students} étudiants</span>
                         </>
-                      )}
+                      )} */}
                     </div>
                   )}
 
@@ -173,7 +173,7 @@ const EnhancedPopularClasses = ({
                   <p className="card-text flex-grow-1 mb-3">{classItem.description}</p>
 
                   {/* Tags */}
-                  {classItem.tags && classItem.tags.length > 0 && (
+                  {/* {classItem.tags && classItem.tags.length > 0 && (
                     <div className="mb-3">
                       {classItem.tags.slice(0, 2).map((tag, tagIndex) => (
                         <span key={tagIndex} className="badge bg-light text-dark me-1">
@@ -181,14 +181,14 @@ const EnhancedPopularClasses = ({
                         </span>
                       ))}
                     </div>
-                  )}
+                  )} */}
 
                   {/* Lien "Lire plus" */}
                   <Link 
                     href={classItem.readMoreLink || classItem.link || '#'} 
                     className="link-primary text-decoration-none fw-medium"
                   >
-                    Réserver ce cours
+                    Voir plus
                     <i className="ri-arrow-right-line ms-1"></i>
                   </Link>
                 </div>

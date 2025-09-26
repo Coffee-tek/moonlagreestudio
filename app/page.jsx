@@ -1,11 +1,8 @@
 "use client";
 
 import Hero from "@/components/hero";
-import InstructorsSection from "@/components/instructors";
-import Navbar from "@/components/navbar";
 import SubscribeSection from "@/components/newsletter";
 import EnhancedPopularClasses from "@/components/popular-class";
-import PricingSection from "@/components/PricingSection";
 import VideoSection from "@/components/video";
 import YogaTypesSection from "@/components/YogaTypes";
 import Image from "next/image";
@@ -59,7 +56,11 @@ export default function Home() {
             </div>
         </div>
 
-        <VideoSection />
+        <VideoSection 
+            src="/video/pilate.mp4"
+            title="Reconnectez-vous à vous-même"
+            subtitle="Découvrez nos cours de yoga et méditation"
+        />
 
         {/* <!-- Best Yoga --> */}
         <div className="py-5">
@@ -215,7 +216,6 @@ export default function Home() {
             </div>
         </section>
 
-        <InstructorsSection />
         <SubscribeSection />
 
     </main>

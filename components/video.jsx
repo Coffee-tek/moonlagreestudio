@@ -1,4 +1,4 @@
-export default function VideoSection() {
+export default function VideoSection({ src, title, subtitle }) {
   return (
     <div className="py-5">
       <div className="container">
@@ -6,23 +6,15 @@ export default function VideoSection() {
           <div className="col-12"data-aos="fade-up" data-aos-duration="600">
             <div className="card text-bg-dark rounded-4 border-0 overflow-hidden">
               {/* Image d’arrière-plan */}
-              <img
-                src="/img/video.png"
-                className="card-img opacity-50"
-                alt="video"
+              <video
+                className="w-100"
+                src={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ objectFit: "cover", height: "60vh" }}
               />
-
-              {/* Overlay avec bouton lecture */}
-              <div className="card-img-overlay d-flex align-items-center justify-content-center">
-                <a
-                  href="#"
-                  className="link-light stretched-link"
-                  data-bs-toggle="modal"
-                  data-bs-target="#videoModal"
-                >
-                  <i className="ri-play-fill display-1"></i>
-                </a>
-              </div>
             </div>
           </div>
         </div>
@@ -30,3 +22,4 @@ export default function VideoSection() {
     </div>
   );
 }
+

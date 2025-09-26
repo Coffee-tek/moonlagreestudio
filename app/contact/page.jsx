@@ -2,6 +2,7 @@ import HeroHeader from "@/components/HeroSection";
 import InstructorsSection from "@/components/instructors";
 import SubscribeSection from "@/components/newsletter";
 import EnhancedPopularClasses from "@/components/popular-class";
+import Testimonials from "@/components/Témoignages";
 import VideoSection from "@/components/video";
 import { heroHeaders, aboutYoga } from "@/data/data";
 
@@ -19,6 +20,7 @@ export default function ContactPage() {
       <HeroHeader
         title={heroHeaders.contact.title}
         breadcrumbs={heroHeaders.contact.breadcrumbs}
+         backgroundImage="/img/new/3.jpeg"
       />
 
     <div className="py-5">
@@ -130,7 +132,7 @@ export default function ContactPage() {
       </div>
     </div>
 
-    <EnhancedPopularClasses />
+    <Testimonials/>
 
     <SubscribeSection />
       

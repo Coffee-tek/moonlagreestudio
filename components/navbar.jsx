@@ -16,14 +16,15 @@ export default function Navbar() {
   const links = [
     { href: "/", label: "Accueil", icon: "ri-apps-2-line" },
     { href: "/a-propos", label: "A propos" },
-    {
-      href: "/classes",
-      label: "Classes",
-      dropdown: [
-        { href: "/classes/all-class", label: "Liste des classes" },
-        { href: "/classes/book-class", label: "Réserver une classe" },
-      ],
-    },
+    { href: "/planning", label: "Planning" },
+    // {
+    //   href: "/classes",
+    //   label: "Classes",
+    //   dropdown: [
+    //     { href: "/classes/all-class", label: "Liste des classes" },
+    //     { href: "/classes/book-class", label: "Réserver une classe" },
+    //   ],
+    // },
     { href: "/tarifs", label: "Acheter Crédit" },
     { href: "/contact", label: "Contact" },
   ];
