@@ -11,17 +11,17 @@ export default function LoginPage() {
   return (
     <div className="overflow-hidden vh-100 d-flex align-items-center flex-column">
       <div className="container-fluid bg-white first-form overflow-hidden">
-        <div className="row align-items-center bg-light">
+        <div className="row align-items-center " style={{backgroundColor:"#0b0823"}}>
           {/* Colonne gauche */}
-          <div className="col-lg-8 bg-light py-4 d-none d-lg-block">
+          <div className="col-lg-8  py-4 d-none d-lg-block" style={{backgroundColor:"#0b0823"}}>
             <div className="row justify-content-center">
               <div className="col-lg-8 col-12 overflow-hidden">
                 <div className="text-center mb-5">
                   {/* <div className="small text-muted">OVERLINE</div> */}
-                  <h1 className="fw-bold py-2 text-black display-5">
+                  <h1 className="fw-bold py-2 text-white display-5">
                     Votre passerelle vers une exploration continue
                   </h1>
-                  <p className="text-muted mb-4 lead">
+                  <p className="text-white mb-4 lead">
                     Lorem ipsum dolor sit amet, consectetur adipisicing
                   </p>
                   {/* <Link href="/account/orders" className="btn btn-purple btn-theme">
