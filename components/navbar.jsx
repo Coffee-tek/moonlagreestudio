@@ -112,7 +112,7 @@ export default function Navbar() {
               >
                 <i className="ri-search-line ri-lg"></i>
               </button> */}
-              <Link href="/profile" className="link-dark">
+              <Link href="/user-profil/profil-settings" className="link-dark">
                 <i className="ri-account-circle-line ri-lg"></i>
               </Link>
               <Link href="/connexion" className="btn btn-primary rounded-pill px-3 d-none d-lg-block">

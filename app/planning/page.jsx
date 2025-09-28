@@ -389,6 +389,8 @@ export default function CalendarBookingSystem() {
           </div>
         </div>
 
+        <EnhancedPopularClasses/>
+
       </div>
     </>
   );
