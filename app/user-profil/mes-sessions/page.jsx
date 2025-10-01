@@ -42,7 +42,7 @@ export default function MesSessions() {
 
                             {/* Tabs navigation */}
                             <ul
-                            className="nav nav-pills align-items-center justify-content-center bg-light order-tabs mb-4 rounded-3 p-2 purple-tab nav-fill"
+                            className="nav nav-pills align-items-center justify-content-center bg-light order-tabs  p-2 purple-tab nav-fill"
                             id="pills-tab"
                             role="tablist"
                             >
@@ -57,7 +57,7 @@ export default function MesSessions() {
                                 aria-controls="pills-in-progress"
                                 aria-selected="true"
                                 >
-                                Réservée
+                                Réservée(s)
                                 </button>
                             </li>
                             <li className="nav-item" role="presentation">
@@ -71,7 +71,7 @@ export default function MesSessions() {
                                 aria-controls="pills-order-history"
                                 aria-selected="false"
                                 >
-                                Terminée
+                                Annulée(s)
                                 </button>
                             </li>
                             <li className="nav-item" role="presentation">
@@ -99,12 +99,12 @@ export default function MesSessions() {
                                     role="tabpanel"
                                 >
                                     <div className="mb-4">
-                                        <div className="d-flex align-items-center justify-content-between mb-4 border-bottom pb-4">
+                                        {/* <div className="d-flex align-items-center justify-content-between mb-4 border-bottom pb-4">
                                             <h4 className="fw-bold m-0">
                                                 Sessions réservées{" "}
                                             </h4>
                                             
-                                        </div>
+                                        </div> */}
 
                                         <div className="bg-white p-4">
                                             {/* Product 1 */}
@@ -195,7 +195,7 @@ export default function MesSessions() {
                                     id="pills-order-history"
                                     role="tabpanel"
                                 >
-                                    <h4 className="fw-bold mb-4 border-bottom pb-4">Sessions terminées</h4>
+                                    {/* <h4 className="fw-bold mb-4 border-bottom pb-4">Sessions terminées</h4> */}
                                     {/* Exemple d’items ici */}
                                 </div>
 
@@ -205,7 +205,7 @@ export default function MesSessions() {
                                     id="pills-return-requests"
                                     role="tabpanel"
                                 >
-                                    <h4 className="fw-bold mb-4 border-bottom pb-4">Historique des sessions</h4>
+                                    {/* <h4 className="fw-bold mb-4 border-bottom pb-4">Historique des sessions</h4> */}
                                     {/* Exemple d’items ici */}
                                 </div>
                             </div>

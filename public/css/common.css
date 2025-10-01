@@ -332,3 +332,8 @@ a{
     transform: none;
   }
 }
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: white !important;
+  background-color: #0b0823 !important;
+}

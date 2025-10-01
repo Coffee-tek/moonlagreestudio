@@ -295,3 +295,30 @@ export const faqData = {
     ]
   }
 };
+
+export const transactions = [
+    {
+      id: 1,
+      type: 'Cashback',
+      transactionId: '50919487',
+      date: 'Le 23 Oct 18, 03:13 PM',
+      amount: '+7 cr',
+      isPositive: true
+    },
+    {
+      id: 2,
+      type: 'Purchase',
+      transactionId: '50919487',
+      date: 'Le 23 Oct 18, 03:13 PM',
+      amount: '-75 cr',
+      isPositive: false
+    },
+    {
+      id: 3,
+      type: 'Cashback',
+      transactionId: '50919487',
+      date: 'Le 23 Oct 18, 03:13 PM',
+      amount: '+75 cr',
+      isPositive: true
+    }
+];
