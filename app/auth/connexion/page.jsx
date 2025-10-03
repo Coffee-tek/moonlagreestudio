@@ -55,7 +55,7 @@ export default function LoginPage() {
                 </div>
                 <Link href="/" className="stretched-link"></Link>
               </div>
-              <Link href="/inscription" className="text-decoration-none">
+              <Link href="/auth/inscription" className="text-decoration-none">
                 S'inscrire
               </Link>
             </div>

@@ -19,7 +19,7 @@ export default function RegisterPage() {
                 </div>
                 <Link className="stretched-link" href="/" />
               </div>
-              <Link href="/connexion" className="text-decoration-none">
+              <Link href="/auth/connexion" className="text-decoration-none">
                 Se connecter
               </Link>
             </div>

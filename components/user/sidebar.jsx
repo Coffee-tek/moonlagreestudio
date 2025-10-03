@@ -78,9 +78,9 @@ export function Sidebar(){
   };
 
   const sidebarLinks = [
-    { href: '/user-profil/profil-settings',  label: 'Profil', active: true },
-    { href: '/user-profil/mes-sessions',  label: 'Mes Sessions', active: false },
-    { href: '/user-profil/mes-credits', label: 'Mes crédits', active: false },
+    { href: '/user/profil-settings',  label: 'Profil', active: true },
+    { href: '/user/mes-sessions',  label: 'Mes Sessions', active: false },
+    { href: '/user/mes-credits', label: 'Mes crédits', active: false },
     // { href: '/account/address', label: 'Address', active: false },
     // { href: '/account/notifications',  label: 'Notification', active: false },
     { href: '/', label: 'Déconnexion', active: false }

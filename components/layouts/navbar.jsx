@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
 import { useState } from 'react';
 import Link from "next/link";
-import Hero from "./hero";
+
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -15,18 +14,10 @@ export default function Navbar() {
   // Configuration des liens de navigation
   const links = [
     { href: "/", label: "Accueil", icon: "ri-apps-2-line" },
-    { href: "/a-propos", label: "A propos" },
-    { href: "/planning", label: "Planning" },
-    // {
-    //   href: "/classes",
-    //   label: "Classes",
-    //   dropdown: [
-    //     { href: "/classes/all-class", label: "Liste des classes" },
-    //     { href: "/classes/book-class", label: "Réserver une classe" },
-    //   ],
-    // },
-    { href: "/tarifs", label: "Acheter Crédit" },
-    { href: "/contact", label: "Contact" },
+    { href: "/public/a-propos", label: "A propos" },
+    { href: "/public/planning", label: "Planning" },
+    { href: "/public/tarifs", label: "Acheter Crédit" },
+    { href: "/public/contact", label: "Contact" },
   ];
 
   // Fonction pour déterminer si un lien est actif
@@ -112,10 +103,10 @@ export default function Navbar() {
               >
                 <i className="ri-search-line ri-lg"></i>
               </button> */}
-              <Link href="/user-profil/profil-settings" className="link-dark">
+              <Link href="/user/profil-settings" className="link-dark">
                 <i className="ri-account-circle-line ri-lg"></i>
               </Link>
-              <Link href="/connexion" className="btn btn-primary rounded-pill px-3 d-none d-lg-block">
+              <Link href="/auth/connexion" className="btn btn-primary rounded-pill px-3 d-none d-lg-block">
                 Connexion
               </Link>
               <button 

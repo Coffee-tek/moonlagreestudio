@@ -1,6 +1,6 @@
 "use client"; 
 
-import { Sidebar } from "@/components/profil/sidebar";
+import { Sidebar } from "@/components/user/sidebar";
 import { useState } from "react";
 
 // import "bootstrap-icons/font/bootstrap-icons.css";

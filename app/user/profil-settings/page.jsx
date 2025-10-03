@@ -2,7 +2,7 @@
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Sidebar } from '@/components/profil/sidebar';
+import { Sidebar } from '@/components/user/sidebar';
 // import { 
 //   Edit3, 
 //   FileText, 

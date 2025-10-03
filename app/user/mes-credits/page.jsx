@@ -1,5 +1,5 @@
 "use client";
-import { Sidebar } from "@/components/profil/sidebar";
+import { Sidebar } from "@/components/user/sidebar";
 import { transactions } from "@/data/data";
 import { useState } from "react";
 
