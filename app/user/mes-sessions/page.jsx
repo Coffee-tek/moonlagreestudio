@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function MesSessions() {
 
     const [coverImage, setCoverImage] = useState('/img/new/9.jpeg');
+    
 
   return (
     <div className="min-h-screen" style={{backgroundColor:"#eee2d4"}}>
@@ -109,48 +110,40 @@ export default function MesSessions() {
                                         <div className="bg-white p-4">
                                             {/* Product 1 */}
                                             <div className="pb-4 border-bottom mb-4">
-                                            <div className="row">
-                                                <div className="col-xl-2 col-lg-3 col-md-3 col-4">
-                                                <img
-                                                    src="/img/pages/products/product-1.jpg"
-                                                    className="img-fluid rounded-3"
-                                                    alt="deliverd-order"
-                                                />
-                                                </div>
-                                                <div className="col-xl-10 col-lg-9 col-md-9 col-8">
-                                                <div className="card-body d-flex align-items-start justify-content-between">
-                                                    <div>
-                                                    <span className="px-3 py-2 rounded-pill bg-opacity-purple text-purple mb-3 badge">
-                                                        <span className="fw-bold">Delivery</span> on July 20
-                                                    </span>
-                                                    <h6 className="card-title fw-bold mb-1">
-                                                        The Organic Taper Jean
-                                                    </h6>
-                                                    <p className="card-text">
-                                                        <small className="text-body-secondary">
-                                                        Size: XL, Colour: Blue
-                                                        </small>
-                                                    </p>
-                                                    <h5 className="card-text fw-bold mb-0">
-                                                        <del className="text-dark-emphasis fw-normal small">
-                                                        $2,299.00
-                                                        </del>{" "}
-                                                        $1,269.00
-                                                    </h5>
+                                                <div className="row">
+                                                    <div className="col-xl-2 col-lg-3 col-md-3 col-4">
+                                                    <img
+                                                        src="/img/pages/products/product-1.jpg"
+                                                        className="img-fluid rounded-3"
+                                                        alt="deliverd-order"
+                                                    />
                                                     </div>
-                                                    <a
-                                                    href="#"
-                                                    className="btn btn-outline-primary rounded-pill"
-                                                    >
-                                                    BUY IT AGAIN
-                                                    </a>
+                                                    <div className="col-xl-10 col-lg-9 col-md-9 col-8">
+                                                        <div className="card-body d-flex align-items-start justify-content-between">
+                                                            <div>
+                                                                <span className="px-3 py-2 rounded-pill bg-opacity-purple text-purple mb-3 badge">
+                                                                    <span className="fw-bold">Session</span> Réservée
+                                                                </span>
+                                                                <h6 className="card-title fw-bold mb-1">
+                                                                    Pilates au sol (Matwork)
+                                                                </h6>
+                                                                <p className="card-text">
+                                                                    <small className="text-body-secondary">
+                                                                    Date : 25 Oct 2025
+                                                                    </small>
+                                                                </p>
+                                                                <h5 className="card-text fw-bold mb-0">
+                                                                    Avec coach Karen
+                                                                </h5>
+                                                            </div>
+                                                            <a href="#" className="btn btn-danger rounded-pill">Annuler</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                </div>
-                                            </div>
                                             </div>
 
                                             {/* Product 2 */}
-                                            <div className="pb-4 border-bottom mb-4">
+                                            {/* <div className="pb-4 border-bottom mb-4">
                                             <div className="row">
                                                 <div className="col-xl-2 col-lg-3 col-md-3 col-4">
                                                 <img
@@ -184,7 +177,7 @@ export default function MesSessions() {
                                                 </div>
                                                 </div>
                                             </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>

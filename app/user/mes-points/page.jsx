@@ -1,9 +1,9 @@
 "use client";
 import { Sidebar } from "@/components/user/sidebar";
-import { transactions } from "@/data/data";
+import { points } from "@/data/data";
 import { useState } from "react";
 
-export default function MesCredits() {
+export default function MesPoints() {
     const [coverImage, setCoverImage] = useState('/img/new/9.jpeg');
 
   return (
@@ -33,11 +33,11 @@ export default function MesCredits() {
                     <div className="col-lg-8 ps-lg-0">
                         <div className="ps-lg-5 pt-lg-5">
                             <div className="d-flex align-items-center justify-content-between w-100 mb-5">
-                            <h1 className="m-0 fw-bold">Mon solde (7 crédits)</h1>
+                            <h1 className="m-0 fw-bold">Mes Points (7 points)</h1>
                             </div>
                             <div>
                             <div className="row row-cols-xl-1 row-cols-lg-1 row-cols-md-1 row-cols-1 g-3">
-                                {transactions.map((transaction) => (
+                                {points.map((transaction) => (
                                 <div key={transaction.id} className="col">
                                     <div className="d-flex align-items-center justify-content-between bg-white border px-4 py-4 rounded-4">
                                     <div className="w-75">

@@ -64,7 +64,7 @@ export const popularClasses = [
     title: "Pilates au sol (Matwork)",
     description: "Pratiqué sur tapis, parfois avec petits accessoires (ballon, élastique, cercle magique, rouleau). C’est la forme la plus accessible et répandue.",
     image: "/img/popular-classes/cours1.jpg",
-    link: "/classes/vinyasa-vitality",
+    link: "/public/session-details",
     category: "Intermédiaire",
     duration: "45 min",
     instructor: "Sarah Johnson",
@@ -80,7 +80,7 @@ export const popularClasses = [
     title: "Pilates sur machines",
     description: "Utilise des appareils inventés par Joseph Pilates (souvent avec ressorts pour ajouter résistance ou assistance) :",
     image: "/img/popular-classes/cours2.jpg",
-    link: "/classes/foundation-flow",
+    link: "/public/session-details",
     category: "Débutant",
     duration: "60 min",
     instructor: "Mike Chen",
@@ -96,7 +96,7 @@ export const popularClasses = [
     title: "Pilates doux / thérapeutique",
     description: "Adapté pour les personnes en rééducation, seniors, ou en reprise d’activité..",
     image: "/img/popular-classes/cours3.jpg",
-    link: "/classes/rise-shine",
+    link: "/public/session-details",
     category: "Débutant",
     duration: "30 min",
     instructor: "Emma Wilson",
@@ -112,7 +112,7 @@ export const popularClasses = [
     title: "Pilates dynamique / cardio-pilates",
     description: "Enchaînements plus rapides pour brûler des calories, proche du fitness.",
     image: "/img/popular-classes/cours4.jpg",
-    link: "/classes/bend-stretch",
+    link: "/public/session-details",
     category: "Avancé",
     duration: "75 min",
     instructor: "David Kumar",
@@ -189,35 +189,35 @@ export const heroHeaders = {
     title: "About",
     breadcrumbs: [
       { label: "Accueil", href: "/" },
-      { label: "A Propos", href: "/about", active: true },
+      { label: "A Propos", href: "/public/a-propos", active: true },
     ],
   },
   contact: {
     title: "Contact",
     breadcrumbs: [
       { label: "Accueil", href: "/" },
-      { label: "Contact", href: "/contact", active: true },
+      { label: "Contact", href: "/public/contact", active: true },
     ],
   },
   tarifs: {
     title: "Achat Crédits",
     breadcrumbs: [
       { label: "Accueil", href: "/" },
-      { label: "Achat Crédit", href: "/tarifs", active: true },
+      { label: "Achat Crédit", href: "/public/tarifs", active: true },
     ],
   },
   planning: {
     title: "Planning",
     breadcrumbs: [
       { label: "Accueil", href: "/" },
-      { label: "Planning", href: "/planning", active: true },
+      { label: "Planning", href: "/public/planning", active: true },
     ],
   },
-  services: {
-    title: "Services",
+  session_details: {
+    title: "Details de Session",
     breadcrumbs: [
       { label: "Accueil", href: "/" },
-      { label: "SERVICES", href: "/services", active: true },
+      { label: "Details de Session", href: "/public/session-details", active: true },
     ],
   },
 };
@@ -299,7 +299,7 @@ export const faqData = {
 export const transactions = [
     {
       id: 1,
-      type: 'Cashback',
+      type: 'Votre conmpte à été crédité',
       transactionId: '50919487',
       date: 'Le 23 Oct 18, 03:13 PM',
       amount: '+7 cr',
@@ -307,7 +307,7 @@ export const transactions = [
     },
     {
       id: 2,
-      type: 'Purchase',
+      type: 'Votre conmpte à été débité',
       transactionId: '50919487',
       date: 'Le 23 Oct 18, 03:13 PM',
       amount: '-75 cr',
@@ -315,7 +315,34 @@ export const transactions = [
     },
     {
       id: 3,
-      type: 'Cashback',
+      type: 'Votre conmpte à été crédité',
+      transactionId: '50919487',
+      date: 'Le 23 Oct 18, 03:13 PM',
+      amount: '+75 cr',
+      isPositive: true
+    }
+];
+
+export const points = [
+    {
+      id: 1,
+      type: 'Points crédités',
+      transactionId: '50919487',
+      date: 'Le 23 Oct 18, 03:13 PM',
+      amount: '+7 cr',
+      isPositive: true
+    },
+    {
+      id: 2,
+      type: 'Points débités',
+      transactionId: '50919487',
+      date: 'Le 23 Oct 18, 03:13 PM',
+      amount: '-75 cr',
+      isPositive: false
+    },
+    {
+      id: 3,
+      type: 'Points crédités',
       transactionId: '50919487',
       date: 'Le 23 Oct 18, 03:13 PM',
       amount: '+75 cr',

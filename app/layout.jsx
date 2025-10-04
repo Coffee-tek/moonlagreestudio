@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ConditionalLayout from "@/components/ConditionalLayout";
 import Script from "next/script";
-// import { useEffect } from "react";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +14,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
 
 
 export const metadata = {
@@ -45,6 +44,11 @@ export default function RootLayout({ children }) {
         {/* CSS personnalisé */}
         <link href="/css/style.css" rel="stylesheet" />
         <link href="/css/common.css" rel="stylesheet" />
+
+        <link
+          href="https://fonts.cdnfonts.com/css/erotique-alternate-trial"
+          rel="stylesheet"
+        />
       </head>
       <body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
         <ConditionalLayout>

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -22,24 +23,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  /* font-family: Arial, Helvetica, sans-serif; */
-  font-family: 'Erotique', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-@font-face {
-  font-family: 'Erotique';
-  src: url('/fonts/Erotique-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Erotique';
-  src: url('/fonts/Erotique-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-.font-erotique {
-  font-family: 'Erotique', sans-serif;
-} 
