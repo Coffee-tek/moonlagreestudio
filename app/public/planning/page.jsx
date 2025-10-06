@@ -279,14 +279,14 @@ export default function CalendarBookingSystem() {
                 className={`
                   aspect-square flex flex-col items-center justify-center p-2 text-sm transition-all duration-200 relative
                   text-gray-700 hover:bg-gray-100
-                  ${day.isSelected ? 'bg-amber-600 text-white' : ''}
+                  ${day.isSelected ? 'bg-primary text-white' : ''}
                   ${day.isToday && !day.isSelected ? 'bg-blue-100 text-blue-600 font-semibold' : ''}
                 `}
               >
                 <span className="font-medium">{day.day}</span>
                 {day.hasClasses && (
                   <div className={`absolute bottom-1 w-1 h-1 rounded-full ${
-                    day.isSelected ? 'bg-white' : 'bg-amber-600'
+                    day.isSelected ? 'bg-white' : 'bg-primary'
                   }`}></div>
                 )}
               </button>
@@ -324,7 +324,7 @@ export default function CalendarBookingSystem() {
                       {/* Indicateur de capacité */}
                       <div className={`
                         w-12 h-12 rounded-full flex items-center justify-center text-white text-xs font-semibold mr-4
-                        ${classItem.available ? 'bg-teal-500' : 'bg-gray-400'}
+                        ${classItem.available ? 'bg-purple' : 'bg-gray-400'}
                       `}>
                         {classItem.capacity}
                       </div>
@@ -347,7 +347,7 @@ export default function CalendarBookingSystem() {
                       className={`
                         px-6 py-2 rounded-lg font-medium transition-all duration-200
                         ${classItem.available && !bookings[classItem.id]
-                          ? 'bg-amber-600 text-white hover:bg-amber-700 hover:shadow-md'
+                          ? 'bg-primary text-white hover:bg-amber-700 hover:shadow-md'
                           : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                         }
                       `}
@@ -370,7 +370,7 @@ export default function CalendarBookingSystem() {
             <h3 className="font-medium text-gray-800 mb-3">Légende</h3>
             <div className="flex flex-wrap gap-4 text-sm">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-amber-600 rounded"></div>
+                <div className="w-3 h-3 bg-primary rounded"></div>
                 <span>Jour sélectionné</span>
               </div>
               <div className="flex items-center gap-2">
@@ -378,7 +378,7 @@ export default function CalendarBookingSystem() {
                 <span>Aujourd'hui</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-teal-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-purple rounded-full"></div>
                 <span>Places disponibles</span>
               </div>
               <div className="flex items-center gap-2">
