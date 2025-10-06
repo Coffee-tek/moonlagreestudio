@@ -51,22 +51,44 @@ export default function RootLayout({ children }) {
         />
 
         <style>{`
+          /* ===== Police Erotique pour les titres ===== */
           @font-face {
             font-family: 'Erotique';
-            src: url('/fonts/Erotique-Regular.ttf') format('truetype');
-            font-weight: 500;
+            src: url('/fonts/Erotique/Erotique-Regular.ttf') format('truetype');
+            font-weight: 400;
             font-style: normal;
           }
           @font-face {
             font-family: 'Erotique';
-            src: url('/fonts/Erotique-Bold.ttf') format('truetype');
+            src: url('/fonts/Erotique/Erotique-Bold.ttf') format('truetype');
             font-weight: 700;
             font-style: normal;
           }
 
-          html, body, h1, h2, h3, h4, h5, h6, p, span, div {
-    font-family: 'Erotique', serif !important;
-  }
+          /* ===== Police Dosis pour le texte ===== */
+          @font-face {
+            font-family: 'Dosis';
+            src: url('/fonts/Dosis/Dosis-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+          }
+          @font-face {
+            font-family: 'Dosis';
+            src: url('/fonts/Dosis/Dosis-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+          }
+
+          /* ===== Application des polices ===== */
+          html, body {
+            font-family: 'Dosis', sans-serif !important;
+            font-weight: 400;
+          }
+
+          h1, h2, h3, h4, h5, h6 {
+            font-family: 'Erotique', serif !important;
+            
+          }
         `}</style>
       </head>
       <body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
