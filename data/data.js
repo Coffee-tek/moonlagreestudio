@@ -1,48 +1,48 @@
 export const defaultYogaTypes = [
     {
       id: 1,
-      title: "La respiration",
-      description: "Contrôlée et profonde, elle accompagne chaque mouvement",
+      title: "Résultats rapides et durables",
+      description: "Entraînement haute intensité qui sculpte le corps et améliore la force en peu de temps.",
       image: "/img/yoga-types/type-1.svg",
       animation: "flip-left",
       duration: 500
     },
     {
       id: 2,
-      title: "La concentration",
-      description: "Être attentif à chaque geste pour mieux l’exécuter",
+      title: "Travail complet du corps",
+      description: "Chaque séance engage simultanément force, endurance, équilibre et mobilité : tous les muscles sont sollicités, même les plus profonds.",
       image: "/img/yoga-types/type-2.svg",
       animation: "flip-right",
       duration: 600
     },
     {
       id: 3,
-      title: "Le centrage",
-      description: "Renforcer la sangle abdominale (le “powerhouse”) qui soutient tout le corps",
+      title: "Sans impact pour les articulations",
+      description: "Mouvement lent et contrôlé, idéal pour protéger le dos et les genoux.",
       image: "/img/yoga-types/type-3.svg",
       animation: "flip-left",
       duration: 600
     },
     {
       id: 4,
-      title: "Le contrôle",
-      description: "Chaque mouvement est précis, sans gestes brusques.",
+      title: "Cardio + Endurance",
+      description: "Le rythme soutenu et l’absence de repos stimulent le cœur et améliorent la condition cardiovasculaire.",
       image: "/img/yoga-types/type-4.svg",
       animation: "flip-right",
       duration: 600
     },
     {
       id: 5,
-      title: "La fluidité",
-      description: "Les enchaînements doivent être harmonieux.",
+      title: "Brûle des calories même après la séance",
+      description: "Grâce à l’intensité, le métabolisme reste stimulé plusieurs heures après.",
       image: "/img/yoga-types/type-5.svg",
       animation: "flip-left",
       duration: 600
     },
     {
       id: 6,
-      title: "La précision",
-      description: "La qualité prime sur la quantité de répétitions.",
+      title: "Adapté à tous les niveaux",
+      description: "Les exercices se modulent facilement : débutants comme athlètes confirmés.",
       image: "/img/yoga-types/type-6.svg",
       animation: "flip-right",
       duration: 600

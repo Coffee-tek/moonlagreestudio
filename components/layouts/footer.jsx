@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function Footer() {
     const currentYear = new Date().getFullYear();
   return (
@@ -12,9 +14,13 @@ export default function Footer() {
               data-aos="fade-up"
               data-aos-duration="500"
             >
-              <h3 className="fw-bold text-white">
-                Defining interaction patterns best suited in the context
-              </h3>
+               <Image
+                  src="/img/logo/LOGO_PRIMAIRE_COULEUR@4x.png"
+                  alt="Profile"
+                  width={100}
+                  height={100}
+                  
+                />
               <p className="fs-5 text-warning pt-1 pt-3 mb-0">
                 moonlagre@gmail.com
               </p>

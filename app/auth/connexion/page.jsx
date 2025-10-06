@@ -48,10 +48,13 @@ export default function LoginPage() {
             <div className="d-flex align-items-center justify-content-between w-100 mb-5">
               {/* Logo */}
               <div className="position-relative d-flex align-items-center gap-2 site-brand">
-                <i className="ri-body-scan-line fs-2 lh-1 text-black"></i>
                 <div className="lh-1">
-                  <h5 className="fw-bold m-0 text-black">YOGA</h5>
-                  <small className="text-dark">Template</small>
+                  <Image
+                    src="/img/logo/LOGO_PRIMAIRE_COULEUR@4x.png"
+                    alt="Profile"
+                    width={100}
+                    height={100}
+                  />
                 </div>
                 <Link href="/" className="stretched-link"></Link>
               </div>
