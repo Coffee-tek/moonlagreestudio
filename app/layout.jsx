@@ -5,15 +5,15 @@ import ConditionalLayout from "@/components/ConditionalLayout";
 import Script from "next/script";
 
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 
 export const metadata = {
@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
   // }, []);
 
   return (
-    <html lang="fr" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="fr">
       <head>
         {/* Vendor CSS */}
         <link href="/vender/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -49,6 +49,25 @@ export default function RootLayout({ children }) {
           href="https://fonts.cdnfonts.com/css/erotique-alternate-trial"
           rel="stylesheet"
         />
+
+        <style>{`
+          @font-face {
+            font-family: 'Erotique';
+            src: url('/fonts/Erotique-Regular.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+          }
+          @font-face {
+            font-family: 'Erotique';
+            src: url('/fonts/Erotique-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+          }
+
+          html, body, h1, h2, h3, h4, h5, h6, p, span, div {
+    font-family: 'Erotique', serif !important;
+  }
+        `}</style>
       </head>
       <body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
         <ConditionalLayout>
