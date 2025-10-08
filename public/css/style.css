@@ -66,6 +66,10 @@ a:hover {
   border-color: #0b0823  !important;
 }
 
+.bg-secondary{
+  background-color: #938cc6  !important;
+}
+
 .btn-primary:hover {
   background-color: #13095f !important;
   border-color: #13095f !important;

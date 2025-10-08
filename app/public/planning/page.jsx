@@ -212,7 +212,7 @@ export default function CalendarBookingSystem() {
       <HeroHeader
           title={heroHeaders.planning.title}
           breadcrumbs={heroHeaders.planning.breadcrumbs}
-          backgroundImage="/img/new/4.jpeg"
+          backgroundImage="/img/new/planning.jpeg"
       />
       <div className="container py-5">
 
@@ -324,7 +324,7 @@ export default function CalendarBookingSystem() {
                       {/* Indicateur de capacité */}
                       <div className={`
                         w-12 h-12 rounded-full flex items-center justify-center text-white text-xs font-semibold mr-4
-                        ${classItem.available ? 'bg-purple' : 'bg-gray-400'}
+                        ${classItem.available ? 'bg-secondary' : 'bg-gray-400'}
                       `}>
                         {classItem.capacity}
                       </div>
@@ -378,7 +378,7 @@ export default function CalendarBookingSystem() {
                 <span>Aujourd'hui</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-purple rounded-full"></div>
+                <div className="w-3 h-3 bg-secondary rounded-full"></div>
                 <span>Places disponibles</span>
               </div>
               <div className="flex items-center gap-2">

@@ -17,8 +17,8 @@ export default function Footer() {
                <Image
                   src="/img/logo/LOGO_PRIMAIRE_COULEUR@4x.png"
                   alt="Profile"
-                  width={100}
-                  height={100}
+                  width={250}
+                  height={250}
                   
                 />
               <p className="fs-5 text-warning pt-1 pt-3 mb-0">

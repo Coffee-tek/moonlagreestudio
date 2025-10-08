@@ -45,49 +45,22 @@ export default function RootLayout({ children }) {
         <link href="/css/style.css" rel="stylesheet" />
         <link href="/css/common.css" rel="stylesheet" />
 
-        <link
-          href="https://fonts.cdnfonts.com/css/erotique-alternate-trial"
+         <link
+          href="https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:wght@400;500;700&family=Dosis:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
 
+        <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Dosis:wght@200..800&display=swap" rel="stylesheet" />
+
         <style>{`
-          /* ===== Police Erotique pour les titres ===== */
-          @font-face {
-            font-family: 'Erotique';
-            src: url('/fonts/Erotique/Erotique-Regular.ttf') format('truetype');
-            font-weight: 400;
-            font-style: normal;
-          }
-          @font-face {
-            font-family: 'Erotique';
-            src: url('/fonts/Erotique/Erotique-Bold.ttf') format('truetype');
-            font-weight: 700;
-            font-style: normal;
-          }
-
-          /* ===== Police Dosis pour le texte ===== */
-          @font-face {
-            font-family: 'Dosis';
-            src: url('/fonts/Dosis/Dosis-Regular.ttf') format('truetype');
-            font-weight: 400;
-            font-style: normal;
-          }
-          @font-face {
-            font-family: 'Dosis';
-            src: url('/fonts/Dosis/Dosis-Bold.ttf') format('truetype');
-            font-weight: 700;
-            font-style: normal;
-          }
-
-          /* ===== Application des polices ===== */
           html, body {
             font-family: 'Dosis', sans-serif !important;
-            font-weight: 400;
           }
 
           h1, h2, h3, h4, h5, h6 {
-            font-family: 'Erotique', serif !important;
-            
+            font-family: 'Bodoni Moda SC', serif !important;
+            font-weight: 700;
+            letter-spacing: 0.5px;
           }
         `}</style>
       </head>

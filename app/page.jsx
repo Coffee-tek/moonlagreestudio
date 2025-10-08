@@ -47,8 +47,8 @@ export default function Home() {
                     <div className="col-12">
                         <div className="text-center">
                             <div className="text-center bg-primary px-5 title-line rounded-pill"><span className="px-5"></span></div>
-                            <h1 className={"fw-bold pb-2 aos-init"} data-aos="fade-up" data-aos-duration="600">Les avantagesdu pilates <br />sur votre coprs et dans votre vie</h1>
-                            <p className="text-muted aos-init" data-aos="fade-up" data-aos-duration="600">Mind and Body practice with origins in ancient Indian Philosophy</p>
+                            <h1 className={"fw-bold pb-2 aos-init"} data-aos="fade-up" data-aos-duration="600">Les avantages du pilates <br />sur votre coprs et dans votre vie</h1>
+                            <p className="text-muted aos-init" data-aos="fade-up" data-aos-duration="600">Le pilates renforce le coprs, améliore la posture et apaise l'esprit</p>
                         </div>
                     </div>
                 </div>

@@ -21,7 +21,7 @@ export default function ContactPage() {
       <HeroHeader
         title={heroHeaders.contact.title}
         breadcrumbs={heroHeaders.contact.breadcrumbs}
-         backgroundImage="/img/new/3.jpeg"
+         backgroundImage="/img/new/11.jpg"
       />
 
     <div className="py-5">

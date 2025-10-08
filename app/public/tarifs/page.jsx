@@ -21,7 +21,7 @@ export default function PricingPage () {
             <HeroHeader
                 title={heroHeaders.tarifs.title}
                 breadcrumbs={heroHeaders.tarifs.breadcrumbs}
-                backgroundImage="/img/new/5.jpeg"
+                backgroundImage="/img/new/4.jpeg"
             />
 
             {/* <!-- Commment fonctionne les crédits --> */}

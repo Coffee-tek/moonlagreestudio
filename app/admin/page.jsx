@@ -1,250 +1,222 @@
-"use client"
-import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+"use client";
 
 export default function AdminHome() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState('dashboard');
 
-  const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: 'bx bx-home-circle', href: '/admin' },
-    { id: 'users', label: 'Gérer les utilisateurs', icon: 'bx bx-user', href: '/admin/users' },
-    { id: 'planning', label: 'Gérer les plannings', icon: 'bx bx-calendar', href: '/admin/planning' },
-    { id: 'packs', label: 'Gérer les packs', icon: 'bx bx-package', href: '/admin/packs' },
-    { id: 'stats', label: 'Statistiques des Sessions', icon: 'bx bx-bar-chart', href: '/admin/stats' }
-  ];
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
 
   return (
-    <div className="layout-wrapper layout-content-navbar">
-      <div className="layout-container">
-        {/* Menu Sidebar */}
-        <aside 
-          id="layout-menu" 
-          className={`layout-menu menu-vertical menu bg-menu-theme ${isSidebarOpen ? 'menu-open' : ''}`}
-        >
-          <div className="app-brand demo">
-            <Link href="/admin" className="app-brand-link">
-              <Image
-                    src="/img/logo/LOGO_PRIMAIRE_COULEUR@4x.png"
-                    alt="Profile"
-                    width={100}
-                    height={100}
-                    
-                />
-            </Link>
+    <>
 
-            <a 
-              href="#" 
-              className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"
-              onClick={(e) => {
-                e.preventDefault();
-                toggleSidebar();
-              }}
-            >
-              <i className="bx bx-chevron-left bx-sm align-middle"></i>
-            </a>
-          </div>
+      <div className="wrapper">
+        {/* Sidenav Menu */}
+        <div className="sidenav-menu">
+          <a href="/" className="logo">
+            <span className="logo logo-light">
+              <span className="logo-lg">
+                <img src="/assets/images/logo.png" alt="logo" />
+              </span>
+              <span className="logo-sm">
+                <img src="/assets/images/logo-sm.png" alt="small logo" />
+              </span>
+            </span>
+            <span className="logo logo-dark">
+              <span className="logo-lg">
+                <img src="/assets/images/logo-black.png" alt="dark logo" />
+              </span>
+              <span className="logo-sm">
+                <img src="/assets/images/logo-sm.png" alt="small logo" />
+              </span>
+            </span>
+          </a>
 
-          <div className="menu-inner-shadow"></div>
+          <button className="button-on-hover">
+            <i className="ti ti-menu-4 fs-22 align-middle"></i>
+          </button>
 
-          <ul className="menu-inner py-1">
-            {menuItems.map((item) => (
-              <li 
-                key={item.id} 
-                className={`menu-item ${activeMenu === item.id ? 'active' : ''}`}
-              >
-                <Link 
-                  href={item.href} 
-                  className="menu-link"
-                  onClick={() => setActiveMenu(item.id)}
-                >
-                  <i className={`menu-icon tf-icons ${item.icon}`}></i>
-                  <div>{item.label}</div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </aside>
-        {/* / Menu */}
+          <button className="button-close-offcanvas">
+            <i className="ti ti-x align-middle"></i>
+          </button>
 
-        {/* Layout page */}
-        <div className="layout-page">
-          {/* Navbar */}
-          <nav
-            className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-            id="layout-navbar"
-          >
-            <div className="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-              <a 
-                className="nav-item nav-link px-0 me-xl-4" 
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  toggleSidebar();
-                }}
-              >
-                <i className="bx bx-menu bx-sm"></i>
-              </a>
-            </div>
-
-            <div className="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <ul className="navbar-nav flex-row align-items-center ms-auto">
-                {/* User Dropdown */}
-                <li className="nav-item navbar-dropdown dropdown-user dropdown">
-                  <a 
-                    className="nav-link dropdown-toggle hide-arrow" 
-                    href="#" 
-                    data-bs-toggle="dropdown"
-                  >
-                    <div className="avatar avatar-online">
-                      <Image 
-                        src="/assets/img/avatars/1.png" 
-                        alt="User Avatar" 
-                        width={40}
-                        height={40}
-                        className="rounded-circle"
-                      />
-                    </div>
+          <div className="scrollbar" data-simplebar>
+            <div className="sidenav-user">
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <a href="#" className="link-reset">
+                    <img
+                      src="/assets/images/users/user-3.jpg"
+                      alt="user"
+                      className="rounded-circle mb-2 avatar-md"
+                    />
+                    <span className="sidenav-user-name fw-bold">Geneva K.</span>
+                    <span className="fs-12 fw-semibold">Art Director</span>
                   </a>
-                  <ul className="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        <div className="d-flex">
-                          <div className="flex-shrink-0 me-3">
-                            <div className="avatar avatar-online">
-                              <Image 
-                                src="/assets/img/avatars/1.png" 
-                                alt="User Avatar" 
-                                width={40}
-                                height={40}
-                                className="rounded-circle"
-                              />
-                            </div>
-                          </div>
-                          <div className="flex-grow-1">
-                            <span className="fw-semibold d-block">John Doe</span>
-                            <small className="text-muted">Admin</small>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <div className="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" href="/admin/profile">
-                        <i className="bx bx-user me-2"></i>
-                        <span className="align-middle">Mon profile</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <div className="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" href="/logout">
-                        <i className="bx bx-power-off me-2"></i>
-                        <span className="align-middle">Déconnexion</span>
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
-                {/* / User */}
-              </ul>
-            </div>
-          </nav>
-          {/* / Navbar */}
-
-          {/* Content wrapper */}
-          <div className="content-wrapper">
-            {/* Content */}
-            <div className="container-xxl flex-grow-1 container-p-y">
-              <h1>ADMIN</h1>
-              
-              {/* Vous pouvez ajouter votre contenu ici */}
-              <div className="row">
-                <div className="col-12">
-                  <div className="card">
-                    <div className="card-body">
-                      <h5 className="card-title">Bienvenue dans le panneau d'administration</h5>
-                      <p className="card-text">
-                        Utilisez le menu de navigation pour gérer votre application.
-                      </p>
+                </div>
+                <div>
+                  <a
+                    className="dropdown-toggle drop-arrow-none link-reset sidenav-user-set-icon"
+                    data-bs-toggle="dropdown"
+                    href="#!"
+                  >
+                    <i className="ti ti-settings fs-24 align-middle ms-1"></i>
+                  </a>
+                  <div className="dropdown-menu">
+                    <div className="dropdown-header noti-title">
+                      <h6 className="text-overflow m-0">Welcome back!</h6>
                     </div>
+                    <a href="#" className="dropdown-item">
+                      <i className="ti ti-user-circle me-2 fs-17 align-middle"></i>
+                      <span>Profile</span>
+                    </a>
+                    <a href="#" className="dropdown-item fw-semibold">
+                      <i className="ti ti-logout-2 me-2 fs-17 align-middle"></i>
+                      <span>Déconnexion</span>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
-            {/* / Content */}
 
-            {/* Footer */}
-            <footer className="content-footer footer bg-footer-theme">
-              <div className="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div className="mb-2 mb-md-0">
-                  © {new Date().getFullYear()}, made with ❤️ by{' '}
-                  <a 
-                    href="https://themeselection.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="footer-link fw-bolder"
-                  >
-                    ThemeSelection
-                  </a>
-                </div>
-                <div>
-                  <a 
-                    href="https://themeselection.com/license/" 
-                    className="footer-link me-4" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    License
-                  </a>
-                  <a 
-                    href="https://themeselection.com/" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="footer-link me-4"
-                  >
-                    More Themes
-                  </a>
+            <ul className="side-nav">
+              <li className="side-nav-title mt-2">Navigation</li>
+
+              <li className="side-nav-item active">
+                <a
+                  data-bs-toggle="collapse"
+                  href="#sidebarDashboards"
+                  className="side-nav-link"
+                >
+                  <span className="menu-icon">
+                    <i data-lucide="circle-gauge"></i>
+                  </span>
+                  <span className="menu-text">Dashboards</span>
+                </a>
+              </li>
+
+              <li className="side-nav-item">
+                <a href="#" className="side-nav-link">
+                  <span className="menu-icon">
+                    <i data-lucide="users"></i>
+                  </span>
+                  <span className="menu-text">Gérer les utilisateurs</span>
+                </a>
+              </li>
+
+              <li className="side-nav-item">
+                <a href="#" className="side-nav-link">
+                  <span className="menu-icon">
+                    <i data-lucide="calendar"></i>
+                  </span>
+                  <span className="menu-text">Gérer les plannings</span>
+                </a>
+              </li>
+
+              <li className="side-nav-item">
+                <a href="#" className="side-nav-link">
+                  <span className="menu-icon">
+                    <i data-lucide="receipt-text"></i>
+                  </span>
+                  <span className="menu-text">Gérer les packs</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Topbar */}
+        <header className="app-topbar z-100">
+          <div className="container-fluid topbar-menu">
+            <div className="d-flex align-items-center gap-2">
+              <div className="logo-topbar">
+                <a href="/" className="logo-light">
+                  <span className="logo-lg">
+                    <img src="/assets/images/logo.png" alt="logo" />
+                  </span>
+                  <span className="logo-sm">
+                    <img src="/assets/images/logo-sm.png" alt="small logo" />
+                  </span>
+                </a>
+                <a href="/" className="logo-dark">
+                  <span className="logo-lg">
+                    <img src="/assets/images/logo-black.png" alt="dark logo" />
+                  </span>
+                  <span className="logo-sm">
+                    <img src="/assets/images/logo-sm.png" alt="small logo" />
+                  </span>
+                </a>
+              </div>
+
+              <button className="sidenav-toggle-button btn btn-default btn-icon">
+                <i className="ti ti-menu-4 fs-22"></i>
+              </button>
+
+              <button
+                className="topnav-toggle-button px-2"
+                data-bs-toggle="collapse"
+                data-bs-target="#topnav-menu-content"
+              >
+                <i className="ti ti-menu-4 fs-22"></i>
+              </button>
+            </div>
+
+            <div className="d-flex align-items-center gap-2">
+              <div className="app-search d-none d-xl-flex me-2">
+                <input
+                  type="search"
+                  className="form-control topbar-search rounded-pill"
+                  name="search"
+                  placeholder="Quick Search..."
+                />
+                <i data-lucide="search" className="app-search-icon text-muted"></i>
+              </div>
+
+              <div className="topbar-item nav-user">
+                <div className="dropdown">
                   <a
-                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="footer-link me-4"
+                    className="topbar-link dropdown-toggle drop-arrow-none px-2"
+                    data-bs-toggle="dropdown"
+                    href="#!"
                   >
-                    Documentation
+                    <img
+                      src="/assets/images/users/user-3.jpg"
+                      width="32"
+                      className="rounded-circle me-lg-2 d-flex"
+                      alt="user"
+                    />
+                    <div className="d-lg-flex align-items-center gap-1 d-none">
+                      <h5 className="my-0">Geneva</h5>
+                      <i className="ti ti-chevron-down align-middle"></i>
+                    </div>
                   </a>
-                  <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="footer-link me-4"
-                  >
-                    Support
-                  </a>
+                  <div className="dropdown-menu dropdown-menu-end">
+                    <div className="dropdown-header noti-title">
+                      <h6 className="text-overflow m-0">Welcome back 👋!</h6>
+                    </div>
+                    <a href="#" className="dropdown-item">
+                      <i className="ti ti-user-circle me-1 fs-17 align-middle"></i>
+                      <span>Profile</span>
+                    </a>
+                    <a href="#" className="dropdown-item fw-semibold">
+                      <i className="ti ti-logout-2 me-1 fs-17 align-middle"></i>
+                      <span>Déconnexion</span>
+                    </a>
+                  </div>
                 </div>
               </div>
-            </footer>
-            {/* / Footer */}
-
-            <div className="content-backdrop fade"></div>
+            </div>
           </div>
-          {/* Content wrapper */}
-        </div>
-        {/* / Layout page */}
-      </div>
+        </header>
 
-      {/* Overlay */}
-      <div 
-        className={`layout-overlay layout-menu-toggle ${isSidebarOpen ? 'active' : ''}`}
-        onClick={toggleSidebar}
-      ></div>
-    </div>
+        {/* Footer */}
+        {/* <footer className="footer">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-12 text-center">
+                © {new Date().getFullYear()} UBold By{" "}
+                <span className="fw-semibold">Coderthemes</span>
+              </div>
+            </div>
+          </div>
+        </footer> */}
+      </div>
+    </>
   );
 }
