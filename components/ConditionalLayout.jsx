@@ -8,7 +8,18 @@ export default function ConditionalLayout({ children }) {
   const pathname = usePathname();
   
   // Pages qui n'ont pas besoin du layout complet
-  const noLayoutPages = ['/auth/connexion', '/auth/inscription', '/auth/forgot-password', '/admin'];
+  const noLayoutPages = [
+    '/auth/connexion', 
+    '/auth/inscription', 
+    '/auth/forgot-password', 
+    '/auth/reset-password', 
+    '/auth/new-password', 
+    '/admin', 
+    '/admin/profile', 
+    '/admin/users',
+    '/admin/plannings',
+    '/admin/packs',
+  ];
   const hideLayout = noLayoutPages.includes(pathname);
 
   if (hideLayout) {

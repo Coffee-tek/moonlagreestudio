@@ -226,7 +226,7 @@ export const aboutYoga = {
   title: "Moon Lagre Studio",
   button: {
     label: "Contactez Nous",
-    href: "#",
+    href: "/public/contact",
   },
   lead: "Découvrez une nouvelle façon de vous entraîner, où l’efficacité rencontre l’élégance. Le studio Lagree, c’est bien plus qu’une salle de sport : c’est un espace dédié à la transformation du corps et de l’esprit, dans une ambiance moderne et inspirante.",
   description:

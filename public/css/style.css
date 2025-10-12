@@ -70,6 +70,10 @@ a:hover {
   background-color: #938cc6  !important;
 }
 
+.text-secondary{
+  color: #938cc6  !important;
+}
+
 .btn-primary:hover {
   background-color: #13095f !important;
   border-color: #13095f !important;

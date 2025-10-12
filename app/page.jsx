@@ -80,7 +80,8 @@ export default function Home() {
                     </p>
                     </div>
                     <a
-                    href="#"
+                    href="https://maps.app.goo.gl/e2BTgUVvN5TJj19F6"
+                    target="_blank" rel="noopener noreferrer"
                     className="btn btn-primary btn-lg rounded-pill"
                     data-aos="fade-right"
                     data-aos-duration="600"

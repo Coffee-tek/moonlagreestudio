@@ -15,14 +15,14 @@ export default function Footer() {
               data-aos-duration="500"
             >
                <Image
-                  src="/img/logo/LOGO_PRIMAIRE_COULEUR@4x.png"
+                  src="/img/logo/LOGO_PRIMAIRE_BLANC@4x.png"
                   alt="Profile"
-                  width={250}
-                  height={250}
+                  width={200}
+                  height={200}
                   
                 />
-              <p className="fs-5 text-warning pt-1 pt-3 mb-0">
-                moonlagre@gmail.com
+              <p className="fs-5 text-white pt-1 pt-3 mb-0">
+                moonlagree@gmail.com
               </p>
             </div>
 

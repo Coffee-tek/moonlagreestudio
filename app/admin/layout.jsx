@@ -1,24 +1,63 @@
 "use client";
 
 import React, { useEffect } from "react";
-import "./styles/css/vendors.min.css";
-import "./styles/css/app.min.css";
+// import "./styles/vendor/fonts/boxicons.css";
+import "./styles/vendor/css/core.css";
+import "./styles/vendor/css/theme-default.css";
+import "./styles/css/demo.css";
+import "./styles/vendor/libs/perfect-scrollbar/perfect-scrollbar.css";
+import "./styles/vendor/libs/apex-charts/apex-charts.css";
+import AdminSidebar from "@/components/admin/layouts/sidebar";
+import AdminFooter from "@/components/admin/layouts/footer";
+import AdminNavbar from "@/components/admin/layouts/navbar";
+import { useState } from "react";
 
+// Optionnel : scripts JS spécifiques
 export default function AdminLayout({ children }) {
   useEffect(() => {
     // Import dynamique des scripts JS après le rendu
-    import("./styles/js/config.js");
-    import("./styles/js/vendors.min.js");
+    import("./styles/vendor/js/helpers.js");
   }, []);
 
-  return (
-    <>
-      {/* Ici, on peut utiliser Head pour favicon ou scripts */}
-      <head>
-        <link rel="shortcut icon" href="./styles/favicon.ico" />
-      </head>
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    
+    const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+    };
 
-      <main>{children}</main>
-    </>
+  return (
+    <div className="layout-wrapper layout-content-navbar">
+      <div className="layout-container">
+        {/* Menu Sidebar */}
+        <AdminSidebar/>
+        {/* / Menu */}
+
+        {/* Layout page */}
+        <div className="layout-page">
+          
+          {/* Navbar */}
+          <AdminNavbar/>
+          {/* / Navbar */}
+
+          {/* Content wrapper */}
+          <div className="content-wrapper">
+            {children}
+            {/* Footer */}
+            <AdminFooter/>
+            {/* / Footer */}
+
+            <div className="content-backdrop fade"></div>
+          </div>
+          {/* Content wrapper */}
+        </div>
+        {/* / Layout page */}
+      </div>
+    
+      {/* Overlay */}
+      <div 
+        className={`layout-overlay layout-menu-toggle ${isSidebarOpen ? 'active' : ''}`}
+        onClick={toggleSidebar}
+      ></div>
+    </div>
   );
 }

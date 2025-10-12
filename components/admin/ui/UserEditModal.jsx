@@ -1,0 +1,176 @@
+import { useState, useEffect } from "react";
+import Image from "next/image";
+
+export default function UserEditModal({ user, onClose, onSave }) {
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    if (user) {
+      setFormData({ ...user });
+    }
+  }, [user]);
+
+  if (!user) return null;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave(formData);
+  };
+
+  return (
+    <div
+      className="modal fade show d-block"
+      tabIndex="-1"
+      style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+      onClick={onClose}
+    >
+      <div
+        className="modal-dialog modal-dialog-centered modal-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-content">
+          <form onSubmit={handleSubmit}>
+            <div className="modal-header">
+              <h5 className="modal-title">Edit User</h5>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={onClose}
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div className="row">
+                <div className="col-md-4 text-center mb-4">
+                  <Image
+                    src={formData.avatar || user.avatar}
+                    alt={formData.name || user.name}
+                    width={150}
+                    height={150}
+                    className="rounded-circle mb-3"
+                  />
+                  <small className="text-muted">Avatar preview</small>
+                </div>
+                <div className="col-md-8">
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      User ID <span className="text-muted">(non-editable)</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={formData.id || ""}
+                      disabled
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Full Name <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="name"
+                      value={formData.name || ""}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Email <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      name="email"
+                      value={formData.email || ""}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Role <span className="text-danger">*</span>
+                    </label>
+                    <select
+                      className="form-select"
+                      name="role"
+                      value={formData.role || ""}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select a role</option>
+                      <option value="Project Manager">Project Manager</option>
+                      <option value="Developer">Developer</option>
+                      <option value="Support Lead">Support Lead</option>
+                      <option value="Security Officer">Security Officer</option>
+                    </select>
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Status <span className="text-danger">*</span>
+                    </label>
+                    <select
+                      className="form-select"
+                      name="status"
+                      value={formData.status || ""}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select a status</option>
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                      <option value="Suspended">Suspended</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+              <button type="submit" className="btn btn-primary">
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .modal {
+          z-index: 1050;
+        }
+
+        .modal-dialog {
+          max-width: 800px;
+        }
+
+        .form-label {
+          font-size: 0.9rem;
+        }
+
+        .text-danger {
+          color: #dc3545;
+        }
+
+        .text-muted {
+          color: #6c757d;
+        }
+      `}</style>
+    </div>
+  );
+}

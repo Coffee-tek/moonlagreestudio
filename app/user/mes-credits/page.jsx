@@ -44,7 +44,7 @@ export default function MesCredits() {
                                         <div className="d-flex align-items-center gap-3 osahan-mb-1">
                                         <i className={`ri-${transaction.isPositive ? 'add' : 'subtract'}-line text-muted fs-5`}></i>
                                         <div className="lh-sm">
-                                            <h4 className={`fw-bold ${transaction.isPositive ? 'text-success' : 'text-danger'} mb-2`}>
+                                            <h4 className={`fw-bold ${transaction.isPositive ? 'text-secondary' : 'text-primary'} mb-2`}>
                                             {transaction.type}
                                             </h4>
                                             <p className="text-truncate mb-2 small">
@@ -55,7 +55,7 @@ export default function MesCredits() {
                                         </div>
                                     </div>
                                     <div className="ms-auto d-flex align-items-center gap-3 text-center small">
-                                        <span className={`${transaction.isPositive ? 'text-success' : 'text-danger'} fw-bold h5 m-0`}>
+                                        <span className={`${transaction.isPositive ? 'text-secondary' : 'text-primary'} fw-bold h5 m-0`}>
                                         {transaction.amount}
                                         </span>
                                     </div>

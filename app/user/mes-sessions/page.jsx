@@ -128,9 +128,17 @@ export default function MesSessions() {
                                                                     Pilates au sol (Matwork)
                                                                 </h6>
                                                                 <p className="card-text">
-                                                                    <small className="text-body-secondary">
-                                                                    Date : 25 Oct 2025
-                                                                    </small>
+                                                                    <div className="row">
+                                                                        <small className="text-body-secondary">
+                                                                        Date : 25 Oct 2025
+                                                                        </small>
+                                                                        <small className="text-body-secondary">
+                                                                        Heure : 15H00
+                                                                        </small>
+                                                                        <small className="text-body-secondary">
+                                                                        Crédits : 17 
+                                                                        </small>
+                                                                    </div>                                                                  
                                                                 </p>
                                                                 <h5 className="card-text fw-bold mb-0">
                                                                     Avec coach Karen

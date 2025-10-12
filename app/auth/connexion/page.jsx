@@ -115,7 +115,7 @@ export default function LoginPage() {
                       Se souvenir de moi
                     </label>
                   </div>
-                  <Link href="/reset-password" className="text-decoration-none small">
+                  <Link href="/auth/reset-password" className="text-decoration-none small">
                     Mot de passe oublié
                   </Link>
                 </div>

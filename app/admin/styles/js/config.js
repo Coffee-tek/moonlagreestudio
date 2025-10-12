@@ -1,1 +1,27 @@
-(()=>{var e=document.documentElement,o=sessionStorage.getItem("__UBOLD_CONFIG__");const t="default",i=!1,a="light",s={position:"fixed"},r={color:"dark"},n={color:"light"},d={size:"default",user:!1};function u(){return window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}var c={skin:e.getAttribute("data-skin")||t,monochrome:e.classList.contains("monochrome")||i,theme:"system"===e.getAttribute("data-bs-theme")?u():e.getAttribute("data-bs-theme")||("system"===a?u():a),layout:{position:e.getAttribute("data-layout-position")||s.position},topbar:{color:e.getAttribute("data-topbar-color")||r.color},menu:{color:e.getAttribute("data-menu-color")||n.color},sidenav:{size:e.getAttribute("data-sidenav-size")||d.size,user:e.hasAttribute("data-sidenav-user")||d.user}},o=(window.defaultConfig=structuredClone(c),o?JSON.parse(o):c);if(window.config=o,e.setAttribute("data-skin",o.skin),e.setAttribute("data-bs-theme","system"===o.theme?u():o.theme),e.setAttribute("data-menu-color",o.menu.color),e.setAttribute("data-topbar-color",o.topbar.color),e.setAttribute("data-layout-position",o.layout.position),e.classList.toggle("monochrome",o.monochrome),o.sidenav.size){let t=o.sidenav.size;window.innerWidth<=767?t="offcanvas":window.innerWidth<=1140&&!["offcanvas"].includes(t)&&(t="condensed"),e.setAttribute("data-sidenav-size",t),!0===o.sidenav.user?e.setAttribute("data-sidenav-user","true"):e.removeAttribute("data-sidenav-user")}})();
+/**
+ * Config
+ * -------------------------------------------------------------------------------------
+ * ! IMPORTANT: Make sure you clear the browser local storage In order to see the config changes in the template.
+ * ! To clear local storage: (https://www.leadshook.com/help/how-to-clear-local-storage-in-google-chrome-browser/).
+ */
+
+'use strict';
+
+// JS global variables
+let config = {
+  colors: {
+    primary: '#696cff',
+    secondary: '#8592a3',
+    success: '#71dd37',
+    info: '#03c3ec',
+    warning: '#ffab00',
+    danger: '#ff3e1d',
+    dark: '#233446',
+    black: '#000',
+    white: '#fff',
+    body: '#f4f5fb',
+    headingColor: '#566a7f',
+    axisColor: '#a1acb8',
+    borderColor: '#eceef1'
+  }
+};
