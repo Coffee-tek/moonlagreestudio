@@ -202,7 +202,7 @@ export default function AdminPlanning() {
               <input
                 type="search"
                 className="form-control"
-                placeholder="Rechercher une session..."
+                placeholder="Session..."
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -299,6 +299,7 @@ export default function AdminPlanning() {
             <button
               type="button"
               className="btn btn-primary"
+              onClick={() => setShowAddModal(true)}
             >
               <i className="bi bi-plus-circle me-1"></i>
               Ajouter Session
@@ -440,6 +441,7 @@ export default function AdminPlanning() {
                         <button
                           className="btn btn-sm btn-outline-primary"
                           title="Modifier"
+                          onClick={() => handleEditSession(session)}
                         >
                           <i className="bi bi-pencil-square"></i>
                         </button>

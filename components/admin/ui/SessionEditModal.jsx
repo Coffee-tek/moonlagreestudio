@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { faker } from "@faker-js/faker";
 
 export default function SessionEditModal({ session, onClose, onSave, teachers = [] }) {
   const [formData, setFormData] = useState({});
@@ -8,8 +9,13 @@ export default function SessionEditModal({ session, onClose, onSave, teachers = 
   useEffect(() => {
     if (session) {
       // Convertir la date au format YYYY-MM-DD pour l'input date
-      const dateObj = new Date(session.date);
-      const formattedDate = dateObj.toISOString().split('T')[0];
+      let dateObj = faker.date.future();
+
+if (!(dateObj instanceof Date) || isNaN(dateObj)) {
+  dateObj = new Date(); // valeur de secours
+}
+
+const formattedDate = dateObj.toISOString().split('T')[0]; // ✅ toujours valide
       
       setFormData({
         ...session,
@@ -152,9 +158,39 @@ export default function SessionEditModal({ session, onClose, onSave, teachers = 
                       className="rounded-circle"
                     />
                   </div>
+
+                   <div className="button-wrapper">
+                    <label
+                      htmlFor="upload"
+                      className="btn btn-primary me-2 mb-4"
+                      tabIndex={0}
+                    >
+                      <span className="d-none d-sm-block">Changer de photo</span>
+                      <i className="bx bx-upload d-block d-sm-none"></i>
+                      <input
+                        type="file"
+                        id="upload"
+                        className="account-file-input"
+                        hidden
+                        accept="image/png, image/jpeg"
+                      />
+                    </label>
+
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary account-image-reset mb-4"
+                    >
+                      <i className="bx bx-reset d-block d-sm-none"></i>
+                      <span className="d-none d-sm-block">Annuler</span>
+                    </button>
+
+                    <p className="text-muted mb-0">
+                      Autorisé JPG, GIF or PNG. Max size of 800K
+                    </p>
+                </div>
                   
                   {/* Statistiques des places */}
-                  <div className="card bg-light">
+                  <div className="card bg-light mt-1">
                     <div className="card-body p-3">
                       <h6 className="mb-2">Occupation</h6>
                       <div className="mb-2">

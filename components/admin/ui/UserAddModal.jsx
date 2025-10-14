@@ -4,9 +4,12 @@ import Image from "next/image";
 export default function UserAddModal({ onClose, onAdd }) {
   const [formData, setFormData] = useState({
     name: "",
+    username: "",
     email: "",
-    role: "",
-    status: "Active",
+    adress: "",
+    tel : "",
+    credits : "",
+    points : "",
     avatar: "/img/new/12.jpeg",
   });
 
@@ -31,21 +34,17 @@ export default function UserAddModal({ onClose, onAdd }) {
     const newErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = "Full name is required";
+      newErrors.name = "Nom complet requis";
+    }
+
+    if (!formData.username.trim()) {
+      newErrors.username = "Nom d'utilisateur requis";
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = "Email est requis";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
-    }
-
-    if (!formData.role) {
-      newErrors.role = "Role is required";
-    }
-
-    if (!formData.status) {
-      newErrors.status = "Status is required";
+      newErrors.email = "Email est invalide";
     }
 
     setErrors(newErrors);
@@ -85,6 +84,10 @@ export default function UserAddModal({ onClose, onAdd }) {
     }));
   };
 
+  const handleReset = () => {
+    setAvatar("/assets/img/new/14.jpeg");
+  };
+
   return (
     <div
       className="modal fade show d-block"
@@ -101,7 +104,7 @@ export default function UserAddModal({ onClose, onAdd }) {
             <div className="modal-header">
               <h5 className="modal-title">
                 <i className="ti ti-user-plus me-2"></i>
-                Add New User
+                Ajouter un nouvel utilisateur
               </h5>
               <button
                 type="button"
@@ -121,22 +124,52 @@ export default function UserAddModal({ onClose, onAdd }) {
                       className="rounded-circle"
                     />
                   </div>
-                  <button
+                  {/* <button
                     type="button"
                     className="btn btn-sm btn-outline-secondary"
                     onClick={generateRandomAvatar}
                   >
                     <i className="ti ti-refresh me-1"></i>
                     Generate Avatar
-                  </button>
+                  </button> */}
+                  <div className="button-wrapper">
+                    <label
+                      htmlFor="upload"
+                      className="btn btn-primary me-2 mb-4"
+                      tabIndex={0}
+                    >
+                      <span className="d-none d-sm-block">Changer de photo</span>
+                      <i className="bx bx-upload d-block d-sm-none"></i>
+                      <input
+                        type="file"
+                        id="upload"
+                        className="account-file-input"
+                        hidden
+                        accept="image/png, image/jpeg"
+                      />
+                    </label>
+
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary account-image-reset mb-4"
+                    >
+                      <i className="bx bx-reset d-block d-sm-none"></i>
+                      <span className="d-none d-sm-block">Annuler</span>
+                    </button>
+
+                    <p className="text-muted mb-0">
+                      Autorisé JPG, GIF or PNG. Max size of 800K
+                    </p>
+                </div>
                   <small className="d-block text-muted mt-2">
                     Avatar will be generated from email
                   </small>
                 </div>
                 <div className="col-md-8">
+
                   <div className="mb-3">
                     <label className="form-label fw-bold">
-                      Full Name <span className="text-danger">*</span>
+                      Nom Complet <span className="text-danger">*</span>
                     </label>
                     <input
                       type="text"
@@ -144,10 +177,27 @@ export default function UserAddModal({ onClose, onAdd }) {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Enter full name"
+                      placeholder="Entrer nom complet"
                     />
                     {errors.name && (
                       <div className="invalid-feedback">{errors.name}</div>
+                    )}
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Nom d'utilisateur <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      className={`form-control ${errors.username ? "is-invalid" : ""}`}
+                      name="username"
+                      value={formData.username}
+                      onChange={handleChange}
+                      placeholder="Entrer nom d'utilisateur"
+                    />
+                    {errors.username && (
+                      <div className="invalid-feedback">{errors.username}</div>
                     )}
                   </div>
 
@@ -170,6 +220,68 @@ export default function UserAddModal({ onClose, onAdd }) {
 
                   <div className="mb-3">
                     <label className="form-label fw-bold">
+                      Adresse
+                    </label>
+                    <input
+                      type="input"
+                      className={`form-control ${errors.adress ? "is-invalid" : ""}`}
+                      name="adress"
+                      value={formData.adress}
+                      onChange={handleChange}
+                      placeholder="Entrer votre adresse"
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Téléphone 
+                    </label>
+                    <input
+                      type="number"
+                      className={`form-control ${errors.tel ? "is-invalid" : ""}`}
+                      name="tel"
+                      value={formData.tel}
+                      onChange={handleChange}
+                      placeholder="Entrer votre numéro"
+                    />
+                    {errors.tel && (
+                      <div className="invalid-feedback">{errors.tel}</div>
+                    )}
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Crédits 
+                    </label>
+                    <input
+                      type="number"
+                      className={`form-control ${errors.credits ? "is-invalid" : ""}`}
+                      name="tel"
+                      value={formData.credits}
+                      onChange={handleChange}
+                      placeholder="Entrer votre numéro"
+                    />
+                    {errors.credits && (
+                      <div className="invalid-feedback">{errors.credits}</div>
+                    )}
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Points 
+                    </label>
+                    <input
+                      type="number"
+                      className={`form-control ${errors.points ? "is-invalid" : ""}`}
+                      name="points"
+                      value={formData.points}
+                      onChange={handleChange}
+                      placeholder="Entrer nombre de point"
+                    />
+                  </div>
+
+                  {/* <div className="mb-3">
+                    <label className="form-label fw-bold">
                       Role <span className="text-danger">*</span>
                     </label>
                     <select
@@ -187,9 +299,9 @@ export default function UserAddModal({ onClose, onAdd }) {
                     {errors.role && (
                       <div className="invalid-feedback">{errors.role}</div>
                     )}
-                  </div>
+                  </div> */}
 
-                  <div className="mb-3">
+                  {/* <div className="mb-3">
                     <label className="form-label fw-bold">
                       Status <span className="text-danger">*</span>
                     </label>
@@ -206,14 +318,9 @@ export default function UserAddModal({ onClose, onAdd }) {
                     {errors.status && (
                       <div className="invalid-feedback">{errors.status}</div>
                     )}
-                  </div>
+                  </div> */}
 
-                  <div className="alert alert-info d-flex align-items-center">
-                    <i className="ti ti-info-circle me-2"></i>
-                    <small>
-                      The user ID and timestamps will be generated automatically
-                    </small>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -224,11 +331,11 @@ export default function UserAddModal({ onClose, onAdd }) {
                 onClick={onClose}
               >
                 <i className="ti ti-x me-1"></i>
-                Cancel
+                Annuler
               </button>
               <button type="submit" className="btn btn-primary">
                 <i className="ti ti-check me-1"></i>
-                Add User
+                Ajouter utilisateur
               </button>
             </div>
           </form>

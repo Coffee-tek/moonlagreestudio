@@ -45,20 +45,18 @@ export default function RootLayout({ children }) {
         <link href="/css/style.css" rel="stylesheet" />
         <link href="/css/common.css" rel="stylesheet" />
 
-         <link
-          href="https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:wght@400;500;700&family=Dosis:wght@400;600;700&display=swap"
-          rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
-        <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Dosis:wght@200..800&display=swap" rel="stylesheet" />
+       <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet"/>
 
         <style>{`
+
           html, body {
             font-family: 'Dosis', sans-serif !important;
           }
 
           h1, h2, h3, h4, h5, h6 {
-            font-family: 'Bodoni Moda SC', serif !important;
+            font-family: "Cormorant Unicase", serif !important;
             font-weight: 700;
             letter-spacing: 0.5px;
           }

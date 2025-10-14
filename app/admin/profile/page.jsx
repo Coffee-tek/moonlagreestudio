@@ -7,7 +7,7 @@ export default function AdminProfile() {
 
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
-    const [avatar, setAvatar] = useState("/assets/img/avatars/1.png");
+    const [avatar, setAvatar] = useState("/img/new/14.jpeg");
 
     const [passwordForm, setPasswordForm] = useState({
         newPassword: '',

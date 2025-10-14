@@ -16,7 +16,6 @@ export default function AdminHome() {
 
         <LoyaltyPointsChart />
 
-
       </div>
       {/* / Content */}
     </>    

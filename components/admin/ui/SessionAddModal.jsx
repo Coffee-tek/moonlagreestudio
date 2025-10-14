@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
   const [formData, setFormData] = useState({
     teacher: "",
-    teacherAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=default",
+    teacherAvatar: "/img/new/14.jpeg",
     date: "",
     time: "",
     credits: 1,
@@ -140,9 +140,35 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
                       className="rounded-circle"
                     />
                   </div>
-                  <small className="d-block text-muted">
-                    Avatar généré automatiquement
-                  </small>
+                   <div className="button-wrapper">
+                    <label
+                      htmlFor="upload"
+                      className="btn btn-primary me-2 mb-4"
+                      tabIndex={0}
+                    >
+                      <span className="d-none d-sm-block">Changer de photo</span>
+                      <i className="bx bx-upload d-block d-sm-none"></i>
+                      <input
+                        type="file"
+                        id="upload"
+                        className="account-file-input"
+                        hidden
+                        accept="image/png, image/jpeg"
+                      />
+                    </label>
+
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary account-image-reset mb-4"
+                    >
+                      <i className="bx bx-reset d-block d-sm-none"></i>
+                      <span className="d-none d-sm-block">Annuler</span>
+                    </button>
+
+                    <p className="text-muted mb-0">
+                      Autorisé JPG, GIF or PNG. Max size of 800K
+                    </p>
+                </div>
                 </div>
 
                 <div className="col-md-8">

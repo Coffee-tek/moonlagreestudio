@@ -3,15 +3,6 @@ import Image from "next/image";
 export default function UserViewModal({ user, onClose }) {
   if (!user) return null;
 
-  const getStatusBadge = (status) => {
-    const badges = {
-      Active: "bg-success-subtle text-success",
-      Inactive: "bg-warning-subtle text-warning",
-      Suspended: "bg-danger-subtle text-danger",
-    };
-    return badges[status] || "";
-  };
-
   return (
     <div
       className="modal fade show d-block"
@@ -25,7 +16,7 @@ export default function UserViewModal({ user, onClose }) {
       >
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">User Details</h5>
+            <h5 className="modal-title">Détails Utilisateurs</h5>
             <button
               type="button"
               className="btn-close"
@@ -40,32 +31,52 @@ export default function UserViewModal({ user, onClose }) {
                   alt={user.name}
                   width={150}
                   height={150}
-                  className="rounded-circle"
+                  className="rounded-circle m-lg-5"
                 />
                 <h4 className="mt-3 mb-1">{user.name}</h4>
-                <span className={`badge ${getStatusBadge(user.status)} fs-6`}>
-                  {user.status}
-                </span>
               </div>
+              
               <div className="col-md-8">
                 <div className="mb-3">
-                  <label className="fw-bold text-muted mb-1">User ID</label>
+                  <label className="fw-bold text-muted mb-1">Id utilisateur</label>
                   <p className="mb-0">{user.id}</p>
                 </div>
+
+                <div className="mb-3">
+                  <label className="fw-bold text-muted mb-1">Nom d'utilisateur</label>
+                  <p className="mb-0">Afficher le nom d'utilisateur ici</p>
+                </div>
+
                 <div className="mb-3">
                   <label className="fw-bold text-muted mb-1">Email</label>
                   <p className="mb-0">{user.email}</p>
                 </div>
+
                 <div className="mb-3">
-                  <label className="fw-bold text-muted mb-1">Role</label>
-                  <p className="mb-0">{user.role}</p>
+                  <label className="fw-bold text-muted mb-1">Téléphone</label>
+                  <p className="mb-0">{user.phone}</p>
                 </div>
+
                 <div className="mb-3">
-                  <label className="fw-bold text-muted mb-1">Last Updated</label>
-                  <p className="mb-0">
-                    {user.lastUpdated} at {user.time}
-                  </p>
+                  <label className="fw-bold text-muted mb-1">Adresse</label>
+                  <p className="mb-0">{user.adress}</p>
                 </div>
+
+                <div className="mb-3">
+                  <label className="fw-bold text-muted mb-1">Crédits</label>
+                  <p className="mb-0">{user.credits}</p>
+                </div>
+
+                <div className="mb-3">
+                  <label className="fw-bold text-muted mb-1">Points</label>
+                  <p className="mb-0">{user.points}</p>
+                </div>
+
+                <div className="mb-3">
+                  <label className="fw-bold text-muted mb-1">Session Reservées</label>
+                  <p className="mb-0">Afficher les sessions réservées ici</p>
+                </div>
+
               </div>
             </div>
           </div>
@@ -75,7 +86,7 @@ export default function UserViewModal({ user, onClose }) {
               className="btn btn-secondary"
               onClick={onClose}
             >
-              Close
+              Fermer
             </button>
           </div>
         </div>
