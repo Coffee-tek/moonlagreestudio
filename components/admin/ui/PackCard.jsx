@@ -15,7 +15,7 @@ const PackCard = ({ pack, onEdit, onDelete }) => {
             </div>
 
             <div className="ms-3 flex-grow-1">
-              <h5 className="mb-1">{pack.name}</h5>
+              <p className="mb-1 ">{pack.name}</p>
               <p className="text-muted mb-0 fs-base">{pack.credits} crédits</p>
             </div>
 

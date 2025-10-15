@@ -3,6 +3,19 @@
 * File include item demo only specific css only
 ******************************************************************************/
 
+
+/* Import de la police Dosis */
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
+/* Appliquer la police Dosis à tout le back office */
+html, body, * {
+  font-family: "Dosis", sans-serif !important;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
 .menu .app-brand.demo {
   height: 64px;
   margin-top: 12px;

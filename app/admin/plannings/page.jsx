@@ -391,9 +391,9 @@ export default function AdminPlanning() {
                           />
                         </div>
                         <div>
-                          <h5 className="mb-0" style={{ fontSize: "0.95rem" }}>
+                          <p className="mb-0" style={{ fontSize: "0.95rem" }}>
                             {session.teacher}
-                          </h5>
+                          </p>
                         </div>
                       </div>
                     </td>
@@ -562,6 +562,7 @@ export default function AdminPlanning() {
         .app-search {
           position: relative;
         }
+          
         
         .app-search-icon {
           pointer-events: none;
