@@ -108,13 +108,6 @@ export default function SessionDetails() {
                         Description
                     </button>
                     <button
-                        className={`nav-link text-primary px-lg-4 py-lg-3 ${activeTab === 'information' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('information')}
-                        type="button"
-                    >
-                        Information
-                    </button>
-                    <button
                         className={`nav-link text-primary px-lg-4 py-lg-3 ${activeTab === 'reviews' ? 'active' : ''}`}
                         onClick={() => setActiveTab('reviews')}
                         type="button"
@@ -137,28 +130,7 @@ export default function SessionDetails() {
                     </div>
                     )}
 
-                    {/* Additional Information Tab */}
-                    {activeTab === 'information' && (
-                    <div className="tab-pane fade show active">
-                        <h4 className="fw-bold pb-2">Informations Supplémentaires</h4>
-                        <table className="table table-striped table-bordered">
-                        <tbody>
-                            <tr>
-                            <td>Coach</td>
-                            <td>Coach Karen</td>
-                            </tr>
-                            <tr>
-                            <td>Date</td>
-                            <td>Mercredi 20 Octobre 2025</td>
-                            </tr>
-                            <tr>
-                            <td>Heure</td>
-                            <td>18h00</td>
-                            </tr>
-                        </tbody>
-                        </table>
-                    </div>
-                    )}
+                    
 
                     {/* Reviews Tab */}
                     {activeTab === 'reviews' && (

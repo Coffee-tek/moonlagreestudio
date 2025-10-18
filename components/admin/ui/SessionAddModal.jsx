@@ -3,6 +3,7 @@ import Image from "next/image";
 
 export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
   const [formData, setFormData] = useState({
+    sessionName: "",
     teacher: "",
     teacherAvatar: "/img/new/14.jpeg",
     date: "",
@@ -19,8 +20,8 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
       ...prev,
       [name]: value,
     }));
-    
-    // Générer l'avatar du professeur
+
+    // Générer l'avatar du professeur automatiquement
     if (name === "teacher" && value) {
       setFormData((prev) => ({
         ...prev,
@@ -28,7 +29,7 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
       }));
     }
 
-    // Clear error for this field
+    // Effacer l'erreur du champ modifié
     if (errors[name]) {
       setErrors((prev) => ({
         ...prev,
@@ -40,6 +41,10 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
   const validateForm = () => {
     const newErrors = {};
 
+    if (!formData.sessionName.trim()) {
+      newErrors.sessionName = "Le nom de la session est requis";
+    }
+
     if (!formData.teacher.trim()) {
       newErrors.teacher = "Le nom du professeur est requis";
     }
@@ -50,7 +55,6 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
       const selectedDate = new Date(formData.date);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      
       if (selectedDate < today) {
         newErrors.date = "La date ne peut pas être dans le passé";
       }
@@ -74,23 +78,20 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
-      // Créer la nouvelle session
       const newSession = {
         ...formData,
         id: `#SES${String(Math.floor(Math.random() * 100000)).padStart(5, "0")}`,
         bookedPlaces: 0,
         remainingPlaces: formData.totalPlaces,
         status: "Disponible",
-        // Formater la date
         date: new Date(formData.date).toLocaleDateString("fr-FR", {
           day: "2-digit",
           month: "short",
           year: "numeric",
         }),
       };
-      
       onAdd(newSession);
     }
   };
@@ -122,14 +123,12 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
                 <i className="bi bi-plus-circle me-2"></i>
                 Ajouter une nouvelle session
               </h5>
-              <button
-                type="button"
-                className="btn-close"
-                onClick={onClose}
-              ></button>
+              <button type="button" className="btn-close" onClick={onClose}></button>
             </div>
+
             <div className="modal-body">
               <div className="row">
+                {/* Avatar et upload */}
                 <div className="col-md-4 text-center mb-4">
                   <div className="avatar-preview mb-3">
                     <Image
@@ -137,15 +136,11 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
                       alt="Avatar professeur"
                       width={120}
                       height={120}
-                      className="rounded-circle"
+                      className="rounded-circle m-lg-5"
                     />
                   </div>
-                   <div className="button-wrapper">
-                    <label
-                      htmlFor="upload"
-                      className="btn btn-primary me-2 mb-4"
-                      tabIndex={0}
-                    >
+                  <div className="button-wrapper">
+                    <label htmlFor="upload" className="btn btn-primary me-2 mb-4" tabIndex={0}>
                       <span className="d-none d-sm-block">Changer de photo</span>
                       <i className="bx bx-upload d-block d-sm-none"></i>
                       <input
@@ -166,12 +161,32 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
                     </button>
 
                     <p className="text-muted mb-0">
-                      Autorisé JPG, GIF or PNG. Max size of 800K
+                      Autorisé JPG, GIF ou PNG. Max 800K.
                     </p>
-                </div>
+                  </div>
                 </div>
 
+                {/* Formulaire principal */}
                 <div className="col-md-8">
+                  {/* Nom de la session */}
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Nom de la session <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      className={`form-control ${errors.sessionName ? "is-invalid" : ""}`}
+                      name="sessionName"
+                      value={formData.sessionName}
+                      onChange={handleChange}
+                      placeholder="Ex: Pilates sur machine"
+                    />
+                    {errors.sessionName && (
+                      <div className="invalid-feedback">{errors.sessionName}</div>
+                    )}
+                  </div>
+
+                  {/* Professeur */}
                   <div className="mb-3">
                     <label className="form-label fw-bold">
                       Professeur <span className="text-danger">*</span>
@@ -197,6 +212,7 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
                     )}
                   </div>
 
+                  {/* Date et Heure */}
                   <div className="row">
                     <div className="col-md-6 mb-3">
                       <label className="form-label fw-bold">
@@ -241,6 +257,7 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
                     </div>
                   </div>
 
+                  {/* Crédits et places */}
                   <div className="row">
                     <div className="col-md-6 mb-3">
                       <label className="form-label fw-bold">
@@ -282,99 +299,25 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
                   <div className="alert alert-info d-flex align-items-start">
                     <i className="bi bi-info-circle me-2 mt-1"></i>
                     <small>
-                      L'ID de la session sera généré automatiquement. 
-                      Le statut sera défini sur "Disponible" par défaut.
+                      L'ID de la session sera généré automatiquement. Le statut sera défini sur{" "}
+                      <b>"Disponible"</b> par défaut.
                     </small>
                   </div>
                 </div>
               </div>
             </div>
+
             <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={onClose}
-              >
-                <i className="bi bi-x-circle me-1"></i>
-                Annuler
+              <button type="button" className="btn btn-secondary" onClick={onClose}>
+                <i className="bi bi-x-circle me-1"></i> Annuler
               </button>
               <button type="submit" className="btn btn-primary">
-                <i className="bi bi-check-circle me-1"></i>
-                Créer la session
+                <i className="bi bi-check-circle me-1"></i> Créer la session
               </button>
             </div>
           </form>
         </div>
       </div>
-
-      <style jsx>{`
-        .modal {
-          z-index: 1050;
-        }
-
-        .modal-dialog {
-          max-width: 800px;
-        }
-
-        .form-label {
-          font-size: 0.9rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .text-danger {
-          color: #dc3545;
-        }
-
-        .text-muted {
-          color: #6c757d;
-          font-size: 0.875rem;
-        }
-
-        .is-invalid {
-          border-color: #dc3545;
-        }
-
-        .invalid-feedback {
-          display: block;
-          color: #dc3545;
-          font-size: 0.875rem;
-          margin-top: 0.25rem;
-        }
-
-        .alert-info {
-          background-color: #cfe2ff;
-          border-color: #b6d4fe;
-          color: #084298;
-          padding: 0.75rem;
-          border-radius: 0.375rem;
-          font-size: 0.875rem;
-        }
-
-        .avatar-preview {
-          border: 3px solid #e9ecef;
-          border-radius: 50%;
-          display: inline-block;
-          padding: 5px;
-          background: white;
-        }
-
-        .input-group .btn {
-          z-index: 0;
-        }
-
-        @media (max-width: 768px) {
-          .modal-dialog {
-            margin: 0.5rem;
-          }
-
-          .col-md-4,
-          .col-md-6,
-          .col-md-8 {
-            flex: 0 0 100%;
-            max-width: 100%;
-          }
-        }
-      `}</style>
     </div>
   );
 }

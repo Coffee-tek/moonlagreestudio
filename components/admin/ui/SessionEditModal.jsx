@@ -117,9 +117,9 @@ const formattedDate = dateObj.toISOString().split('T')[0]; // ✅ toujours valid
 
   const getProgressColor = (remaining, total) => {
     const percentage = (remaining / total) * 100;
-    if (percentage > 50) return "bg-success";
-    if (percentage > 20) return "bg-warning";
-    return "bg-danger";
+    if (percentage == 100) return "bg-danger";
+    if (percentage > 20) return "bg-success";
+    return "bg-success";
   };
 
   return (
@@ -207,16 +207,14 @@ const formattedDate = dateObj.toISOString().split('T')[0]; // ✅ toujours valid
                           <small className="fw-bold">{formData.totalPlaces || 0}</small>
                         </div>
                       </div>
-                      <div className="progress" style={{ height: "8px" }}>
+                      <div className="progress" style={{ height: "6px" }}>
                         <div
                           className={`progress-bar ${getProgressColor(
-                            formData.remainingPlaces || 0,
-                            formData.totalPlaces || 1
+                            session.bookedPlaces,
+                            session.totalPlaces
                           )}`}
                           style={{
-                            width: `${
-                              ((formData.remainingPlaces || 0) / (formData.totalPlaces || 1)) * 100
-                            }%`,
+                            width: `${(session.bookedPlaces / session.totalPlaces) * 100}%`,
                           }}
                         ></div>
                       </div>
@@ -227,13 +225,13 @@ const formattedDate = dateObj.toISOString().split('T')[0]; // ✅ toujours valid
                 <div className="col-md-8">
                   <div className="mb-3">
                     <label className="form-label fw-bold">
-                      ID Session <span className="text-muted">(non-modifiable)</span>
+                      Nom de la session <span className="text-danger">*</span>
                     </label>
                     <input
                       type="text"
                       className="form-control"
-                      value={formData.id || ""}
-                      disabled
+                      value={formData.sessionName || ""}
+                      onChange={handleChange}
                     />
                   </div>
 

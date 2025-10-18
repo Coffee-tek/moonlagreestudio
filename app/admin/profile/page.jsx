@@ -34,11 +34,22 @@ export default function AdminProfile() {
     setPasswordForm({ newPassword: '', currentPassword: '' });
   };
 
+  // const handleDeleteAccount = () => {
+  //   if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) {
+  //     console.log('Account deletion requested');
+  //     alert('Demande de suppression de compte envoyée.');
+  //   }
+  // };
+
+  const [success, setSuccess] = useState("");
+  const [formErrors, setFormErrors] = useState({});
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  // Exemple de fonction pour la suppression
   const handleDeleteAccount = () => {
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) {
-      console.log('Account deletion requested');
-      alert('Demande de suppression de compte envoyée.');
-    }
+    setShowDeleteModal(false); // on ferme le modal
+    // Ta logique de suppression réelle ici (API, etc.)
+    setSuccess("Votre compte a été supprimé avec succès !");
   };
 
   return (
@@ -188,7 +199,7 @@ export default function AdminProfile() {
 
                 <div className="mt-2">
                   <button type="submit" className="btn btn-primary me-2">
-                    Save changes
+                    Sauvegarder
                   </button>
                   <button type="reset" className="btn btn-outline-secondary">
                     Cancel
@@ -199,64 +210,64 @@ export default function AdminProfile() {
           </div>
 
           {/* Section Password */}
-                <div className="bg-white rounded-4 p-4 mb-4 shadow-sm">
-                  <h5 className="mb-4 text-primary">Mot de passe</h5>
-                  <form onSubmit={handleSavePassword} className="row row-cols-1 row-cols-lg-2">
-                    <div className="mb-4 col">
-                      <label className="form-label fw-semibold">Nouveau mot de passe</label>
-                      <div className="input-group">
-                        <input 
-                          type={showNewPassword ? "text" : "password"} 
-                          name="newPassword"
-                          className="form-control" 
-                          placeholder="Nouveau mot de passe"
-                          value={passwordForm.newPassword}
-                          onChange={handlePasswordChange}
-                        />
-                        <button
-                          type="button"
-                          className="btn btn-outline-secondary"
-                          onClick={() => setShowNewPassword(!showNewPassword)}
-                        >
-                          {/* {showNewPassword ? <EyeOff size={16} /> : <Eye size={16} />} */}
-                        </button>
-                      </div>
-                    </div>
-                    
-                    <div className="mb-4 col">
-                      <label className="form-label fw-semibold">Mot de passe actuel</label>
-                      <div className="input-group">
-                        <input 
-                          type={showCurrentPassword ? "text" : "password"} 
-                          name="currentPassword"
-                          className="form-control" 
-                          placeholder="Mot de passe actuel"
-                          value={passwordForm.currentPassword}
-                          onChange={handlePasswordChange}
-                        />
-                        <button
-                          type="button"
-                          className="btn btn-outline-secondary"
-                          onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                        >
-                          {/* {showCurrentPassword ? <EyeOff size={16} /> : <Eye size={16} />} */}
-                        </button>
-                      </div>
-                    </div>
-                    
-                    <div className="col-12">
-                      <p className="mb-4 text-muted">
-                        Vous avez oublié votre mot de passe ? 
-                        <Link href="/forgot-password" className="text-primary text-decoration-none ms-1">
-                          Réinitialiser votre mot de passe.
-                        </Link>
-                      </p>
-                      <button type="submit" className="btn btn-primary px-4">
-                        Sauvegarder mot de passe
-                      </button>
-                    </div>
-                  </form>
+          <div className="bg-white rounded-4 p-4 mb-4 shadow-sm">
+            <h5 className="mb-4 text-primary">Mot de passe</h5>
+            <form onSubmit={handleSavePassword} className="row row-cols-1 row-cols-lg-2">
+              <div className="mb-4 col">
+                <label className="form-label fw-semibold">Nouveau mot de passe</label>
+                <div className="input-group">
+                  <input 
+                    type={showNewPassword ? "text" : "password"} 
+                    name="newPassword"
+                    className="form-control" 
+                    placeholder="Nouveau mot de passe"
+                    value={passwordForm.newPassword}
+                    onChange={handlePasswordChange}
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                  >
+                    {showNewPassword ?<i className="bi bi-eye-slash"></i>: <i className="bi bi-eye"></i>}
+                  </button>
                 </div>
+              </div>
+              
+              <div className="mb-4 col">
+                <label className="form-label fw-semibold">Mot de passe actuel</label>
+                <div className="input-group">
+                  <input 
+                    type={showCurrentPassword ? "text" : "password"} 
+                    name="currentPassword"
+                    className="form-control" 
+                    placeholder="Mot de passe actuel"
+                    value={passwordForm.currentPassword}
+                    onChange={handlePasswordChange}
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary"
+                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                  >
+                    {showCurrentPassword ? <i className="bi bi-eye-slash"></i>: <i className="bi bi-eye"></i>}
+                  </button>
+                </div>
+              </div>
+              
+              <div className="col-12">
+                <p className="mb-4 text-muted">
+                  Vous avez oublié votre mot de passe ? 
+                  <Link href="/forgot-password" className="text-primary text-decoration-none ms-1">
+                    Réinitialiser votre mot de passe.
+                  </Link>
+                </p>
+                <button type="submit" className="btn btn-primary px-4">
+                  Sauvegarder mot de passe
+                </button>
+              </div>
+            </form>
+          </div>
 
           {/* Delete Account */}
           <div className="card">
@@ -273,24 +284,60 @@ export default function AdminProfile() {
                 </div>
               </div>
 
-              <form id="formAccountDeactivation" onSubmit={(e) => e.preventDefault()}>
-                <div className="form-check mb-3">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    name="accountActivation"
-                    id="accountActivation"
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="accountActivation"
-                  >
-                    Je confirme la suppréssion de mon compte
-                  </label>
-                </div>
-                <button type="submit" className="btn btn-danger deactivate-account">
-                  Supprimer compte
+              <form id="formAccountDeactivation">
+                <button 
+                  type="button" // <-- ici
+                  onClick={() => setShowDeleteModal(true)} 
+                  className="btn btn-danger deactivate-account"
+                >
+                  Supprimer mon compte
                 </button>
+
+                 {/* ✅ Modal de confirmation pour supprimer compte*/}
+                {showDeleteModal && (
+                  <div
+                    className="modal fade show d-block"
+                    tabIndex="-1"
+                    style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                  >
+                    <div className="modal-dialog modal-dialog-centered">
+                      <div className="modal-content border-0 rounded-4 shadow">
+                        <div className="modal-header border-0">
+                          <h5 className="modal-title text-danger">
+                            Confirmer la suppression
+                          </h5>
+                          <button
+                            type="button"
+                            className="btn-close"
+                            onClick={() => setShowDeleteModal(false)}
+                          ></button>
+                        </div>
+                        <div className="modal-body">
+                          <p>
+                            Êtes-vous sûr de vouloir supprimer votre compte ?{" "}
+                            <br />
+                            Cette action est irréversible.
+                          </p>
+                        </div>
+                        <div className="modal-footer border-0">
+                          <button
+                            className="btn btn-secondary"
+                            onClick={() => setShowDeleteModal(false)}
+                          >
+                            Annuler
+                          </button>
+                          <button
+                            className="btn btn-danger"
+                            onClick={handleDeleteAccount}
+                          >
+                            Oui, supprimer
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
               </form>
             </div>
           </div>

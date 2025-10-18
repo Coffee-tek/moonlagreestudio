@@ -86,7 +86,7 @@ const EnhancedPopularClasses = ({
         </div>
 
         {/* Grille des cours */}
-        <div className="row g-5" >
+        <div className="row g-3" >
           {filteredClasses.map((classItem, index) => (
             <div 
               key={classItem.id || index} 

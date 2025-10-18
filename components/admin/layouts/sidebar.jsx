@@ -12,6 +12,8 @@ export default function AdminSidebar(){
     { id: 'users', label: 'Gérer les utilisateurs', icon: 'bx bx-user', href: '/admin/users' },
     { id: 'planning', label: 'Gérer les plannings', icon: 'bx bx-calendar', href: '/admin/plannings' },
     { id: 'packs', label: 'Gérer les packs', icon: 'bx bx-package', href: '/admin/packs' },
+    { id: 'profil', label: 'Mon Profil', icon: 'bx bx-package', href: '/admin/profile' },
+    { id: 'logout', label: 'Déconnexion', icon: 'bx bx-package', href: '/auth/connexion' },
   ];
 
    const toggleSidebar = () => {

@@ -144,7 +144,7 @@ export default function Home() {
                 >
                 <div className="relative overflow-hidden rounded-2xl shadow-2xl group">
                     <Image
-                    src="/img/studio.png"
+                    src="/img/new/7.jpeg"
                     alt="Best Yoga Studio - Peaceful yoga practice"
                     width={600}
                     height={400}

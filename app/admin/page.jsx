@@ -10,9 +10,11 @@ export default function AdminHome() {
     <>     
       {/* Content */}
       <div className="container-xxl flex-grow-1 container-p-y">
-        <h1>ADMIN</h1>
+        <h1>Statistiques des Sessions</h1>
 
         <SessionStatsChart/>
+
+         <h1 className='mt-5'>Statistiques des points et crédits</h1>
 
         <LoyaltyPointsChart />
 

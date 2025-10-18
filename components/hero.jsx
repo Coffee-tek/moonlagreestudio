@@ -8,7 +8,7 @@ export default function Hero() {
     <section className="relative w-full h-[90vh] flex items-center">
       {/* Image de fond */}
       <Image
-        src="/img/hero.jpg" // mets ton image ici (public/images/hero.jpg)
+        src="/img/new/3.jpeg" // mets ton image ici (public/images/hero.jpg)
         alt="Hero background"
         fill
         className="object-cover"
@@ -33,7 +33,7 @@ export default function Hero() {
           {/* Boutons */}
           <div className="mt-6 flex gap-4">
             <Link
-              href="#"
+              href="/public/a-propos"
               className="btn btn-primary hover:bg-blue-800 text-white px-6 py-3 rounded-md font-medium"
             >
               En savoir plus

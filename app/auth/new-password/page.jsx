@@ -35,10 +35,10 @@ export default function NewPassword() {
             <div className="position-relative d-flex align-items-center gap-2 site-brand">
               <div className="lh-1">
                  <Image
-                    src="/img/logo/LOGO_PRIMAIRE_COULEUR@4x.png"
+                    src="/img/logo/LOGO_PRIMAIRE_BLANC@4x.png"
                     alt="Profile"
-                    width={150}
-                    height={150}
+                    width={200}
+                    height={200}
                     
                     />
               </div>
@@ -66,9 +66,6 @@ export default function NewPassword() {
                   <p className="py-4 lead">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, quas. Laudantium temporibus placeat.
                   </p>
-                  <Link href="/" className="btn btn-purple btn-theme">
-                    Voir Plus
-                  </Link>
                 </div>
               </div>
             </div>

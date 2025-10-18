@@ -186,6 +186,37 @@ export default function AdminUsers() {
     handleCloseModals();
   };
 
+  const [showDeleteSingleModal, setShowDeleteSingleModal] = useState(false);
+  const [showDeleteMultipleModal, setShowDeleteMultipleModal] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
+
+  // Ouvrir modal suppression simple
+  const handleOpenDeleteSingle = (user) => {
+    setUserToDelete(user);
+    setShowDeleteSingleModal(true);
+  };
+
+  // Confirmer suppression simple
+  const confirmDeleteSingle = () => {
+    setUsers(users.filter((u) => u.id !== userToDelete.id));
+    setSelectedUsers(selectedUsers.filter((id) => id !== userToDelete.id));
+    setShowDeleteSingleModal(false);
+    setUserToDelete(null);
+  };
+
+  // Ouvrir modal suppression multiple
+  const handleOpenDeleteMultiple = () => {
+    setShowDeleteMultipleModal(true);
+  };
+
+  // Confirmer suppression multiple
+  const confirmDeleteMultiple = () => {
+    setUsers(users.filter((u) => !selectedUsers.includes(u.id)));
+    setSelectedUsers([]);
+    setSelectAll(false);
+    setShowDeleteMultipleModal(false);
+  };
+
   return (
     <div className="container-xxl flex-grow-1 container-p-y">
       <h4 className="fw-bold py-3 mb-4">
@@ -230,7 +261,7 @@ export default function AdminUsers() {
             {selectedUsers.length > 0 && (
               <button
                 className="btn btn-danger"
-                onClick={handleDeleteSelected}
+               onClick={handleOpenDeleteMultiple}
               >
                 Supprimer ({selectedUsers.length})
               </button>
@@ -241,7 +272,7 @@ export default function AdminUsers() {
             <span className="me-2 fw-semibold d-none d-md-inline">Filtrer par:</span>
 
             {/* Filtre par rôle */}
-            <div className="app-search position-relative">
+            {/* <div className="app-search position-relative">
               <select
                 className="form-select form-control"
                 value={roleFilter}
@@ -256,7 +287,7 @@ export default function AdminUsers() {
                 <option value="Developer">Developer</option>
                 <option value="Support Lead">Support Lead</option>
               </select>
-            </div>
+            </div> */}
 
             {/* Filtre par statut */}
             <div className="app-search position-relative">
@@ -307,6 +338,7 @@ export default function AdminUsers() {
         {/* Table */}
         <div className="table-responsive">
           <table className="table table-hover w-100 mb-0">
+
             <thead className="bg-light">
               <tr className="text-uppercase" style={{ fontSize: "0.75rem" }}>
                 <th className="ps-3" style={{ width: "1%" }}>
@@ -317,12 +349,12 @@ export default function AdminUsers() {
                     onChange={handleSelectAll}
                   />
                 </th>
-                <th
+                {/* <th
                   onClick={() => handleSort("id")}
                   style={{ cursor: "pointer" }}
                 >
                   ID <i className="bi bi-arrow-down-up"></i>
-                </th>
+                </th> */}
                 <th
                   onClick={() => handleSort("name")}
                   style={{ cursor: "pointer" }}
@@ -356,6 +388,7 @@ export default function AdminUsers() {
                 <th className="text-center">Actions</th>
               </tr>
             </thead>
+
             <tbody>
               {paginatedUsers.length > 0 ? (
                 paginatedUsers.map((user) => (
@@ -368,13 +401,15 @@ export default function AdminUsers() {
                         onChange={() => handleSelectUser(user.id)}
                       />
                     </td>
-                    <td>
+
+                    {/* <td>
                       <h5 className="m-0">
                         <Link href="#" className="text-decoration-none">
                           {user.id}
                         </Link>
                       </h5>
-                    </td>
+                    </td> */}
+
                     <td>
                       <div className="d-flex align-items-center gap-2">
                         <div className="avatar avatar-sm">
@@ -423,13 +458,15 @@ export default function AdminUsers() {
 
                     <td>
                       <div className="d-flex justify-content-center gap-1">
-                        <button
+
+                        {/* <button
                           onClick={() => handleViewUser(user)}
                           className="btn btn-sm btn-outline-secondary"
                           title="View"
                         >
                           <i className="bi bi-eye"></i>
-                        </button>
+                        </button> */}
+
                         <button
                           onClick={() => handleEditUser(user)}
                           className="btn btn-sm btn-outline-primary"
@@ -437,13 +474,15 @@ export default function AdminUsers() {
                         >
                           <i className="bi bi-pencil-square"></i>
                         </button>
+
                         <button
                           className="btn btn-sm btn-outline-danger"
-                          onClick={() => handleDeleteUser(user.id)}
+                          onClick={() => handleOpenDeleteSingle(user)}
                           title="Delete"
                         >
                           <i className="bi bi-trash3"></i>
                         </button>
+
                       </div>
                     </td>
                   </tr>
@@ -552,6 +591,48 @@ export default function AdminUsers() {
         <UserAddModal onClose={handleCloseModals} onAdd={handleAddUser} />
       )}
 
+      {/* Modal suppression multiple */}
+      {showDeleteMultipleModal && (
+        <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content border-0 rounded-4 shadow">
+              <div className="modal-header border-0">
+                <h5 className="modal-title text-danger">Confirmer la suppression</h5>
+                <button type="button" className="btn-close" onClick={() => setShowDeleteMultipleModal(false)}></button>
+              </div>
+              <div className="modal-body">
+                <p>Êtes-vous sûr de vouloir supprimer {selectedUsers.length} utilisateur(s) ? Cette action est irréversible.</p>
+              </div>
+              <div className="modal-footer border-0">
+                <button className="btn btn-secondary" onClick={() => setShowDeleteMultipleModal(false)}>Annuler</button>
+                <button className="btn btn-danger" onClick={confirmDeleteMultiple}>Oui, supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal suppression utilisateur spécifique */}
+      {showDeleteSingleModal && userToDelete && (
+        <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content border-0 rounded-4 shadow">
+              <div className="modal-header border-0">
+                <h5 className="modal-title text-danger">Confirmer la suppression</h5>
+                <button type="button" className="btn-close" onClick={() => setShowDeleteSingleModal(false)}></button>
+              </div>
+              <div className="modal-body">
+                <p>Êtes-vous sûr de vouloir supprimer {userToDelete.name} ? Cette action est irréversible.</p>
+              </div>
+              <div className="modal-footer border-0">
+                <button className="btn btn-secondary" onClick={() => setShowDeleteSingleModal(false)}>Annuler</button>
+                <button className="btn btn-danger" onClick={confirmDeleteSingle}>Oui, supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <style jsx>{`
         .app-search {
           position: relative;
@@ -618,14 +699,14 @@ export default function AdminUsers() {
         }
 
         .page-item.active .page-link {
-          background-color: #727cf5;
+          background-color: #0b0823;
           color: white;
           border-radius: 0.25rem;
         }
 
         .page-link:hover:not(.disabled) {
           background-color: #f8f9fa;
-          color: #727cf5;
+          color: #0b0823;
         }
 
         @media (max-width: 768px) {

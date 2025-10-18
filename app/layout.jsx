@@ -45,20 +45,20 @@ export default function RootLayout({ children }) {
         <link href="/css/style.css" rel="stylesheet" />
         <link href="/css/common.css" rel="stylesheet" />
 
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+        {/* <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&display=swap" rel="stylesheet"/> */}
 
-       <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet"/>
+       <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 
         <style>{`
 
-          html, body {
-            font-family: 'Dosis', sans-serif !important;
+        html, body {
+            font-family: "Raleway", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-weight: 400;
           }
 
           h1, h2, h3, h4, h5, h6 {
-            font-family: "Cormorant Unicase", serif !important;
+            font-family: "Raleway", sans-serif;
             font-weight: 700;
-            letter-spacing: 0.5px;
           }
         `}</style>
       </head>

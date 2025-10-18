@@ -9,7 +9,7 @@ export function Sidebar(){
   const pathname = usePathname();
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
-  const [profileImage, setProfileImage] = useState('/img/pages/team/member-1.jpg');
+  const [profileImage, setProfileImage] = useState('/img/pop.jpeg');
   const [coverImage, setCoverImage] = useState('');
   
   const fileInputRef = useRef(null);
@@ -78,13 +78,13 @@ export function Sidebar(){
   };
 
   const sidebarLinks = [
-    { href: '/user/profil-settings',  label: 'Profil', active: true },
+    { href: '/user/profil-settings',   label: 'Profil', active: true },
     { href: '/user/mes-sessions',  label: 'Mes Sessions', active: false },
     { href: '/user/mes-credits', label: 'Mes crédits', active: false },
     { href: '/user/mes-points', label: 'Mes points de fidélité', active: false },
     // { href: '/account/address', label: 'Address', active: false },
     // { href: '/account/notifications',  label: 'Notification', active: false },
-    { href: '/', label: 'Déconnexion', active: false }
+    { href: '/', label: 'Déconnexion', icon:'<i className="bi bi-box-arrow-left"></i>', active: false }
   ];
 
   const isActive = (href) => {
@@ -110,6 +110,7 @@ export function Sidebar(){
               className="position-absolute bottom-0 end-0 btn btn-sm btn-primary rounded-circle p-2"
               style={{ transform: 'translate(25%, 25%)' }}
             >
+              <i className="bi bi-camera"></i>
               {/* <Camera size={12} /> */}
             </button>
             <input

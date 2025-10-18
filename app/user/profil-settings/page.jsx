@@ -21,6 +21,10 @@ export default function ProfilSettings() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [profileImage, setProfileImage] = useState('/img/pages/team/member-1.jpg');
   const [coverImage, setCoverImage] = useState('/img/new/9.jpeg');
+
+  const [success, setSuccess] = useState("");
+  const [formErrors, setFormErrors] = useState({});
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   
   const fileInputRef = useRef(null);
   const coverInputRef = useRef(null);
@@ -49,24 +53,6 @@ export default function ProfilSettings() {
     setPasswordForm(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleProfileImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => setProfileImage(e.target.result);
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleCoverImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => setCoverImage(e.target.result);
-      reader.readAsDataURL(file);
-    }
-  };
-
   const handleSaveAccount = (e) => {
     e.preventDefault();
     console.log('Account saved:', accountForm);
@@ -80,12 +66,12 @@ export default function ProfilSettings() {
     setPasswordForm({ newPassword: '', currentPassword: '' });
   };
 
-  const handleDeleteAccount = () => {
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) {
-      console.log('Account deletion requested');
-      alert('Demande de suppression de compte envoyée.');
-    }
-  };
+  // const handleDeleteAccount = () => {
+  //   if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) {
+  //     console.log('Account deletion requested');
+  //     alert('Demande de suppression de compte envoyée.');
+  //   }
+  // };
 
   const sidebarLinks = [
     { href: '/account/settings',  label: 'Profil', active: true },
@@ -95,6 +81,17 @@ export default function ProfilSettings() {
     { href: '/account/notifications',  label: 'Notification', active: false },
     { href: '/', label: 'Déconnexion', active: false }
   ];
+
+ 
+
+  // Exemple de fonction pour la suppression
+  const handleDeleteAccount = () => {
+    setShowDeleteModal(false); // on ferme le modal
+    // Ta logique de suppression réelle ici (API, etc.)
+    setSuccess("Votre compte a été supprimé avec succès !");
+  };
+
+  
 
   return (
     <div className="min-h-screen" style={{backgroundColor:"#eee2d4"}}>
@@ -167,16 +164,20 @@ export default function ProfilSettings() {
                       />
                     </div>
                     
-                    <div className="mb-4 col">
-                      <label className="form-label fw-semibold">Phone</label>
-                      <input 
-                        type="text" 
-                        name="phone"
-                        className="form-control" 
-                        placeholder="Phone number"
-                        value={accountForm.phone}
-                        onChange={handleAccountChange}
-                      />
+                    <div className="mb-3 col-md-6">
+                      <label htmlFor="phoneNumber" className="form-label">
+                        Téléphone
+                      </label>
+                      <div className="input-group input-group-merge">
+                        <span className="input-group-text">(+221)</span>
+                        <input
+                          type="text"
+                          id="phoneNumber"
+                          name="phoneNumber"
+                          className="form-control"
+                          placeholder="202 555 0111"
+                        />
+                      </div>
                     </div>
                     
                     <div className="mb-4 col">
@@ -234,7 +235,7 @@ export default function ProfilSettings() {
                           className="btn btn-outline-secondary"
                           onClick={() => setShowNewPassword(!showNewPassword)}
                         >
-                          {/* {showNewPassword ? <EyeOff size={16} /> : <Eye size={16} />} */}
+                          {showNewPassword ? <i className="bi bi-eye-slash"></i> : <i className="bi bi-eye"></i>}
                         </button>
                       </div>
                     </div>
@@ -255,7 +256,7 @@ export default function ProfilSettings() {
                           className="btn btn-outline-secondary"
                           onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                         >
-                          {/* {showCurrentPassword ? <EyeOff size={16} /> : <Eye size={16} />} */}
+                          {showCurrentPassword ?<i className="bi bi-eye-slash"></i> : <i className="bi bi-eye"></i>}
                         </button>
                       </div>
                     </div>
@@ -275,19 +276,70 @@ export default function ProfilSettings() {
                 </div>
 
                 {/* Section Delete Account */}
+                {/* Section Supprimer le compte */}
                 <div className="bg-white rounded-4 p-4 shadow-sm border border-danger border-opacity-25">
                   <h5 className="mb-4 text-danger">Supprimer votre compte</h5>
-                  <p className="mb-2 text-muted">Voulez-vous supprimé votre compte ?</p>
-                  <p className="mb-4 text-muted">
-                    Supprimer votre compte va retirer toutes vos sessinos et tous les détails.
+                  <p className="mb-2 text-muted">
+                    Voulez-vous supprimer votre compte ?
                   </p>
-                  <button 
-                    onClick={handleDeleteAccount}
+                  <p className="mb-4 text-muted">
+                    Supprimer votre compte va retirer toutes vos sessions et tous
+                    les détails.
+                  </p>
+                  <button
+                    onClick={() => setShowDeleteModal(true)}
                     className="btn btn-outline-danger"
                   >
                     Je veux supprimer mon compte
                   </button>
                 </div>
+
+                {/* ✅ Modal de confirmation  pour supprimer compte*/}
+                {showDeleteModal && (
+                  <div
+                    className="modal fade show d-block"
+                    tabIndex="-1"
+                    style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                  >
+                    <div className="modal-dialog modal-dialog-centered">
+                      <div className="modal-content border-0 rounded-4 shadow">
+                        <div className="modal-header border-0">
+                          <h5 className="modal-title text-danger">
+                            Confirmer la suppression
+                          </h5>
+                          <button
+                            type="button"
+                            className="btn-close"
+                            onClick={() => setShowDeleteModal(false)}
+                          ></button>
+                        </div>
+                        <div className="modal-body">
+                          <p>
+                            Êtes-vous sûr de vouloir supprimer votre compte ?{" "}
+                            <br />
+                            Cette action est irréversible.
+                          </p>
+                        </div>
+                        <div className="modal-footer border-0">
+                          <button
+                            className="btn btn-secondary"
+                            onClick={() => setShowDeleteModal(false)}
+                          >
+                            Annuler
+                          </button>
+                          <button
+                            className="btn btn-danger"
+                            onClick={handleDeleteAccount}
+                          >
+                            Oui, supprimer
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+
               </div>
             </div>
           </div>
@@ -296,3 +348,4 @@ export default function ProfilSettings() {
     </div>
   );
 }
+

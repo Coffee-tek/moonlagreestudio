@@ -21,6 +21,7 @@ const generateFakeSessions = (count = 50) => {
     
     return {
       id: `#SES${String(index + 1).padStart(5, "0")}`,
+      sessionName: faker.company.catchPhrase(), // ✅ Nom de session aléatoire
       teacher: faker.helpers.arrayElement(teachers),
       teacherAvatar: faker.image.avatar(),
       date: faker.date.future().toLocaleDateString("fr-FR", {
@@ -154,9 +155,10 @@ export default function AdminPlanning() {
   // Barre de progression des places
   const getProgressColor = (remaining, total) => {
     const percentage = (remaining / total) * 100;
-    if (percentage > 50) return "bg-success";
-    if (percentage > 20) return "bg-warning";
-    return "bg-danger";
+    // if (percentage > 50 && percentage < 100 ) return "bg-warning";
+    if (percentage == 100) return "bg-danger";
+    if (percentage > 20) return "bg-success";
+    return "bg-success";
   };
 
   // Dans le composant :
@@ -185,7 +187,34 @@ export default function AdminPlanning() {
       )
     );
     setShowEditModal(false);
-};
+  };
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showDeleteSelectedModal, setShowDeleteSelectedModal] = useState(false);
+  const [sessionToDelete, setSessionToDelete] = useState(null);
+
+  const handleDeleteSessionClick = (session) => {
+    setSessionToDelete(session);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteSession = () => {
+    setSessions(sessions.filter((s) => s.id !== sessionToDelete.id));
+    setSelectedSessions(selectedSessions.filter((id) => id !== sessionToDelete.id));
+    setShowDeleteModal(false);
+    setSessionToDelete(null);
+  };
+
+  const handleDeleteSelectedClick = () => {
+    setShowDeleteSelectedModal(true);
+  };
+
+  const confirmDeleteSelectedSessions = () => {
+    setSessions(sessions.filter((s) => !selectedSessions.includes(s.id)));
+    setSelectedSessions([]);
+    setSelectAll(false);
+    setShowDeleteSelectedModal(false);
+  };
 
   return (
     <div className="container-xxl flex-grow-1 container-p-y">
@@ -231,7 +260,7 @@ export default function AdminPlanning() {
             {selectedSessions.length > 0 && (
               <button
                 className="btn btn-danger"
-                onClick={handleDeleteSelected}
+               onClick={handleDeleteSelectedClick}
               >
                 Supprimer ({selectedSessions.length})
               </button>
@@ -324,7 +353,7 @@ export default function AdminPlanning() {
                   onClick={() => handleSort("id")}
                   style={{ cursor: "pointer" }}
                 >
-                  ID <i className="bi bi-arrow-down-up"></i>
+                  Nom de session <i className="bi bi-arrow-down-up"></i>
                 </th>
                 <th
                   onClick={() => handleSort("teacher")}
@@ -372,16 +401,24 @@ export default function AdminPlanning() {
                         onChange={() => handleSelectSession(session.id)}
                       />
                     </td>
-                    <td>
+
+                    {/* <td>
                       <h5 className="m-0">
                         <Link href="#" className="text-decoration-none">
                           {session.id}
                         </Link>
                       </h5>
+                    </td> */}
+
+                    <td>
+                      <p className="m-0">
+                          {session.sessionName}
+                      </p>
                     </td>
+
                     <td>
                       <div className="d-flex align-items-center gap-2">
-                        <div className="avatar avatar-sm">
+                        {/* <div className="avatar avatar-sm">
                           <Image
                             src={session.teacherAvatar}
                             className="rounded-circle"
@@ -389,7 +426,7 @@ export default function AdminPlanning() {
                             width={40}
                             height={40}
                           />
-                        </div>
+                        </div> */}
                         <div>
                           <p className="mb-0" style={{ fontSize: "0.95rem" }}>
                             {session.teacher}
@@ -410,31 +447,32 @@ export default function AdminPlanning() {
                         {session.credits} crédit{session.credits > 1 ? "s" : ""}
                       </span>
                     </td>
-                    <td>
-                      <div className="d-flex flex-column" style={{ minWidth: "150px" }}>
-                        <small className="text-muted mb-1">
-                          {session.remainingPlaces}/{session.totalPlaces} disponibles
-                        </small>
-                        <div className="progress" style={{ height: "6px" }}>
-                          <div
-                            className={`progress-bar ${getProgressColor(
-                              session.remainingPlaces,
-                              session.totalPlaces
-                            )}`}
-                            style={{
-                              width: `${
-                                (session.remainingPlaces / session.totalPlaces) * 100
-                              }%`,
-                            }}
-                          ></div>
-                        </div>
+
+                   <td>
+                    <div className="d-flex flex-column" style={{ minWidth: "150px" }}>
+                      <small className="text-muted mb-1">
+                        {session.bookedPlaces}/{session.totalPlaces} réservées
+                      </small>
+                      <div className="progress" style={{ height: "6px" }}>
+                        <div
+                          className={`progress-bar ${getProgressColor(
+                            session.bookedPlaces,
+                            session.totalPlaces
+                          )}`}
+                          style={{
+                            width: `${(session.bookedPlaces / session.totalPlaces) * 100}%`,
+                          }}
+                        ></div>
                       </div>
-                    </td>
+                    </div>
+                  </td>
+
                     <td>
                       <span className={`badge ${getStatusBadge(session.status)}`}>
                         {session.status}
                       </span>
                     </td>
+
                     <td>
                       <div className="d-flex justify-content-center gap-1">
                         
@@ -447,7 +485,7 @@ export default function AdminPlanning() {
                         </button>
                         <button
                           className="btn btn-sm btn-outline-danger"
-                          onClick={() => handleDeleteSession(session.id)}
+                          onClick={() => handleDeleteSessionClick(session)}
                           title="Supprimer"
                         >
                           <i className="bi bi-trash3"></i>
@@ -556,9 +594,55 @@ export default function AdminPlanning() {
           teachers={uniqueTeachers}
         />
       )}
+
+      {showDeleteModal && (
+      <div className="modal-backdrop">
+        <div className="modal-dialog">
+          <div className="modal-content p-4">
+            <h5>Supprimer la session ?</h5>
+            <p>Voulez-vous vraiment supprimer "{sessionToDelete.sessionName}" ?</p>
+            <div className="d-flex justify-content-end gap-2 mt-3">
+              <button className="btn btn-secondary" onClick={() => setShowDeleteModal(false)}>Annuler</button>
+              <button className="btn btn-danger" onClick={confirmDeleteSession}>Supprimer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
       
+    {showDeleteSelectedModal && (
+    <div className="modal-backdrop">
+      <div className="modal-dialog">
+        <div className="modal-content p-4">
+          <h5>Supprimer les sessions sélectionnées ?</h5>
+          <p>Voulez-vous vraiment supprimer {selectedSessions.length} session(s) ?</p>
+          <div className="d-flex justify-content-end gap-2 mt-3">
+            <button className="btn btn-secondary" onClick={() => setShowDeleteSelectedModal(false)}>Annuler</button>
+            <button className="btn btn-danger" onClick={confirmDeleteSelectedSessions}>Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
 
       <style jsx>{`
+
+        .modal-backdrop {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1050;
+        }
+
+        .modal-dialog {
+          background: white;
+          border-radius: 0.5rem;
+          max-width: 400px;
+          width: 100%;
+        }
         .app-search {
           position: relative;
         }
@@ -633,14 +717,14 @@ export default function AdminPlanning() {
         }
 
         .page-item.active .page-link {
-          background-color: #727cf5;
+          background-color: #0b0823;
           color: white;
           border-radius: 0.25rem;
         }
 
         .page-link:hover:not(.disabled) {
           background-color: #f8f9fa;
-          color: #727cf5;
+          color: #0b0823;
         }
 
         .progress {
