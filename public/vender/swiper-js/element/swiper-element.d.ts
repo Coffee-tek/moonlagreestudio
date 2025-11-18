@@ -1,4 +1,4 @@
-import { SwiperOptions, Swiper } from '../types/';
+import { SwiperOptions, Swiper } from '../types';
 
 declare const register: (injectStyles?: boolean) => void;
 

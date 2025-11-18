@@ -1,0 +1,218 @@
+// ---------------------------
+// GENERATOR & DATASOURCE
+// ---------------------------
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------
+// ENUMS
+// ---------------------------
+enum UserRole {
+  client
+  admin
+  agent
+}
+
+enum StatutCompte {
+  actif
+  inactif
+  suspendu
+}
+
+enum ModePaiement {
+  en_ligne
+  sur_place
+}
+
+enum StatutReservation {
+  en_attente
+  confirme
+  annule
+}
+
+enum TransactionType {
+  debit
+  credit
+}
+
+// ---------------------------
+// MODELS
+// ---------------------------
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email         String  @unique
+  emailVerified Boolean @default(false)
+  image         String?
+
+  role          UserRole     @default(client)
+  statut_compte StatutCompte @default(actif)
+
+  name           String?
+  genre          String?
+  ville          String?
+  adresse        String?
+  date_naissance DateTime?
+  telephone      String?
+
+  sessions     Session[]
+  accounts     Account[]
+  reservations Reservation[]
+  transactions Transaction[]
+
+  wallet Wallet?
+
+  walletId String?
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  expiresAt DateTime
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Account {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(uuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@map("verification")
+}
+
+model Wallet {
+  id String @id @default(uuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  credit     Int       @default(0)
+  point      Int       @default(0)
+  expiryDate DateTime?
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  transactions Transaction[]
+
+  @@map("wallets")
+}
+
+model Pack {
+  id Int @id @default(autoincrement())
+
+  titre       String
+  description String?
+  credits     Int
+  prix        Float
+  promotion   Float?
+  duree       Int?
+  theme_color String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("packs")
+}
+
+model Seance {
+  id Int @id @default(autoincrement())
+
+  titre          String
+  date           DateTime
+  heure          DateTime
+  coatch         String
+  places         Int
+  credits        Int
+  place_reserver Int      @default(0)
+  status         String   @default("Disponible")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reservations Reservation[]
+
+  @@map("seances")
+}
+
+model Reservation {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  modePaiement ModePaiement
+  statut       StatutReservation
+
+  montant Int
+  paye    Boolean @default(false)
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  seance   Seance @relation(fields: [seanceId], references: [id])
+  seanceId Int
+
+  @@map("reservations")
+}
+
+model Transaction {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId      String
+  walletId    String
+  type        TransactionType
+  montant     Int
+  description String?
+
+  user   User   @relation(fields: [userId], references: [id])
+  wallet Wallet @relation(fields: [walletId], references: [id])
+
+  @@map("transactions")
+}

@@ -1,0 +1,31 @@
+/* ===========================
+   admin-planning.css
+   Styles spécifiques à la page Planning
+=========================== */
+
+.admin-planning .modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.admin-planning .modal-dialog {
+  background: white;
+  border-radius: 0.5rem;
+  max-width: 400px;
+  width: 100%;
+}
+
+.admin-planning .progress {
+  background-color: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.admin-planning .progress-bar {
+  transition: width 0.3s ease;
+}

@@ -1,0 +1,19 @@
+/* ===========================
+   admin-users.css
+   Styles spécifiques à la gestion des utilisateurs
+=========================== */
+
+.admin-users {
+  /* Exemple : fond spécifique à la page utilisateurs */
+  background-color: #fff;
+}
+
+.admin-users .user-table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.admin-users .btn-outline-danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
