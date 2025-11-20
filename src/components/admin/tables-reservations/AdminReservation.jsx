@@ -61,7 +61,7 @@ export default function AdminReservation({ reservation }) {
       r.user?.email,
       r.seance?.titre,
       r.modePaiement,
-      r.statut,  // 👈 ajout du mode de paiement ici
+      r.statut,  
     ]
       .filter(Boolean) // 🔒 évite les erreurs si un champ est null/undefined
       .some((field) =>

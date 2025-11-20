@@ -21,7 +21,7 @@ export default function PhotoProfil({ user }) {
     try {
       setIsPending(true);
 
-      // 1. Upload sur ton endpoint serveur
+      // --- 1. Upload de l'image vers ton API ---
       const formData = new FormData();
       formData.append("file", file);
 
@@ -30,19 +30,26 @@ export default function PhotoProfil({ user }) {
         body: formData,
       });
 
-      if (!res.ok) throw new Error("Erreur lors de l'upload de l'image");
+      if (!res.ok) {
+        throw new Error("Erreur lors de l'upload de l'image");
+      }
 
-      const data = await res.json();
-      const uploadedUrl = data.url;
+      const { url: uploadedUrl } = await res.json();
 
-      // 2. Mettre à jour le user via Better Auth
-      await updateUser({ image: uploadedUrl });
+      // --- 2. Mettre à jour l'utilisateur via Better Auth ---
+      await updateUser({
+        image: uploadedUrl,
+      });
 
-      // 3. Mettre à jour le state local pour affichage immédiat
-      setAccountForm((prev) => ({ ...prev, image: uploadedUrl }));
+      // --- 3. Mise à jour locale de l'affichage ---
+      setAccountForm((prev) => ({
+        ...prev,
+        image: uploadedUrl,
+      }));
+
       toast.success("Photo de profil mise à jour !");
     } catch (err) {
-      console.error(err);
+      console.error("Erreur MAJ photo :", err);
       toast.error(err.message || "Erreur lors de la mise à jour de la photo");
     } finally {
       setIsPending(false);

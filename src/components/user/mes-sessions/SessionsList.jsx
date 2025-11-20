@@ -9,7 +9,7 @@ export default function SessionsList({ status, sessions, setSessions }) {
   });
 
   if (!filtered.length)
-    return <p className="text-center text-muted py-5">Aucune session {status}.</p>;
+    return <p className="text-center text-muted py-5">Aucune seances {status}.</p>;
 
   return (
     <div className="bg-white p-4 rounded-3 shadow-sm">

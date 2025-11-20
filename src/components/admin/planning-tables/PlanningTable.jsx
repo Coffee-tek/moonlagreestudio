@@ -45,7 +45,11 @@ export default function PlanningTable({
                     {sessions.length === 0 ? (
                         <tr><td colSpan="9" className="text-center">Aucune session trouvée</td></tr>
                     ) : sessions.map(s => (
-                        <tr key={s.id}>
+                        <tr
+                            key={s.id}
+                            // className={`transition-all ${s.status === "Expirée" ? "opacity-50 pointer-events-none" : ""
+                            //     }`}
+                        >
                             <td><input type="checkbox" checked={selectedSessions.includes(s.id)} onChange={() => handleSelectSession(s.id)} /></td>
                             <td>{s.titre}</td>
                             <td><p className="mb-0" style={{ fontSize: "0.95rem" }}>{s.coatch}</p></td>
@@ -69,14 +73,9 @@ export default function PlanningTable({
                                     </div>
                                 </div>
                             </td>
-
                             <td>
-                                <span className={`badge ${getStatusBadge(s.place_reserver, s.places)}`}>
-                                    {s.places - s.place_reserver === 0
-                                        ? "Complet"
-                                        : s.places - s.place_reserver <= 3
-                                            ? "Presque complet"
-                                            : "Disponible"}
+                                <span className={`badge ${getStatusBadge(s.status)}`}>
+                                    {s.status}
                                 </span>
                             </td>
 
@@ -84,14 +83,15 @@ export default function PlanningTable({
                                 <div className="d-flex justify-content-center gap-1">
 
                                     <button
-                                        className="btn btn-sm btn-outline-primary"
+                                        className="btn btn-sm btn-primary"
                                         title="Modifier"
                                         onClick={() => handleEditSession(s)}
+                                        disabled={s.status === "Expirée"}
                                     >
                                         <i className="bi bi-pencil-square"></i>
                                     </button>
                                     <button
-                                        className="btn btn-sm btn-outline-danger"
+                                        className="btn btn-sm btn-danger"
                                         onClick={() => handleDeleteSessionClick(s)}
                                         title="Supprimer"
                                     >

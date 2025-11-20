@@ -1,22 +1,101 @@
+// seanceService.js
 import prisma from "@/lib/prisma";
+
+// Fonction utilitaire pour calculer le status et remainingPlaces
+function getStatus(s) {
+  const remainingPlaces = (s.places || 0) - (s.place_reserver || 0);
+
+  let status = "Disponible";
+  if (remainingPlaces === 0) status = "Complet";
+  else if (remainingPlaces <= 3 && remainingPlaces > 0) status = "Presque complet";
+
+  // Comparer uniquement la date (sans l'heure)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const seanceDate = new Date(s.date);
+  seanceDate.setHours(0, 0, 0, 0);
+
+  if (seanceDate < today) status = "Expirée";
+
+  return { ...s, remainingPlaces, status };
+}
 
 export const seanceService = {
   getAll: async () => {
-    return await prisma.seance.findMany({ orderBy: { date: "asc" } });
+    const allSeances = await prisma.seance.findMany({ orderBy: { date: "asc" } });
+
+    const updatedSeances = await Promise.all(
+      allSeances.map(async (s) => {
+        const sWithStatus = getStatus(s);
+
+        // Mise à jour en base seulement si nécessaire
+        if (sWithStatus.status !== s.status) {
+          await prisma.seance.update({
+            where: { id: s.id },
+            data: { status: sWithStatus.status },
+          });
+        }
+
+        return sWithStatus;
+      })
+    );
+
+    return updatedSeances;
   },
+
   getById: async (id) => {
-    return await prisma.seance.findUnique({ where: { id: parseInt(id) } });
+    const s = await prisma.seance.findUnique({ where: { id: parseInt(id) } });
+    if (!s) return null;
+
+    const sWithStatus = getStatus(s);
+
+    if (sWithStatus.status !== s.status) {
+      await prisma.seance.update({
+        where: { id: s.id },
+        data: { status: sWithStatus.status },
+      });
+    }
+
+    return sWithStatus;
   },
+
   create: async (data) => {
-    return await prisma.seance.create({ data });
+    // Vérification : existe déjà une séance le même jour et à la même heure
+    const existing = await prisma.seance.findFirst({
+      where: {
+        date: data.date,
+        heure: data.heure,
+      },
+    });
+    if (existing) throw new Error("Une séance existe déjà à cette date et heure.");
+
+    const sWithStatus = getStatus({ ...data, place_reserver: 0 });
+    return await prisma.seance.create({ data: { ...data, status: sWithStatus.status } });
   },
+
   update: async (id, data) => {
+    const existing = await prisma.seance.findFirst({
+      where: {
+        date: data.date,
+        heure: data.heure,
+        NOT: { id: parseInt(id) },
+      },
+    });
+    if (existing) throw new Error("Une autre séance existe déjà à cette date et heure.");
+
+    const sWithStatus = getStatus({ ...data, place_reserver: data.place_reserver || 0 });
     return await prisma.seance.update({
       where: { id: parseInt(id) },
-      data,
+      data: { ...data, status: sWithStatus.status },
     });
   },
+
   delete: async (id) => {
     return await prisma.seance.delete({ where: { id: parseInt(id) } });
+  },
+
+  deleteMany: async (ids) => {
+    return await prisma.seance.deleteMany({ where: { id: { in: ids.map((i) => parseInt(i)) } } });
   },
 };

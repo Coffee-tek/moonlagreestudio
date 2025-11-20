@@ -46,6 +46,7 @@ export default async function DashboardReservations() {
           id: true,
           name: true,
           email: true,
+          telephone: true,
         },
       },
       seance: {
@@ -54,6 +55,7 @@ export default async function DashboardReservations() {
           titre: true,
           date: true,
           heure: true,
+          status: true,
         },
       },
     },

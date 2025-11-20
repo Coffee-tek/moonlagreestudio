@@ -112,7 +112,7 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
         window.location.reload();
       } catch (error) {
         console.error(error);
-        toast.error("Erreur lors de la création de la séance");
+        toast.error(`Erreur lors de la création de la séance : ${error.message || error}`);
       }
     });
   };

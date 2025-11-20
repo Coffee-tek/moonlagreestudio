@@ -283,7 +283,7 @@ export default function SessionEditModal({ session, onClose, onSave, teachers = 
                       <input
                         type="time"
                         className={`form-control ${errors.time ? "is-invalid" : ""}`}
-                        name="heure"
+                        name="time"
                         value={formData.time || ""}
                         onChange={handleChange}
                       />

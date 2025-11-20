@@ -23,6 +23,9 @@ export default function UserTable({
       setSelectedUsers([]);
     }
   };
+  console.log(users);
+
+  
 
   return (
     <div className="table-responsive">
@@ -72,7 +75,8 @@ export default function UserTable({
                   <div className="d-flex align-items-center gap-2">
                     <img
                       // src={user.image}
-                      src="/img/user-img.jpg"
+                      // src={user?.image ? `/uploads/${user.image}` : "/img/user-img.jpg"}
+                      src={user?.image ? user.image : "/img/user-img.jpg"}
                       alt={user.name}
                       style={{ height: "40px", width: "40px" }}
                       className="rounded-circle"
@@ -117,7 +121,7 @@ export default function UserTable({
                   <button
                     className="btn btn-sm btn-primary me-1"
                     onClick={() => onEdit(user)}
-                  disabled={user.role === "admin"} // 👈 désactive pour admin
+                    disabled={user.role === "admin"} // 👈 désactive pour admin
                   >
                     <i className="bi bi-pencil-square"></i>
                   </button>

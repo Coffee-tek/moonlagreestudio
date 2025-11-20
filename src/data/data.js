@@ -43,7 +43,7 @@ export const defaultYogaTypes = [
       id: 6,
       title: "Adapté à tous les niveaux",
       description: "Les exercices se modulent facilement : débutants comme athlètes confirmés.",
-      image: "/img/icon/moon.png",
+      image: "/img/icon/filter.png",
       animation: "flip-right",
       duration: 600
     }
@@ -291,11 +291,25 @@ export const faqData = {
     questions: [
       {
         question: "Depuis quand existez-vous ?",
-        answer: "Nous existons depuis plus de 10 ans dans le domaine du bien-être."
+        answers: [
+          {
+            r1 : "Reponse 1",
+          },
+          {
+            r2 : "Reponse 2"
+          }
+        ]
       },
       {
         question: "Où se trouvent vos studios ?",
-        answer: "Nous avons plusieurs studios dans la région."
+        answers: [
+          {
+            r1 : "Reponse 1",
+          },
+          {
+            r2 : "Reponse 2"
+          }
+        ]
       }
     ]
   },
@@ -306,12 +320,44 @@ export const faqData = {
     description: "Quelques réponses avant de nous joindre directement.",
     questions: [
       {
-        question: "Comment réserver une séance ?",
-        answer: `1. Créez votre compte.`
+        question: "Comment fonctionne le système de crédits ?",
+        answers: [
+          {
+            r1 : "Chaque crédit correspond à une séance sur Microformer. Vous achetez un pack de credits (1, 5, 10, 20…), directement en ligne sur la page achat de credits ou sur place au studio,  puis vous utilisez vos crédits pour réserver vos cours librement, selon votre planning.",
+          },
+        ]
       },
       {
-        question: "Comment Acheter des credits ? ",
-        answer: "Consultez les differents pack de credits disponible sur la page “Achat credits”"
+        question: "Les crédits ont-ils une date d’expiration ?",
+        answers: [
+          {
+            r1 : "Oui. Chaque pack a une durée de validité (ex : 30, 60 ou 90 jours). La validité commence au moment de l’achat et les crédits expirés ne sont pas remboursables.",
+          }
+        ]
+      },
+      {
+        question: "Comment réserver une séance avec mes crédits ? ",
+        answers: [
+          {
+            r1 : "Après avoir acheté un pack, connectez-vous à votre espace, consultez le planning, choisissez votre créneau et votre machine. Le crédit est automatiquement déduit au moment de la réservation.",
+          }
+        ]
+      },
+      {
+        question: "Peut-on partager des crédits ? ",
+        answers: [
+          {
+            r1 : "Non, les crédits sont nominatifs et liés à votre compte personnel. Ils ne peuvent pas être partagés, transférés ou utilisés pour réserver la place d’une autre personne.",
+          }
+        ]
+      },
+      {
+        question: "À quoi servent mes points de fidélité ?",
+        answers: [
+          {
+            r1 : "À chaque achat de credit  vous cumulez des points de fidélité. 1 credit = 100 Points de fidélité. Ces points peuvent etre échanger en credits par la suite, 2.000 points de fidélité = 1 credit offert soit 1 seance offerte. Votre solde de points de fidélité est visible directement dans votre compte.",
+          }
+        ]
       }
     ]
   }

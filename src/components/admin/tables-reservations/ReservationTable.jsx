@@ -62,7 +62,7 @@ export default function ReservationTable({
               Heure <i className="bi bi-arrow-down-up"></i>
             </th>
             <th>Mode de paiement</th>
-            <th>Statue</th>
+            <th>Statut</th>
             <th>Payée</th>
 
             <th className="text-center">Actions</th>
@@ -72,7 +72,11 @@ export default function ReservationTable({
         <tbody>
           {data.length ? (
             data.map((r) => (
-              <tr key={r.id}>
+              <tr
+                key={r.id}
+                className={`transition-all ${r.seance?.status === "Expirée" ? "opacity-50 pointer-events-none" : ""
+                  }`}
+              >
                 <td>
                   <input
                     type="checkbox"
@@ -91,7 +95,7 @@ export default function ReservationTable({
                     /> */}
                     <div>
                       <strong>{r.user?.name}</strong>
-                      <div className="small text-muted">{r.user?.email}</div>
+                      <div className="small text-muted">{r.user?.telephone}</div>
                     </div>
                   </div>
                 </td>
@@ -123,14 +127,14 @@ export default function ReservationTable({
                   )}
                 </td>
 
-                <td className="text-center">
+                <td className="text-center" >
                   <button
                     className="btn btn-sm me-1"
                     style={{ backgroundColor: "#212529", color: "white" }}
                     // onClick={() => onEdit(r)}
                     onClick={() => handleConfirmation(r.id)}
                     title="Valider la reservation"
-                    disabled={r.statut=== "annule"} // 👈 désactive pour admin
+                    disabled={r.statut === "annule" || r.seance?.status === "Expirée"} // 👈 désactive pour admin
                   >
                     <i className="bi bi-check2-square"></i>
                   </button>
@@ -140,7 +144,7 @@ export default function ReservationTable({
                     style={{ backgroundColor: "#212529", color: "white" }}
                     // onClick={() => onDelete(r)}
                     onClick={() => handleCancel(r.id)}
-                    disabled={r.user?.role === "admin"} // 👈 désactive aussi
+                    disabled={r.seance?.status === "Expirée"} // 👈 désactive aussi
                     title="Annulée la reservation "
                   >
                     {/* <i className="bi bi-trash3"></i> */}

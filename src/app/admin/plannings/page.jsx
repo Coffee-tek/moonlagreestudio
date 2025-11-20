@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import AdminPlanning from "../../../components/admin/planning-tables/AdminPlanning";
 import prisma from "../../../lib/prisma";
+import { seanceService } from "../../../services/ seanceService";
 
 export default async function DashboardPlanning() {
 
@@ -30,9 +31,10 @@ export default async function DashboardPlanning() {
       </div>
     );
   }
-  const seances = await prisma.seance.findMany({
-    orderBy: { date: "desc" },
-  });
+  // const seances = await prisma.seance.findMany({
+  //   orderBy: { date: "desc" },
+  // });
+  const seances = await seanceService.getAll();
   console.log("donnee du serveur:",seances);
   
 

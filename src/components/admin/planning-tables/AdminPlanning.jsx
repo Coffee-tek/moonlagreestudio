@@ -197,20 +197,19 @@ export default function AdminPlanning({ seances }) {
     setSelectedSessions([]);
   };
 
-  const getStatusBadge = (place_reserver, places) => {
-    const remainingPlaces = places - place_reserver;
-
-    let status = "Disponible";
-    if (remainingPlaces === 0) status = "Complet";
-    else if (remainingPlaces <= 3) status = "Presque complet";
-
-    const badges = {
-      Disponible: "bg-success-subtle text-success",
-      "Presque complet": "bg-warning-subtle text-warning",
-      Complet: "bg-danger-subtle text-danger",
-    };
-
-    return badges[status];
+  const getStatusBadge = (status) => {
+    switch (status) {
+      case "Disponible":
+        return "bg-success-subtle text-success";
+      case "Presque complet":
+        return "bg-warning-subtle text-warning";
+      case "Complet":
+        return "bg-danger-subtle text-danger";
+      case "Expirée":
+        return "bg-secondary-subtle text-secondary";
+      default:
+        return "bg-light text-dark";
+    }
   };
 
   const getProgressColor = (booked, total) => {
@@ -219,6 +218,9 @@ export default function AdminPlanning({ seances }) {
     if (percentage > 20) return "bg-success";
     return "bg-success";
   };
+
+  console.log(seances);
+
 
   return (
     <>

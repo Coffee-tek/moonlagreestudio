@@ -78,6 +78,8 @@ export default function PlanningHeader({
                         <option value="Disponible">Disponible</option>
                         <option value="Presque complet">Presque complet</option>
                         <option value="Complet">Complet</option>
+                        <option value="Expirée">Expirée</option>
+
                     </select>
                 </div>
 

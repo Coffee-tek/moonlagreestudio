@@ -42,7 +42,7 @@ export default function MesSessionsClient({ seances }) {
         <div className="col-lg-8 ps-lg-0">
             <div className="ps-lg-5 pt-lg-5">
                 <div className="d-flex align-items-center justify-content-between w-100 mb-5">
-                    <h1 className="m-0 fw-bold">Mes Sessions</h1>
+                    <h1 className="m-0 fw-bold">Mes seances</h1>
                 </div>
 
                 <SessionTabs

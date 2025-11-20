@@ -41,6 +41,9 @@ export default function CalendarBookingSystemClient({ seances, user }) {
     const [selectedSeance, setSelectedSeance] = useState(null);
     const [showModal, setShowModal] = useState(false);
 
+    const today = new Date();
+    const startOfCurrentWeek = moment.startOf(today, 'week');
+
     const weekDays = ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'];
 
     const generateWeekDays = () => {
@@ -59,7 +62,6 @@ export default function CalendarBookingSystemClient({ seances, user }) {
     };
 
     const getCurrentWeekMonthYear = () => moment.format(currentDate, 'MMMM YYYY');
-
     const getSelectedDayClasses = () => seances.filter(s => new Date(s.date).toDateString() === selectedDate.toDateString());
 
     const handleBookClick = (seance) => {
@@ -71,25 +73,10 @@ export default function CalendarBookingSystemClient({ seances, user }) {
         setShowModal(true);
     };
 
-    //   const confirmReservation = async (typePaiement) => {
-    //     try {
-    //       // simulation d’appel API pour enregistrer la réservation
-    //       await new Promise((r) => setTimeout(r, 1000));
-
-    //       toast.success(`Réservation ${typePaiement === 'en_ligne' ? 'payée en ligne' : 'à payer sur place'} confirmée !`);
-    //       setShowModal(false);
-    //       setBookings((prev) => ({ ...prev, [selectedSeance.id]: true }));
-
-    //       setTimeout(() => window.location.reload(), 1500);
-    //     } catch (error) {
-    //       toast.error('Une erreur est survenue lors de la réservation.');
-    //     }
-    //   };
     const confirmReservation = async (typePaiement) => {
         try {
             if (!selectedSeance || !user) return;
 
-            // Appel vers ton endpoint qui exécute la server action
             const response = await fetch("/api/reservations", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -118,6 +105,8 @@ export default function CalendarBookingSystemClient({ seances, user }) {
         }
     };
 
+    // ⚠️ Vérifier si le bouton "semaine précédente" doit être désactivé
+    const isPrevDisabled = moment.add(currentDate, -7, 'days') < startOfCurrentWeek;
 
     return (
         <div className="container py-5">
@@ -132,11 +121,20 @@ export default function CalendarBookingSystemClient({ seances, user }) {
             {/* Calendrier */}
             <div className="max-w-4xl mx-auto p-6 bg-white mb-5">
                 <div className="flex items-center justify-between mb-8">
-                    <button onClick={() => setCurrentDate(moment.add(currentDate, -7, 'days'))} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                    <button
+                        onClick={() => !isPrevDisabled && setCurrentDate(moment.add(currentDate, -7, 'days'))}
+                        disabled={isPrevDisabled}
+                        className={`p-2 hover:bg-gray-100 rounded-full transition-colors ${isPrevDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    >
                         <i className="bi bi-arrow-left" style={{ fontSize: "35px" }}></i>
                     </button>
+
                     <h1 className="text-2xl font-light text-gray-800 capitalize">{getCurrentWeekMonthYear()}</h1>
-                    <button onClick={() => setCurrentDate(moment.add(currentDate, 7, 'days'))} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+
+                    <button
+                        onClick={() => setCurrentDate(moment.add(currentDate, 7, 'days'))}
+                        className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                    >
                         <i className="bi bi-arrow-right" style={{ fontSize: "35px" }}></i>
                     </button>
                 </div>
@@ -189,11 +187,21 @@ export default function CalendarBookingSystemClient({ seances, user }) {
                                     </div>
                                     <button
                                         onClick={() => handleBookClick(s)}
-                                        disabled={s.place_reserver >= s.places || bookings[s.id]}
-                                        className={`px-6 py-2 rounded-lg font-medium transition-all duration-200 ${s.place_reserver < s.places && !bookings[s.id] ? 'bg-primary text-white hover:bg-amber-700 hover:shadow-md' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+                                        disabled={s.place_reserver >= s.places || bookings[s.id] || s.status === "Expirée"}
+                                        className={`px-6 py-2 rounded-lg font-medium transition-all duration-200 ${s.place_reserver < s.places && !bookings[s.id] && s.status !== "Expirée"
+                                                ? 'bg-primary text-white hover:bg-amber-700 hover:shadow-md'
+                                                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                            }`}
                                     >
-                                        {bookings[s.id] ? 'Réservé' : s.place_reserver < s.places ? 'Réserver' : 'Complet'}
+                                        {bookings[s.id]
+                                            ? 'Réservé'
+                                            : s.status === "Expirée"
+                                                ? "Terminée"
+                                                : s.place_reserver < s.places
+                                                    ? 'Réserver'
+                                                    : 'Complet'}
                                     </button>
+
                                 </div>
                             ))}
                         </div>

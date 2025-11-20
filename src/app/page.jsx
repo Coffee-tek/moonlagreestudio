@@ -196,7 +196,7 @@ export default function Home() {
                     Moon Lagree Studio est le premier studio à Dakar équipé de Microformers, une version plus agile, plus dynamique et incroyablement efficace de la machine Lagree qui fait fureur dans les plus grandes villes du monde entier.
                     </p>
                     
-                    <p className="text-white/90 leading-relaxed">
+                    <span className="text-white/90 leading-relaxed">
                     Des résultats visibles et rapides:
                     La méthode Lagree est reconnue mondialement pour : <br/>
                         <ul style={{ listStyleType: "disc" }}>
@@ -207,12 +207,12 @@ export default function Home() {
                             <li>booster endurance et contrôle</li>
                         </ul>
                     En quelques séances déjà, on ressent la différence. En quelques semaines, on la voit.
-                    </p>
+                    </span>
                     
                     <p className="text-white/80 leading-relaxed">
-                    ATTENTION : : le Lagree, ce n’est pas du Pilates. <br/><br/>
+                   <br/> ATTENTION : : le Lagree, ce n’est pas du Pilates. <br/><br/>
                     Bien qu’elles partagent certaines inspirations (notamment le contrôle et la précision des mouvements), la méthode Lagree est plus intense, plus dynamique, et conçue pour des résultats rapides et durables. 
- Là où le Pilates se concentre sur la stabilité et la rééducation, le Lagree cible la transformation physique : brûler, sculpter, renforcer… tout en préservant les articulations.
+                    Là où le Pilates se concentre sur la stabilité et la rééducation, le Lagree cible la transformation physique : brûler, sculpter, renforcer… tout en préservant les articulations.
                     </p>
                     
                     {/* Signature */}

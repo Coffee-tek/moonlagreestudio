@@ -11,8 +11,8 @@ const EnhancedPopularClasses = ({
   subtitle = "Découvrez les différentes sessions",
   classes = popularClasses,
   showViewAllButton = true,
-  viewAllLink = "/planning",
-  viewAllText = "Planning",
+  planningLink = "/public/planning",
+  planningTxt = "Planning",
   sectionClassName = "py-5 ",
   containerClassName = "container",
   showFilters = false,
@@ -43,24 +43,6 @@ const EnhancedPopularClasses = ({
           </div>
         </div>
 
-        {/* Filtres (optionnel) */}
-        {showFilters && (
-          <div className="row justify-content-center mb-5">
-            <div className="col-auto">
-              <div className="btn-group" data-aos="fade-up" data-aos-duration="600">
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    className={`btn ${activeCategory === category ? 'btn-primary' : 'btn-outline-primary'}`}
-                    onClick={() => setActiveCategory(category)}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* En-tête avec bouton "Voir tout" */}
         <div className="row align-items-center justify-content-between mb-5">
@@ -70,15 +52,17 @@ const EnhancedPopularClasses = ({
               {/* <span className="badge bg-primary ms-2">{filteredClasses.length}</span> */}
             </h2>
           </div>
+          
+          {/* Button Planning */}
           {showViewAllButton && (
             <div className="col-auto">
               <Link 
-                href={viewAllLink} 
+                href={planningLink} 
                 className="btn btn-outline-primary btn-lg rounded-pill" 
                 data-aos="fade-left" 
                 data-aos-duration="600"
               >
-                {viewAllText}
+                {planningTxt}
                 <i className="ri-arrow-right-line ms-2"></i>
               </Link>
             </div>
@@ -112,19 +96,6 @@ const EnhancedPopularClasses = ({
                     {classItem.level || classItem.category}
                   </span>
 
-                  {/* Badge de prix */}
-                  {/* {classItem.price && (
-                    <span className="badge bg-success position-absolute top-0 end-0 m-3">
-                      {classItem.price}
-                    </span>
-                  )} */}
-
-                  {/* Overlay au hover */}
-                  {/* <div className="card-image-overlay">
-                    <Link href={classItem.link || '#'} className="stretched-link">
-                      <i className="ri-play-circle-fill"></i>
-                    </Link>
-                  </div> */}
                 </div>
 
                 <div className="card-body px-0 d-flex flex-column">

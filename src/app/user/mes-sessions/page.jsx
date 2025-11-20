@@ -1,9 +1,9 @@
-import { Sidebar } from "@/components/user/sidebar";
 import MesSessionsClient from "../../../components/user/mes-sessions/MesSessionsClient";
 import prisma from "../../../lib/prisma";
 import { headers } from "next/headers";
 import { auth } from "../../../lib/auth";
 import { redirect } from "next/navigation";
+import { Sidebar } from "../../../components/user/sidebar";
 
 // import "bootstrap-icons/font/bootstrap-icons.css";
 

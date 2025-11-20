@@ -56,7 +56,12 @@ export function FAQ({ data }) {
                       }}
                     >
                       <div className="accordion-body bg-light rounded-bottom">
-                        <p className="text-muted mb-0">{q.answer}</p>
+                        <ul className="text-muted ">
+                          {q.answers.map((ans, i) => {
+                            const key = Object.keys(ans)[0];
+                            return <li key={i}>{ans[key]}</li>;
+                          })}
+                        </ul>
                       </div>
                     </div>
                   </div>
@@ -66,59 +71,6 @@ export function FAQ({ data }) {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .accordion-button {
-          box-shadow: none !important;
-        }
-
-        .accordion-button:not(.collapsed) {
-          background-color: #f8f9fa;
-          color: #212529;
-        }
-
-        .accordion-button::after {
-          transition: transform 0.2s ease-in-out;
-        }
-
-        .accordion-button:not(.collapsed)::after {
-          transform: rotate(180deg);
-        }
-
-        .accordion-collapse {
-          overflow: hidden;
-        }
-
-        .accordion-collapse.collapse {
-          max-height: 0;
-          visibility: hidden;
-        }
-
-        .accordion-collapse.show {
-          max-height: 1000px;
-          visibility: visible;
-        }
-
-        .accordion-item {
-          border: none !important;
-        }
-
-        .accordion-body {
-          padding: 1rem 1.25rem;
-          animation: fadeIn 0.3s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   );
 }

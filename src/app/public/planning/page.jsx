@@ -29,31 +29,32 @@ export default async function CalendarBookingSystemServer() {
   const classesData = await fetchClassesData();
 
   const h = await headers();
-  const session = await auth.api.getSession({
-    headers: h,
-  });
-
-  if (!session) {
-    // redirect("/auth/connexion");
-    
-  }
-  // console.log(session.user);
-
+  const session = await auth.api.getSession({ headers: h });
 
   const seances = await prisma.seance.findMany({
-    include: {
-      reservations: true, // Inclure toutes les réservations
-    },
-    orderBy: {
-      date: 'asc'
-    }
+    include: { reservations: true },
+    orderBy: { date: 'asc' },
   });
 
-  console.log("toutes les seance:", seances);
-  console.log("données du user", session.user);
+  // ⚠️ Si l'utilisateur n'est pas connecté
+  if (!session) {
+    return (
+      <>
+        <HeroHeader
+          title={heroHeaders.planning.title}
+          breadcrumbs={heroHeaders.planning.breadcrumbs}
+          backgroundImage="/img/new/planning.jpeg"
+        />
 
+        {/* user = null */}
+        <CalendarBookingSystemClient seances={seances} user={null} />
 
+        <EnhancedPopularClasses />
+      </>
+    );
+  }
 
+  // ✔️ Si l'utilisateur est connecté
   return (
     <>
       <HeroHeader

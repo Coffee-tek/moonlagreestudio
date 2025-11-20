@@ -13,7 +13,7 @@ export function Sidebar({ users }) {
 
   const sidebarLinks = [
     { href: '/user/profil-settings', label: 'Profil', active: true },
-    { href: '/user/mes-sessions', label: 'Mes Sessions', active: false },
+    { href: '/user/mes-sessions', label: 'Mes Seances', active: false },
     { href: '/user/mes-credits', label: 'Mes crédits', active: false },
     { href: '/user/mes-points', label: 'Mes points de fidélité', active: false },
     { href: '/auth/login', label: 'Déconnexion', logout: true, icon: '<i className="bi bi-box-arrow-left"></i>', active: false }

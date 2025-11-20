@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 
 export const reservationService = {
+  
   async reserverSeance(userId, seanceId, modePaiement) {
     const seance = await prisma.seance.findUnique({ where: { id: seanceId } });
     if (!seance) throw new Error("Séance introuvable");

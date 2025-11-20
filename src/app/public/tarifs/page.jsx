@@ -49,7 +49,7 @@ export default function PricingPage() {
             </div>
 
             <div className="col-lg-6 col-12">
-                <p
+                <span
                 className="text-dark"
                 data-aos="fade-left"
                 data-aos-duration="700"
@@ -62,9 +62,9 @@ export default function PricingPage() {
                       <li>Choisissez votre moyen de paiement (Via vos credits, Via Mobile Money ou en espèces sur place)</li>
                       <li>confirmer la reservation.</li>
                   </ol>
-                </p>
+                </span>
                 
-                <p
+                <span
                 className="text-dark"
                 data-aos="fade-left"
                 data-aos-duration="700"
@@ -77,9 +77,9 @@ export default function PricingPage() {
                       <li>Choisissez votre moyen de paiement (Via vos credits, Via Mobile Money ou en espèces sur place)</li>
                       <li>confirmer la reservation.</li>
                   </ol>
-                </p>
+                </span>
 
-                <p
+                <span
                 className="text-dark"
                 data-aos="fade-left"
                 data-aos-duration="700"
@@ -90,7 +90,7 @@ export default function PricingPage() {
                       <li>Passé ce délai, le crédit est perdu car la place aurait pu être réattribuée.</li>
                       <li>Si le cours est complet, vous pouvez vous inscrire sur liste d’attente : si une place se libère, vous recevez une notification automatique.</li>
                   </ul>
-                </p>
+                </span>
 
                 <p
                 className="text-dark"

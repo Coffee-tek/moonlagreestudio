@@ -36,8 +36,9 @@ export default function SessionCard({ session, sessions, setSessions }) {
       <div className="row">
         <div className="col-xl-2 col-lg-3 col-md-3 col-4">
           <img
-            src={session.image || "/img/pages/products/product-1.jpg"}
+            src={session.image || "/img/seances/5.png"}
             className="img-fluid rounded-3"
+            style={{ height: "100%", objectFit: "cover" }}
             alt={session.titre}
           />
         </div>
@@ -46,7 +47,7 @@ export default function SessionCard({ session, sessions, setSessions }) {
           <div className="card-body d-flex align-items-start justify-content-between">
             <div>
               <span className="badge bg-light text-dark mb-2">
-                Session {session.statut}
+                Seance {session.statut}
               </span>
               <h6 className="fw-bold">{session.titre}</h6>
               <div>
@@ -61,15 +62,25 @@ export default function SessionCard({ session, sessions, setSessions }) {
               <h6 className="fw-semibold mt-2">Coach : {session.coatch || "N/A"}</h6>
             </div>
 
-            {(session.statut === "en_attente" || session.statut === "confirme") && (
+            {session.status === "Expirée" ? (
               <button
-                className="btn btn-danger rounded-pill"
-                onClick={() => handleCancel(session.reservationId)}
-                disabled={isPending}
+                className="btn btn-secondary rounded-pill"
+                disabled
               >
-                {isPending ? "Annulation..." : "Annuler"}
+                Expirée
               </button>
+            ) : (
+              (session.statut === "en_attente" || session.statut === "confirme") && (
+                <button
+                  className="btn btn-danger rounded-pill"
+                  onClick={() => handleCancel(session.reservationId)}
+                  disabled={isPending}
+                >
+                  {isPending ? "Annulation..." : "Annuler"}
+                </button>
+              )
             )}
+
           </div>
         </div>
       </div>
