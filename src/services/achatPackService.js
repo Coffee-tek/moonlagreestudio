@@ -1,36 +1,72 @@
 // services/achatPackService.js
 import prisma from "@/lib/prisma";
 
-/**
- * Service central pour gérer :
- * - Achat de packs
- * - Crédit / Débit de wallet
- * - Création automatique des transactions
- */
-
 export const achatPackService = {
+
+    /**
+     * Vérifie si les crédits du wallet sont expirés.
+     * Si la date est dépassée → remet credit à 0 et expiryDate à null
+     */
+    async verifierExpirationWallet(userId) {
+        const wallet = await prisma.wallet.findUnique({
+            where: { userId }
+        });
+
+        if (!wallet) throw new Error("Wallet introuvable");
+
+        // Si pas d’expiration ou pas de crédits → rien à faire
+        if (!wallet.expiryDate || wallet.credit === 0) {
+            return wallet;
+        }
+
+        const now = new Date();
+
+        // Expiré ?
+        if (wallet.expiryDate < now) {
+            const updatedWallet = await prisma.wallet.update({
+                where: { id: wallet.id },
+                data: {
+                    credit: 0,
+                    expiryDate: null
+                }
+            });
+
+            // Transaction d’expiration
+            await prisma.transaction.create({
+                data: {
+                    userId,
+                    walletId: updatedWallet.id,
+                    type: "debit",
+                    montant: 0,
+                    description: "Crédits expirés automatiquement"
+                }
+            });
+
+            return updatedWallet;
+        }
+
+        return wallet;
+    },
+
     /**
      * Acheter un pack
      */
     async acheterPack({ userId, packId }) {
-        // 1️⃣ Récupérer le pack
+
+        const wallet = await this.verifierExpirationWallet(userId);
+
         const pack = await prisma.pack.findUnique({ where: { id: packId } });
         if (!pack) throw new Error("Pack introuvable");
 
-        // 2️⃣ Récupérer ou créer le wallet de l'utilisateur
-        let wallet = await prisma.wallet.findUnique({ where: { userId } });
-        if (!wallet) {
-            //   wallet = await prisma.wallet.create({ data: { userId, credit: 0, point: 0 } });
-            throw new Error("Wallet introuvable");
+        if (wallet.credit > 2) {
+            throw new Error("Vous avez encore des crédits disponibles.");
         }
 
-        // 3️⃣ Calculer la date d'expiration (si pack.duree défini)
-        const now = new Date();
-        const expiryDate = pack.duree
-            ? new Date(now.getTime() + pack.duree * 24 * 60 * 60 * 1000)
-            : null;
+        let expiryDate = null;
+        if (pack.duree) {
+            expiryDate = new Date(Date.now() + pack.duree * 86400000);
+        }
 
-        // 4️⃣ Créditer le wallet avec les crédits du pack
         const updatedWallet = await prisma.wallet.update({
             where: { id: wallet.id },
             data: {
@@ -39,12 +75,11 @@ export const achatPackService = {
             }
         });
 
-        // 5️⃣ Créer la transaction associée
         await prisma.transaction.create({
             data: {
                 userId,
                 walletId: updatedWallet.id,
-                type: "ACHAT_PACK",
+                type: "credit",
                 montant: pack.credits,
                 description: `Achat du pack ${pack.titre}`
             }
@@ -53,19 +88,19 @@ export const achatPackService = {
         return updatedWallet;
     },
 
+
+
     /**
-     * Créditer le wallet de l'utilisateur
+     * Créditer le wallet
      */
-    async crediterWallet({ userId, montant, description = "Crédit ajouté par admin" }) {
-        const wallet = await prisma.wallet.findUnique({ where: { userId } });
-        if (!wallet) throw new Error("Wallet introuvable");
+    async crediterWallet({ userId, montant, description = "Crédit ajouté" }) {
+        const wallet = await this.verifierExpirationWallet(userId);
 
         const updatedWallet = await prisma.wallet.update({
             where: { id: wallet.id },
             data: { credit: wallet.credit + montant }
         });
 
-        // Créer une transaction de crédit
         await prisma.transaction.create({
             data: {
                 userId,
@@ -79,20 +114,24 @@ export const achatPackService = {
         return updatedWallet;
     },
 
+
     /**
-     * Débiter le wallet de l'utilisateur
+     * Débiter le wallet
      */
-    async debiterWallet({ userId, montant, description = "Crédit retiré" }) {
-        const wallet = await prisma.wallet.findUnique({ where: { userId } });
-        if (!wallet) throw new Error("Wallet introuvable");
-        if (wallet.credit < montant) throw new Error("Crédits insuffisants");
+    async debiterWallet({ userId, montant, description = "Débit effectué" }) {
+        const wallet = await this.verifierExpirationWallet(userId);
+
+        if (wallet.credit < montant) {
+            throw new Error("Crédits insuffisants");
+        }
 
         const updatedWallet = await prisma.wallet.update({
             where: { id: wallet.id },
-            data: { credit: wallet.credit - montant }
+            data: {
+                credit: wallet.credit - montant
+            }
         });
 
-        // Créer une transaction de débit
         await prisma.transaction.create({
             data: {
                 userId,
@@ -106,16 +145,19 @@ export const achatPackService = {
         return updatedWallet;
     },
 
+
     /**
-     * Ajouter ou retirer des points dans le wallet
+     * Ajouter ou retirer des points
      */
     async modifierPoints({ userId, montant, type = "POINT_CREDIT", description = "Modification de points" }) {
         const wallet = await prisma.wallet.findUnique({ where: { userId } });
         if (!wallet) throw new Error("Wallet introuvable");
 
         let newPoint = wallet.point;
-        if (type === "POINT_CREDIT") newPoint += montant;
-        else if (type === "POINT_DEBIT") {
+
+        if (type === "POINT_CREDIT") {
+            newPoint += montant;
+        } else if (type === "POINT_DEBIT") {
             if (wallet.point < montant) throw new Error("Points insuffisants");
             newPoint -= montant;
         } else {
@@ -127,17 +169,7 @@ export const achatPackService = {
             data: { point: newPoint }
         });
 
-        // Créer la transaction
-        // await prisma.transaction.create({
-        //     data: {
-        //         userId,
-        //         walletId: updatedWallet.id,
-        //         type,
-        //         montant,
-        //         description
-        //     }
-        // });
-
         return updatedWallet;
     }
+
 };

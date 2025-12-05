@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import MesCreditsClient from "../../../components/user/mes-credits/MesCreditsClient";
+import { achatPackService } from "../../../services/achatPackService";
 
 export default async function MesCreditsPage() {
   const h = headers();
@@ -13,7 +14,10 @@ export default async function MesCreditsPage() {
     redirect("/auth/connexion");
   }
 
-  // 🔹 Récupérer le user, son wallet et ses transactions liées
+  // 🔹 Récupérer le wallet et vérifier expiration
+  const wallet = await achatPackService.verifierExpirationWallet(session.user.id);
+
+  // 🔹 Récupérer le user et ses transactions
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
     include: {
@@ -31,8 +35,7 @@ export default async function MesCreditsPage() {
     redirect("/auth/connexion");
   }
 
-  const wallet = user.wallet;
-  const transactions = wallet?.transactions || [];
+  const transactions = user?.wallet?.transactions || [];
 
   return (
     <div className="row">

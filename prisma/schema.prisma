@@ -77,6 +77,59 @@ model User {
   @@map("users")
 }
 
+model Wallet {
+  id String @id @default(uuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  credit     Int       @default(0)
+  point      Int       @default(0)
+  expiryDate DateTime?
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  transactions Transaction[]
+
+  @@map("wallets")
+}
+
+model Pack {
+  id Int @id @default(autoincrement())
+
+  titre       String
+  description String?
+  credits     Int
+  prix        Float
+  promotion   Float?
+  duree       Int?
+  theme_color String?
+  visible     Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("packs")
+}
+
+model Transaction {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId      String
+  walletId    String
+  type        TransactionType
+  montant     Int
+  description String?
+
+  user   User   @relation(fields: [userId], references: [id])
+  wallet Wallet @relation(fields: [walletId], references: [id])
+
+  @@map("transactions")
+}
+
 model Session {
   id        String   @id
   createdAt DateTime @default(now())
@@ -125,41 +178,6 @@ model Verification {
   @@map("verification")
 }
 
-model Wallet {
-  id String @id @default(uuid())
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  credit     Int       @default(0)
-  point      Int       @default(0)
-  expiryDate DateTime?
-
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @unique
-
-  transactions Transaction[]
-
-  @@map("wallets")
-}
-
-model Pack {
-  id Int @id @default(autoincrement())
-
-  titre       String
-  description String?
-  credits     Int
-  prix        Float
-  promotion   Float?
-  duree       Int?
-  theme_color String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("packs")
-}
-
 model Seance {
   id Int @id @default(autoincrement())
 
@@ -200,19 +218,3 @@ model Reservation {
   @@map("reservations")
 }
 
-model Transaction {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  userId      String
-  walletId    String
-  type        TransactionType
-  montant     Int
-  description String?
-
-  user   User   @relation(fields: [userId], references: [id])
-  wallet Wallet @relation(fields: [walletId], references: [id])
-
-  @@map("transactions")
-}

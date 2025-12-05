@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 
 export default function PackEditModal({ pack, onClose, onSave }) {
-  const [id, setId] = useState(pack.id)
+  const [id, setId] = useState(pack ? pack.id : null);
+
   const [formData, setFormData] = useState({
     titre: "",
     credits: 0,
@@ -11,21 +12,13 @@ export default function PackEditModal({ pack, onClose, onSave }) {
     promotion: "",
     description: "",
     duree: 0,
- 
+    visible: false,
   });
 
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (pack) {
-      const today = new Date();
-      let endDate = "";
-      if (pack.duree) {
-        const end = new Date();
-        end.setDate(today.getDate() + pack.duree);
-        endDate = end.toISOString().split("T")[0];
-      }
-
       setFormData({
         titre: pack.titre || "",
         description: pack.description || "",
@@ -33,9 +26,8 @@ export default function PackEditModal({ pack, onClose, onSave }) {
         prix: pack.prix || 0,
         promotion: pack.promotion || "",
         duree: pack.duree || 0,
-        // endDate: endDate,
         theme_color: pack.theme_color || "primary",
-        // isPopular: pack.isPopular || false,
+        visible: pack.visible
       });
     }
   }, [pack]);
@@ -49,11 +41,11 @@ export default function PackEditModal({ pack, onClose, onSave }) {
       [name]:
         type === "checkbox"
           ? checked
-          : name === "credits" || name === "prix" || name === "promotion"
-            ? value === ""
-              ? ""
-              : Number(value)
-            : value,
+          : name === "visible"
+            ? value === "true" // <-- conversion string -> bool
+            : ["credits", "prix", "promotion", "duree"].includes(name)
+              ? value === "" ? "" : Number(value)
+              : value,
     }));
 
     if (errors[name]) {
@@ -61,20 +53,7 @@ export default function PackEditModal({ pack, onClose, onSave }) {
     }
   };
 
-  const handleEndDateChange = (e) => {
-    const value = e.target.value;
-    setFormData((prev) => {
-      const durationInDays = value
-        ? Math.ceil((new Date(value) - new Date()) / (1000 * 60 * 60 * 24))
-        : 0;
 
-      return {
-        ...prev,
-        endDate: value,
-        duree: durationInDays,
-      };
-    });
-  };
 
   const validateForm = () => {
     const newErrors = {};
@@ -89,15 +68,25 @@ export default function PackEditModal({ pack, onClose, onSave }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (!validateForm()) return;
+  const calculateDiscount = () => {
+    if (formData.promotion && formData.prix > 0) {
+      return (((formData.prix - formData.promotion) / formData.prix) * 100).toFixed(0);
+    }
+    return 0;
+  };
 
-  //   onSave({
-  //     ...formData,
-  //     promotion: formData.promotion === "" ? null : formData.promotion,
-  //   });
-  // };
+  const colorOptions = [
+    { value: "#062c54", label: "Bleu" },      // primary
+    { value: "#0a4d0ade", label: "Vert" },      // success
+    { value: "#bb7a01", label: "Jaune" },     // warning
+    { value: "#660909", label: "Rouge" },     // danger
+    { value: "#127f90", label: "Cyan" },      // info
+    { value: "#580758", label: "Violet" },    // purple
+    { value: "#542e06", label: "Marron" },    // brown (standard brown hex)
+    { value: "#000000", label: "Noir" },      // dark
+    { value: "#474d52", label: "Gris" }       // secondary
+  ];
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -111,26 +100,11 @@ export default function PackEditModal({ pack, onClose, onSave }) {
       promotion: formData.promotion === "" ? null : formData.promotion,
       duree: formData.duree,
       theme_color: formData.theme_color, // map vers le champ correct dans Prisma
+      visible: formData.visible
     };
 
     onSave(dataToSave);
   };
-
-  const calculateDiscount = () => {
-    if (formData.promotion && formData.prix > 0) {
-      return (((formData.prix - formData.promotion) / formData.prix) * 100).toFixed(0);
-    }
-    return 0;
-  };
-
-  const colorOptions = [
-    { value: "primary", label: "Bleu" },
-    { value: "success", label: "Vert" },
-    { value: "warning", label: "Jaune" },
-    { value: "danger", label: "Rouge" },
-    { value: "info", label: "Cyan" },
-    { value: "purple", label: "Violet" },
-  ];
 
   return (
     <div
@@ -159,7 +133,8 @@ export default function PackEditModal({ pack, onClose, onSave }) {
               <div className="card bg-light mb-4">
                 <div className="card-body text-center">
                   <div
-                    className={`avatar-xl rounded bg-${formData.theme_color}-subtle d-inline-flex align-items-center justify-content-center mb-3`}
+                    className={`avatar-xl rounded d-inline-flex align-items-center justify-content-center mb-3`}
+                    style={{ backgroundColor: pack.theme_color ?? '#000' }}
                   ></div>
                   {formData.isPopular && (
                     <span className="badge bg-warning position-absolute top-0 end-0 m-3">⭐ Populaire</span>
@@ -276,16 +251,16 @@ export default function PackEditModal({ pack, onClose, onSave }) {
                 </div>
 
                 <div className="col-md-6 mb-3">
-                  <label className="form-label fw-bold">Date de fin</label>
+                  <label className="form-label fw-bold">Nombre de jour de valider</label>
                   <input
-                    type="date"
+                    type="number"
                     className="form-control"
-                    name="endDate"
-                    value={formData.endDate}
-                    onChange={handleEndDateChange}
+                    name="duree"
+                    value={formData.duree}
+                    onChange={handleChange}
                   />
-                  {formData.endDate && (
-                    <small className="text-muted">Durée : {formData.duree} jours</small>
+                  {formData.duree !== 0 && (
+                    <small className="text-muted">{formData.duree} jours d'expirée a comptrer du jours de l'achat du pack</small>
                   )}
                 </div>
               </div>
@@ -312,6 +287,42 @@ export default function PackEditModal({ pack, onClose, onSave }) {
                     ))}
                   </select>
                 </div>
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">Visibilité du pack</label>
+                    <div className="d-flex gap-3 mt-2">
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="visible"
+                          value="true"
+                          checked={formData.visible === true}
+                          onChange={handleChange} // <-- on utilise handleChange standard
+                          id="visibleTrue"
+                        />
+                        <label className="form-check-label" htmlFor="visibleTrue">
+                          Visible
+                        </label>
+                      </div>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name="visible"
+                          value="false"
+                          checked={formData.visible === false}
+                          onChange={handleChange}
+                          id="visibleFalse"
+                        />
+                        <label className="form-check-label" htmlFor="visibleFalse">
+                          Masqué
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
 
               <div className="alert alert-info d-flex align-items-start">

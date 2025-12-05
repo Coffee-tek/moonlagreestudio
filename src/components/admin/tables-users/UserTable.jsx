@@ -114,7 +114,7 @@ export default function UserTable({
                   <button
                     className="btn btn-sm btn-primary me-1"
                     onClick={() => onWallet(user)}
-                    disabled={user.role === "admin"} // 👈 désactive pour admin
+                    // disabled={user.role === "admin"} // 👈 désactive pour admin
                   >
                     <i className="bi bi-wallet"></i>
                   </button>

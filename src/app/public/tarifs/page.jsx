@@ -1,25 +1,33 @@
-"use client";
-
 import { FAQ } from "@/components/FAQ";
 import HeroHeader from "@/components/HeroSection";
-import SubscribeSection from "@/components/newsletter";
 import { faqData, heroHeaders } from "@/data/data";
-import Link from "next/link";
+import PackCard from "../../../components/public/packs/PackCard";
+import { headers } from "next/headers";
+import { auth } from "../../../lib/auth";
+import prisma from "../../../lib/prisma";
+import PackPackCardRemake from "../../../components/public/packs/PackCardRemake";
 
-export default function PricingPage() {
-  const packs = [
-    {
-      name: "Essai",
-      credits: 1,
-      price: {
-        price1: 10000,
-        price2: 23456,
-      },
-    },
-    { name: "Débutant", credits: 10, price: 120000 },
-    { name: "Standard", credits: 20, price: 40000 },
-    { name: "Premium", credits: 125, price: 50000 },
-  ];
+export default async function PricingPage() {
+  // const packs = [
+  //   { titre: "Débutant", credits: 10, prix: 120000, promotion: 80000 },
+  //   { titre: "Débutant", credits: 10, prix: 120000 },
+  //   { titre: "Standard", credits: 20, prix: 40000 },
+  //   { titre: "Premium", credits: 125, prix: 50000 },
+  // ];
+
+  const h = await headers();
+  let session = null;
+
+  try {
+    session = await auth.api.getSession({ headers: h });
+  } catch (err) {
+    console.warn("Aucune session trouvée :", err);
+  }
+
+  const packs = await prisma.pack.findMany({
+    where: { visible: true },
+    orderBy: { createdAt: "asc" },
+  });
 
   return (
     <>
@@ -40,84 +48,84 @@ export default function PricingPage() {
                   data-aos="fade-right"
                   data-aos-duration="600"
                 >
-                 Comment ça marche ?
+                  Comment ça marche ?
                 </h1>
                 <p className="fw-bold fs-5" data-aos="fade-right" data-aos-duration="600">
-                  Credits & Reservations 
+                  Credits & Reservations
                 </p>
               </div>
             </div>
 
             <div className="col-lg-6 col-12">
-                <span
+              <span
                 className="text-dark"
                 data-aos="fade-left"
                 data-aos-duration="700"
-                >
-                  <span className="fw-bold">Comment réserver une séance ?</span>  <br/>
-                  <ol style={{ listStyleType: "decimal" }}>
-                      <li>Créez votre compte.</li>
-                      <li>Consultez le planning des cours (Moon Burn, Full Moon, Moon Flow…).</li>
-                      <li>Choisissez votre créneau</li>
-                      <li>Choisissez votre moyen de paiement (Via vos credits, Via Mobile Money ou en espèces sur place)</li>
-                      <li>confirmer la reservation.</li>
-                  </ol>
-                </span>
-                
-                <span
-                className="text-dark"
-                data-aos="fade-left"
-                data-aos-duration="700"
-                >
-                  <span className="fw-bold">Comment réserver une séance ?</span>  <br/>
-                  <ol style={{ listStyleType: "decimal" }}>
-                      <li>Créez votre compte.</li>
-                      <li>Consultez le planning des cours (Moon Burn, Full Moon, Moon Flow…).</li>
-                      <li>Choisissez votre créneau</li>
-                      <li>Choisissez votre moyen de paiement (Via vos credits, Via Mobile Money ou en espèces sur place)</li>
-                      <li>confirmer la reservation.</li>
-                  </ol>
-                </span>
+              >
+                <span className="fw-bold">Comment réserver une séance ?</span>  <br />
+                <ol style={{ listStyleType: "decimal" }}>
+                  <li>Créez votre compte.</li>
+                  <li>Consultez le planning des cours (Moon Burn, Full Moon, Moon Flow…).</li>
+                  <li>Choisissez votre créneau</li>
+                  <li>Choisissez votre moyen de paiement (Via vos credits, Via Mobile Money ou en espèces sur place)</li>
+                  <li>confirmer la reservation.</li>
+                </ol>
+              </span>
 
-                <span
+              <span
                 className="text-dark"
                 data-aos="fade-left"
                 data-aos-duration="700"
-                >
-                  <span className="fw-bold">Annulation & modification</span>  <br/>
-                  <ul style={{ listStyleType: "disc" }}>
-                      <li>Vous pouvez annuler ou déplacer votre séance jusqu’à X heures avant le début du cours (tu me diras ton délai : 4h ? 8h ? 12h ?).</li>
-                      <li>Passé ce délai, le crédit est perdu car la place aurait pu être réattribuée.</li>
-                      <li>Si le cours est complet, vous pouvez vous inscrire sur liste d’attente : si une place se libère, vous recevez une notification automatique.</li>
-                  </ul>
-                </span>
+              >
+                <span className="fw-bold">Comment réserver une séance ?</span>  <br />
+                <ol style={{ listStyleType: "decimal" }}>
+                  <li>Créez votre compte.</li>
+                  <li>Consultez le planning des cours (Moon Burn, Full Moon, Moon Flow…).</li>
+                  <li>Choisissez votre créneau</li>
+                  <li>Choisissez votre moyen de paiement (Via vos credits, Via Mobile Money ou en espèces sur place)</li>
+                  <li>confirmer la reservation.</li>
+                </ol>
+              </span>
 
-                <p
+              <span
                 className="text-dark"
                 data-aos="fade-left"
                 data-aos-duration="700"
-                >
-                  <span className="fw-bold">L'arrivée au studio</span>  <br/>
+              >
+                <span className="fw-bold">Annulation & modification</span>  <br />
+                <ul style={{ listStyleType: "disc" }}>
+                  <li>Vous pouvez annuler ou déplacer votre séance jusqu’à 12 heures avant le début du cours.</li>
+                  <li>Passé ce délai, le crédit est perdu car la place aurait pu être réattribuée.</li>
+                  <li>Si le cours est complet, vous pouvez vous inscrire sur liste d’attente : si une place se libère, vous recevez une notification automatique.</li>
+                </ul>
+              </span>
+
+              <p
+                className="text-dark"
+                data-aos="fade-left"
+                data-aos-duration="700"
+              >
+                <span className="fw-bold">L'arrivée au studio</span>  <br />
                 Nous vous recommandons d’arriver 10 minutes avant le début du cours pour vous installer, rencontrer votre coach et démarrer sereinement.
-                </p>
+              </p>
 
-                <p
+              <p
                 className="text-dark"
                 data-aos="fade-left"
                 data-aos-duration="700"
-                >
-                ✨ Réservez au rythme qui vous convient. <br/>
+              >
+                ✨ Réservez au rythme qui vous convient. <br />
                 ✨ Des crédits flexibles, un planning simple, une expérience premium.
-                </p>
+              </p>
 
-                <p
+              <p
                 className="text-dark fw-bold"
                 data-aos="fade-left"
                 data-aos-duration="700"
-                >
-                Pour toute question ou soucis à la reservation n’hesitez pas a nous contacter. 
-                </p>
-             </div>
+              >
+                Pour toute question ou soucis à la reservation n’hesitez pas a nous contacter.
+              </p>
+            </div>
 
           </div>
         </div>
@@ -133,47 +141,17 @@ export default function PricingPage() {
           </p>
 
           <div className="row g-4 justify-content-center">
-            {packs.map((pack, idx) => (
-              <div key={idx} className="col-12 col-md-6 col-lg-3">
-                <div className="card shadow-sm border-0 h-100 text-center p-3">
-                  {/* Logo + Titre */}
-                  <div className="d-flex align-items-center justify-content-center gap-2 mb-3">
-                    <i className="ri-refresh-line fs-3 text-primary"></i>
-                    <h6 className="m-0 fw-bold">Pack {pack.name}</h6>
-                  </div>
-
-                  {/* Contenu */}
-                  <hr />
-                  <h4 className="fw-bold">{pack.credits}</h4>
-                  <p className="text-muted">crédits</p>
-
-                  {/* Affichage du prix (objet ou nombre) */}
-                  {typeof pack.price === "object" ? (
-                    <>
-                      <h5 className="fw-bold">
-                        {pack.price.price1.toLocaleString()} FCFA
-                      </h5>
-                      <h6 className="text-muted" style={{ textDecoration: "line-through" }}>
-                         {pack.price.price2.toLocaleString()} FCFA
-                      </h6>
-                    </>
-                  ) : (
-                    <h5 className="fw-bold">
-                      {pack.price.toLocaleString()} FCFA
-                    </h5>
-                  )}
-
-                  {/* Bouton */}
-                  <Link
-                    href="#"
-                    className="btn btn-primary rounded-pill mt-3 w-100"
-                  >
-                    Recharger
-                  </Link>
-                </div>
+            {packs.length > 0 ? (
+              packs.map((pack, idx) => <PackPackCardRemake key={idx} pack={pack} user={session?.user} />)
+            ) : (
+              <div className="col-12 text-center p-5">
+                <p className="text-muted fw-semibold">
+                  Aucun pack disponible pour le moment. Revenez bientôt pour découvrir nos offres !
+                </p>
               </div>
-            ))}
+            )}
           </div>
+
         </div>
       </section>
 

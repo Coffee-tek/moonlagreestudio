@@ -10,7 +10,7 @@ export default function TransactionCard({ transaction }) {
     transaction.type === "credit" || transaction.type === "recharge";
 
   return (
-    <div className="col">
+    <div className="col p-1">
       <div className="d-flex align-items-center justify-content-between bg-white border px-4 py-4 rounded-4 shadow-sm">
         <div className="w-75">
           <div className="d-flex align-items-center gap-3">

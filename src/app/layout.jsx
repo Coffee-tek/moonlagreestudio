@@ -1,9 +1,9 @@
 // 'use client';
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ConditionalLayout from "@/components/ConditionalLayout";
 import Script from "next/script";
 import { Toaster } from "../components/ui/sonner";
+import ConditionalLayout from "../components/ConditionalLayout";
 
 
 // const geistSans = Geist({
@@ -48,7 +48,7 @@ export default function RootLayout({ children }) {
 
         {/* <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&display=swap" rel="stylesheet"/> */}
 
-       <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
         <style>{`
 
@@ -63,10 +63,10 @@ export default function RootLayout({ children }) {
           }
         `}</style>
       </head>
-      <body  suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true}>
         <ConditionalLayout>
+          <Toaster position="top-center" richColors />
           {children}
-           <Toaster position="top-center" richColors />
         </ConditionalLayout>
 
         {/* Scripts avec Next.js Script component */}

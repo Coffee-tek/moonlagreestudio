@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import PackCard from "@/components/admin/ui/PackCard";
-import PackEditModal from "@/components/admin/ui/PackEditModal";
 import { createPackAction, updatePackAction, deletePackAction } from "@/actions/packActions";
 import { toast } from "sonner";
+import PackEditModal from "../ui/PackEditModal";
 
 export default function AdminPacks({ initialPacks }) {
     const [packs, setPacks] = useState(initialPacks || []);

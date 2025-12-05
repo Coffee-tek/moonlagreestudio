@@ -8,20 +8,20 @@ import { usePathname } from "next/navigation";
 import { useSession } from '../../../lib/auth-client';
 
 export default function Navbar() {
-  const { data :session, isPending } = useSession();
+  const { data: session, isPending } = useSession();
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   console.log(session);
-  
+
 
   const pathname = usePathname(); // récupère l'URL actuelle
 
   // Configuration des liens de navigation
   const links = [
     { href: "/", label: "Accueil", icon: "ri-apps-2-line" },
-    { href: "/public/a-propos", label: "A propos" },
+    // { href: "/public/a-propos", label: "A propos" },
     { href: "/public/planning", label: "Planning" },
     { href: "/public/tarifs", label: "Achat crédits" },
     { href: "/public/contact", label: "Contact" },
@@ -51,7 +51,7 @@ export default function Navbar() {
               {/* <h5 className="fw-bold m-0 text-success">MOON</h5>
               <small className="text-dark-50">Studio</small> */}
               <Image
-                src="/img/logo/LOGO PRINCIPAL GRIS.svg"
+                src="/img/logo/LOGO PRINCIPAL NOIR.svg"
                 alt="Profile"
                 width={130}
                 height={100}
@@ -63,7 +63,7 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="navbar-collapse">
-            <ul className="navbar-nav ms-auto gap-4 m-none text-uppercase">
+            <ul className="navbar-nav ms-auto gap-4 m-none">
               {links.map((link) =>
                 link.dropdown ? (
                   <li
@@ -112,16 +112,34 @@ export default function Navbar() {
             <div className="d-flex align-items-center gap-4 ms-auto">
 
               {isPending ? (
-                <span className="btn btn-primary rounded-pill px-3 opacity-50">Chargement...</span>
+                <span className="btn btn-primary rounded-pill px-3 opacity-50">
+                  Chargement...
+                </span>
               ) : session ? (
-                <Link href="/user/profil-settings" className="btn btn-primary rounded-pill px-3 d-none d-lg-block">
-                  Mon profil
-                </Link>
+                session.user?.role === "client" ? (
+                  <Link
+                    href="/user/profil-settings"
+                    className="btn btn-primary rounded-pill px-3 d-none d-lg-block"
+                  >
+                    Mon profil
+                  </Link>
+                ) : (
+                  <Link
+                    href="/admin"
+                    className="btn btn-primary rounded-pill px-3 d-none d-lg-block"
+                  >
+                    Tableau de bord
+                  </Link>
+                )
               ) : (
-                <Link href="/auth/connexion" className="btn btn-primary rounded-pill px-3 d-none d-lg-block">
+                <Link
+                  href="/auth/connexion"
+                  className="btn btn-primary rounded-pill px-3 d-none d-lg-block"
+                >
                   Connexion
                 </Link>
               )}
+
               <button
                 className="link-dark d-lg-none bg-transparent border-0"
                 onClick={() => setIsMobileMenuOpen(true)}

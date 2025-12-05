@@ -16,7 +16,8 @@ export default function AdminSidebar() {
     { id: 'planning', label: 'Gérer les plannings', icon: 'bx bx-calendar', href: '/admin/plannings' },
     { id: 'reservations', label: 'Gérer des réservations', icon: 'bx bx-calendar', href: '/admin/reservations' },
     { id: 'packs', label: 'Gérer les packs', icon: 'bx bx-package', href: '/admin/packs' },
-    { id: 'profil', label: 'Mon Profil', icon: 'bx bx-package', href: '/admin/profile' },
+    // { id: 'profil', label: 'Mon Profil', icon: 'bx bx-package', href: '/admin/profile' },
+    { id: 'profil', label: 'Mon Profil', icon: 'bx bx-package', href: '/user/profil-settings' },
     { id: 'logout', label: 'Déconnexion', icon: 'bx bx-package', href: '/auth/connexion' },
   ];
 

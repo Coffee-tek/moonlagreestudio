@@ -10,10 +10,10 @@ import "./styles/css/admin-users.css";
 import "./styles/css/admin-planning.css"
 import "./styles/vendor/libs/perfect-scrollbar/perfect-scrollbar.css";
 import "./styles/vendor/libs/apex-charts/apex-charts.css";
-import AdminSidebar from "@/components/admin/layouts/sidebar";
 import AdminFooter from "@/components/admin/layouts/footer";
 import AdminNavbar from "@/components/admin/layouts/navbar";
 import { useState } from "react";
+import AdminSidebar from "../../components/admin/layouts/sidebar";
 
 // Optionnel : scripts JS spécifiques
 export default function AdminLayout({ children }) {
@@ -23,30 +23,30 @@ export default function AdminLayout({ children }) {
   }, []);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    
-    const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-    };
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   return (
     <div className="layout-wrapper layout-content-navbar">
       <div className="layout-container">
         {/* Menu Sidebar */}
-        <AdminSidebar/>
+        <AdminSidebar />
         {/* / Menu */}
 
         {/* Layout page */}
         <div className="layout-page">
-          
+
           {/* Navbar */}
-          <AdminNavbar/>
+          <AdminNavbar />
           {/* / Navbar */}
 
           {/* Content wrapper */}
           <div className="content-wrapper">
             {children}
             {/* Footer */}
-            <AdminFooter/>
+            <AdminFooter />
             {/* / Footer */}
 
             <div className="content-backdrop fade"></div>
@@ -55,9 +55,9 @@ export default function AdminLayout({ children }) {
         </div>
         {/* / Layout page */}
       </div>
-    
+
       {/* Overlay */}
-      <div 
+      <div
         className={`layout-overlay layout-menu-toggle ${isSidebarOpen ? 'active' : ''}`}
         onClick={toggleSidebar}
       ></div>

@@ -9,7 +9,13 @@ const PackCard = ({ pack, onEdit, onDelete }) => {
           {/* Pack Info */}
           <div className="d-flex mb-3 align-items-center justify-content-between">
             <div className="d-flex align-items-center">
-              <div className={`avatar-xl rounded bg-${pack.theme_color ? pack.theme_color : 'primary'}-subtle d-flex align-items-center justify-content-center`}>
+              {/* <div className={`avatar-xl rounded bg-${pack.theme_color ? pack.theme_color : 'primary'}-subtle d-flex align-items-center justify-content-center`}>
+                <i className="ti ti-package fs-24 text-primary"></i>
+              </div> */}
+              <div
+                className="avatar-xl rounded d-flex align-items-center justify-content-center"
+                style={{ backgroundColor: pack.theme_color ?? '#000' }}
+              >
                 <i className="ti ti-package fs-24 text-primary"></i>
               </div>
 
