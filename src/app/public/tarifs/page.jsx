@@ -120,7 +120,7 @@ export default async function PricingPage() {
 
               <p
                 className="text-dark fw-bold"
-                data-aos="fade-left"
+                data-aos="fade-left"s
                 data-aos-duration="700"
               >
                 Pour toute question ou soucis à la reservation n’hesitez pas a nous contacter.

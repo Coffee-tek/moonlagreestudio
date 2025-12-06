@@ -3,10 +3,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import {popularClasses, categories as defaultCategories } from "@/data/data";
+import { popularClasses, categories as defaultCategories } from "@/data/data";
 // import { popularClasses, categories as defaultCategories } from '../data/classes';
 
-const EnhancedPopularClasses = ({ 
+const EnhancedPopularClasses = ({
   title = "Nos Sessions",
   subtitle = "Découvrez les différentes sessions",
   classes = popularClasses,
@@ -24,8 +24,8 @@ const EnhancedPopularClasses = ({
   const classesToDisplay = classes;
 
   // Filtrage par catégorie
-  const filteredClasses = activeCategory === "Tous" 
-    ? classesToDisplay 
+  const filteredClasses = activeCategory === "Tous"
+    ? classesToDisplay
     : classesToDisplay.filter(cls => cls.category === activeCategory);
 
   return (
@@ -52,14 +52,14 @@ const EnhancedPopularClasses = ({
               {/* <span className="badge bg-primary ms-2">{filteredClasses.length}</span> */}
             </h2>
           </div>
-          
+
           {/* Button Planning */}
           {showViewAllButton && (
             <div className="col-auto">
-              <Link 
-                href={planningLink} 
-                className="btn btn-outline-primary btn-lg rounded-pill" 
-                data-aos="fade-left" 
+              <Link
+                href={planningLink}
+                className="btn btn-outline-primary btn-lg rounded-pill"
+                data-aos="fade-left"
                 data-aos-duration="600"
               >
                 {planningTxt}
@@ -72,10 +72,10 @@ const EnhancedPopularClasses = ({
         {/* Grille des cours */}
         <div className="row g-3" >
           {filteredClasses.map((classItem, index) => (
-            <div 
-              key={classItem.id || index} 
-              className="col-12 col-sm-6 col-lg-4 mb-4" 
-              data-aos="fade-up" 
+            <div
+              key={classItem.id || index}
+              className="col-12 col-sm-6 col-lg-4 mb-4"
+              data-aos="fade-up"
               data-aos-duration={classItem.animationDuration || (600 + index * 100)}
             >
               <div className="card border-0 rounded-4 h-100 class-card p-2" >
@@ -89,8 +89,9 @@ const EnhancedPopularClasses = ({
                     className="card-img-top rounded-4 w-100"
                     style={{ objectFit: 'cover', height: '200px' }}
                     priority={index < 2}
-                  />
                   
+                  />
+
                   {/* Badge de niveau */}
                   <span className="badge bg-primary position-absolute top-0 start-0 m-3">
                     {classItem.level || classItem.category}
@@ -156,8 +157,8 @@ const EnhancedPopularClasses = ({
                   )} */}
 
                   {/* Lien "Lire plus" */}
-                  <Link 
-                    href={classItem.readMoreLink || classItem.link || '#'} 
+                  <Link
+                    href={classItem.readMoreLink || classItem.link || '#'}
                     className="link-primary text-decoration-none fw-medium"
                   >
                     Voir plus

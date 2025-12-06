@@ -1,4 +1,4 @@
-import { seanceService } from "@/services/seanceService";
+import { seanceService } from "../../../services/ seanceService";
 
 export async function GET(req) {
   const seances = await seanceService.getAll();

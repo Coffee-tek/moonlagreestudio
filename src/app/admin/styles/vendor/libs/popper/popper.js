@@ -10,6 +10,7 @@
 /******/ 			return installedModules[moduleId].exports;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
+// eslint-disable-next-line @next/next/no-assign-module-variable
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,

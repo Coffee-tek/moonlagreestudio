@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import achatPackService from "@/services/achatPackService"; // <-- Ton service
+import { achatPackService } from "../../../../services/achatPackService";
 
 export async function POST(req) {
   try {

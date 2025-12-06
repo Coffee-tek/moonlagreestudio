@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAllPacks, createPack } from "@/services/packService";
+import { createDefaultPack, getAllPacks } from "../../../../services/packService";
 
 export async function GET() {
   const packs = await getAllPacks();
@@ -8,6 +8,6 @@ export async function GET() {
 
 export async function POST(req) {
   const data = await req.json();
-  const pack = await createPack(data);
+  const pack = await createDefaultPack(data);
   return NextResponse.json(pack);
 }

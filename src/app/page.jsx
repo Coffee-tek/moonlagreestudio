@@ -2,11 +2,11 @@
 
 import Hero from "@/components/hero";
 import SubscribeSection from "@/components/newsletter";
-import EnhancedPopularClasses from "@/components/popular-class";
 import VideoSection from "@/components/video";
 import YogaTypesSection from "@/components/YogaTypes";
 import Image from "next/image";
 import { useEffect, useState } from 'react';
+import EnhancedPopularClasses from "../components/popular-class";
 
 export default function Home() {
 
@@ -198,6 +198,7 @@ export default function Home() {
                                         height={400}
                                         className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
                                         priority
+                                        // sizes="(max-width: 768px) 40px, 60px"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>

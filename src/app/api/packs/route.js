@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
-import { getPackById, updatePack, deletePack } from "@/services/packService";
+import { updatePack, deletePack } from "../../../services/packService";;
 
-export async function GET(_, { params }) {
-  const pack = await getPackById(params.id);
-  return NextResponse.json(pack);
-}
+
+// export async function GET(_, { params }) {
+//   const pack = await getPackById(params.id);
+//   return NextResponse.json(pack);
+// }
 
 export async function PUT(req, { params }) {
   const data = await req.json();
