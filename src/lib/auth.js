@@ -4,34 +4,39 @@ import { PrismaClient } from "../../lib/generated/prisma/client.js";
 import { nextCookies } from "better-auth/next-js";
 import { createAuthMiddleware, APIError } from "better-auth/api";
 import { normalizeName, VALID_DOMAINS } from "./utils.js";
-import { role } from "better-auth/plugins";
-import { type } from "os";
-
 
 const prisma = new PrismaClient();
-export const auth = betterAuth({
-    database: prismaAdapter(prisma, {
-        provider: "postgresql",
-    }),
-    emailAndPassword: {
-        enabled: true,
-        minPasswordLength: 6,
-        autoSignIn: false,
-    },
-    user: {
-        additionalFields: {
-            role: {
-                type: ["client", "agent", "admin"],
-            },
-           genre:"string",
-           ville:"string",
-           telephone:"number",
-           date_naissance:"date",
-           adresse:"string"
 
-        }
+export const auth = betterAuth({
+  // 🔥 OBLIGATOIRE : secret, baseURL, origin
+  secret: process.env.BETTER_AUTH_SECRET,
+  baseURL: process.env.BETTER_AUTH_URL, // https://moonlagreestudio.vercel.app
+  origin: process.env.BETTER_AUTH_URL,  // même valeur que baseURL
+
+  database: prismaAdapter(prisma, {
+    provider: "postgresql",
+  }),
+
+  emailAndPassword: {
+    enabled: true,
+    minPasswordLength: 6,
+    autoSignIn: false,
+  },
+
+  user: {
+    additionalFields: {
+      role: {
+        type: ["client", "agent", "admin"],
+      },
+      genre: "string",
+      ville: "string",
+      telephone: "number",
+      date_naissance: "date",
+      adresse: "string",
     },
-    databaseHooks: {
+  },
+
+  databaseHooks: {
     user: {
       create: {
         before: async (user) => {
@@ -46,37 +51,37 @@ export const auth = betterAuth({
       },
     },
   },
-    hooks: {
-        before: createAuthMiddleware(async (ctx) => {
-            if (ctx.path === "/sign-up/email") {
-                const email = String(ctx.body.email);
-                const domain = email.split("@")[1];
 
-                if (!VALID_DOMAINS().includes(domain)) {
-                    throw new APIError("BAD_REQUEST", {
-                        message: "Domaine invalide. Veuillez utiliser une adresse e-mail valide.",
-                    });
-                }
+  hooks: {
+    before: createAuthMiddleware(async (ctx) => {
+      if (ctx.path === "/sign-up/email") {
+        const email = String(ctx.body.email);
+        const domain = email.split("@")[1];
 
-                const name = normalizeName(ctx.body.name);
+        if (!VALID_DOMAINS().includes(domain)) {
+          throw new APIError("BAD_REQUEST", {
+            message: "Domaine invalide.",
+          });
+        }
 
-                return {
-                    context: {
-                        ...ctx,
-                        body: {
-                            ...ctx.body,
-                            name,
-                        },
-                    },
-                };
-            }
-        }),
-    },
-    session: {
-        expiresIn: 30 * 24 * 60 * 60,
-    },
+        const name = normalizeName(ctx.body.name);
 
-    plugins: [
-        nextCookies()],
+        return {
+          context: {
+            ...ctx,
+            body: {
+              ...ctx.body,
+              name,
+            },
+          },
+        };
+      }
+    }),
+  },
 
+  session: {
+    expiresIn: 60 * 60 * 24 * 30,
+  },
+
+  plugins: [nextCookies()],
 });
