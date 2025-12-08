@@ -21,7 +21,7 @@ export default function PaymentRedirect() {
 
     // Redirection automatique après 3 secondes
     const timer = setTimeout(() => {
-      router.push("/dashboard"); // ta page principale
+      router.push("/user/profil-settings"); // ta page principale
     }, 3000);
 
     return () => clearTimeout(timer);
