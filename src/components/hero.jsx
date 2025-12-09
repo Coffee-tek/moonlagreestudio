@@ -8,7 +8,7 @@ export default function Hero() {
     <section className="relative w-full h-[90vh] flex items-center">
       {/* Image de fond */}
       <Image
-        src="/img/new/3.jpeg" // mets ton image ici (public/images/hero.jpg)
+        src="/img/new/banniere.WEBP" // mets ton image ici (public/images/hero.jpg)
         alt="Hero background"
         fill
         className="object-cover"
@@ -25,18 +25,16 @@ export default function Hero() {
             MOON LAGREE STUDIO <br /> 
           </h1>
           <p className="mt-4 text-lg text-gray-200">
-            Massa ultricies mi quis. hendrerit dolor magna eget. Nullam eget felis
-            eget nunc lobortis. Faucibus ornare suspendisse sed nisi consectetur
-            incididunt ut labore.
+           Un espace où le mouvement devient une expérience : chaque séance sculpte le corps, apaise l’esprit et révèle votre force intérieure. Moon Lagree Studio vous invite à vivre l’entraînement nouvelle génération, alliant intensité, contrôle et équilibre, dans un cadre moderne et soigneusement pensé pour vos résultats.
           </p>
 
           {/* Boutons */}
           <div className="mt-6 flex gap-4">
             <Link
-              href="/public/a-propos"
+              href="/public/planning"
               className="btn btn-primary hover:bg-blue-800 text-white px-6 py-3 rounded-md font-medium"
             >
-              En savoir plus
+              Reserver ma seance
             </Link>
             {/* <Link
               href="#"
