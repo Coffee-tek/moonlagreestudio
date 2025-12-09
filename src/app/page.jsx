@@ -47,8 +47,8 @@ export default function Home() {
                             <div className="col-12">
                                 <div className="text-center">
                                     <div className="text-center bg-primary px-5 title-line rounded-pill"><span className="px-5"></span></div>
-                                    <h1 className={"fw-bold pb-2 aos-init"} data-aos="fade-up" data-aos-duration="600">Les avantages du pilates <br />sur votre coprs et dans votre vie</h1>
-                                    <p className="text-muted aos-init" data-aos="fade-up" data-aos-duration="600">Le pilates renforce le coprs, améliore la posture et apaise l'esprit</p>
+                                    <h1 className={"fw-bold pb-2 aos-init"} data-aos="fade-up" data-aos-duration="600">Les avantages du Lagree <br />sur votre coprs et dans votre vie</h1>
+                                    <p className="text-muted aos-init" data-aos="fade-up" data-aos-duration="600">Le lagree, une méthode qui  renforce et transforme votre corps</p>
                                 </div>
                             </div>
                         </div>
@@ -119,15 +119,7 @@ export default function Home() {
                                     encadré par des coachs certifiés.
                                 </p>
 
-                                <p
-                                    className="text-muted"
-                                    data-aos="fade-left"
-                                    data-aos-duration="700"
-                                >
-                                    Rejoignez notre studio où chaque séance est un moment pour vous,
-                                    pour évoluer, pour respirer, vous transformer, lâcher prise,
-                                    vous dépasser et célébrer votre puissance.
-                                </p>
+                              
                             </div>
                             <div
                                 className="col-lg-12 col-12"
@@ -144,8 +136,8 @@ export default function Home() {
                                     data-aos-duration="700"
                                 >
                                     {/* Gros guillemet ouvrant */}
-                                    <span className="absolute left-0 top-0 text-white opacity-20 select-none"
-                                        style={{ fontSize: "120px", lineHeight: "0.7" }}>
+                                    <span className="absolute  top-0 text-white opacity-20 select-none"
+                                        style={{ fontSize: "120px", lineHeight: "0.7", left:"-30px" }}>
                                         “
                                     </span>
 
@@ -165,7 +157,7 @@ export default function Home() {
                                     </span>
 
                                     <footer className="mt-6 not-italic font-semibold opacity-70">
-                                        — Nom de l’auteur
+                                        — L'équipe Moon
                                     </footer>
                                 </blockquote>
                             </div>
@@ -258,7 +250,7 @@ export default function Home() {
                                     {/* Signature */}
                                     <div className="pt-6 text-white">
                                         <p className="text-right font-semibold tracking-wider">
-                                            - Celia Moon
+                                            - L'équipe Moon
                                         </p>
                                     </div>
                                 </div>

@@ -37,6 +37,31 @@ export default async function PricingPage() {
         backgroundImage="/img/new/4.jpeg"
       />
 
+      {/* <!-- Crédits--> */}
+      <section className="py-5">
+        <div className="container text-center">
+          <h2 className="fw-bold mb-3">Choisis le pack qui te correspond !</h2>
+          <p className="text-muted mb-5">
+            Découvre nos différentes formules et choisis le forfait qui
+            s&apos;intègre parfaitement dans ton quotidien selon ton rythme et tes envies.
+          </p>
+
+          <div className="row g-4 justify-content-center">
+            {packs.length > 0 ? (
+              packs.map((pack, idx) => <PackPackCardRemake key={idx} pack={pack} user={session?.user} />)
+            ) : (
+              <div className="col-12 text-center p-5">
+                <p className="text-muted fw-semibold">
+                  Aucun pack disponible pour le moment. Revenez bientôt pour découvrir nos offres !
+                </p>
+              </div>
+            )}
+          </div>
+
+        </div>
+      </section>
+
+
       {/* <!-- Comment fonctionne les crédits --> */}
       <div className="py-5">
         <div className="container py-5">
@@ -72,20 +97,6 @@ export default async function PricingPage() {
                 </ol>
               </span>
 
-              <span
-                className="text-dark"
-                data-aos="fade-left"
-                data-aos-duration="700"
-              >
-                <span className="fw-bold">Comment réserver une séance ?</span>  <br />
-                <ol style={{ listStyleType: "decimal" }}>
-                  <li>Créez votre compte.</li>
-                  <li>Consultez le planning des cours (Moon Burn, Full Moon, Moon Flow…).</li>
-                  <li>Choisissez votre créneau</li>
-                  <li>Choisissez votre moyen de paiement (Via vos credits, Via Mobile Money ou en espèces sur place)</li>
-                  <li>confirmer la reservation.</li>
-                </ol>
-              </span>
 
               <span
                 className="text-dark"
@@ -120,7 +131,7 @@ export default async function PricingPage() {
 
               <p
                 className="text-dark fw-bold"
-                data-aos="fade-left"s
+                data-aos="fade-left" s
                 data-aos-duration="700"
               >
                 Pour toute question ou soucis à la reservation n’hesitez pas a nous contacter.
@@ -131,29 +142,7 @@ export default async function PricingPage() {
         </div>
       </div>
 
-      {/* <!-- Crédits--> */}
-      <section className="py-5">
-        <div className="container text-center">
-          <h2 className="fw-bold mb-3">Choisis le pack qui te correspond !</h2>
-          <p className="text-muted mb-5">
-            Découvre nos différentes formules et choisis le forfait qui
-            s&apos;intègre parfaitement dans ton quotidien selon ton rythme et tes envies.
-          </p>
 
-          <div className="row g-4 justify-content-center">
-            {packs.length > 0 ? (
-              packs.map((pack, idx) => <PackPackCardRemake key={idx} pack={pack} user={session?.user} />)
-            ) : (
-              <div className="col-12 text-center p-5">
-                <p className="text-muted fw-semibold">
-                  Aucun pack disponible pour le moment. Revenez bientôt pour découvrir nos offres !
-                </p>
-              </div>
-            )}
-          </div>
-
-        </div>
-      </section>
 
       <FAQ data={faqData.credits} />
       {/* <SubscribeSection /> */}

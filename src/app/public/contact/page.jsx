@@ -10,7 +10,7 @@ import { heroHeaders, aboutYoga } from "@/data/data";
 export default function ContactPage() {
       // 🔹 Données statiques locales
   const contactInfo = {
-    address: "9016 Goldfield Street, South Richmond Hill, New York 11419",
+    address: "Villa 9 x RUE KA 5 - Sicap Karak <br />   en face ecole de police à <br /> l’angle de l’Ambassade de l’Afrique du Sud",
     emails: ["Moon.Lagree@gmail.com",],
     phones: ["+1800-954-852", "+1800-954-852"],
     info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -90,7 +90,7 @@ export default function ContactPage() {
                   href="#"
                   className="btn btn-primary rounded-pill px-5 py-3"
                 >
-                  Envoyer Messages
+                  Envoyer le Message
                 </a>
               </div>
             </form>
@@ -99,11 +99,11 @@ export default function ContactPage() {
           {/* Coordonnées */}
           <div className="col-lg-4 col-12">
             <div className="mb-5" data-aos="fade-left" data-aos-duration="600">
-              <h5 className="fw-bold">Notre Addresse​</h5>
+              <h5 className="fw-bold">Notre Adresse​</h5>
               <p className="text-muted">{contactInfo.address}</p>
             </div>
             <div className="mb-5" data-aos="fade-left" data-aos-duration="600">
-              <h5 className="fw-bold">Address Email​</h5>
+              <h5 className="fw-bold">Adresse Email​</h5>
               <p className="text-muted">
                 {contactInfo.emails.map((email, index) => (
                   <span key={index}>
@@ -129,7 +129,7 @@ export default function ContactPage() {
       </div>
     </div>
 
-    <Testimonials/>
+    {/* <Testimonials/> */}
 
     <MapSection
       title="Nous trouver"

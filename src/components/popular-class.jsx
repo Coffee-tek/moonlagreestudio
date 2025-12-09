@@ -108,12 +108,12 @@ const EnhancedPopularClasses = ({
 
                   {/* Informations du cours */}
                   <div className="d-flex align-items-center mb-2 text-muted small">
-                    {classItem.instructor && (
+                    {/* {classItem.instructor && (
                       <>
                         <i className="ri-user-line me-1"></i>
                         <span className="me-3">{classItem.instructor}</span>
                       </>
-                    )}
+                    )} */}
                     {classItem.duration && (
                       <>
                         <i className="ri-time-line me-1"></i>
@@ -125,14 +125,14 @@ const EnhancedPopularClasses = ({
                   {/* Rating et nombre d'étudiants */}
                   {(classItem.rating || classItem.students) && (
                     <div className="d-flex align-items-center mb-3 text-muted small">
-                      {classItem.rating && (
+                      {/* {classItem.rating && (
                         <>
                           <div className="d-flex align-items-center me-3">
                             <i className="ri-star-fill text-warning me-1"></i>
                             <span>{classItem.rating}</span>
                           </div>
                         </>
-                      )}
+                      )} */}
                       {/* {classItem.students && (
                         <>
                           <i className="ri-group-line me-1"></i>
@@ -157,13 +157,13 @@ const EnhancedPopularClasses = ({
                   )} */}
 
                   {/* Lien "Lire plus" */}
-                  <Link
+                  {/* <Link
                     href={classItem.readMoreLink || classItem.link || '#'}
                     className="link-primary text-decoration-none fw-medium"
                   >
                     Voir plus
                     <i className="ri-arrow-right-line ms-1"></i>
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>

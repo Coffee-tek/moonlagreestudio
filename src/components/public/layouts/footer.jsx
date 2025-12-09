@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
 export default function Footer() {
-    const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
   return (
     <>
       {/* Partie principale du footer */}
-      <footer className="footer py-5" style={{backgroundColor:"#0b0823"}}>
+      <footer className="footer py-5" style={{ backgroundColor: "#0b0823" }}>
         <div className="container">
           <div className="row py-5">
             {/* Colonne gauche */}
@@ -14,13 +14,13 @@ export default function Footer() {
               data-aos="fade-up"
               data-aos-duration="500"
             >
-               <Image
-                  src="/img/logo/LOGO_PRIMAIRE_BLANC@4x.png"
-                  alt="Profile"
-                  width={200}
-                  height={200}
-                  
-                />
+              <Image
+                src="/img/logo/LOGO_PRIMAIRE_BLANC@4x.png"
+                alt="Profile"
+                width={200}
+                height={200}
+
+              />
               <p className="fs-5 text-white pt-1 pt-3 mb-0">
                 moonlagree@gmail.com
               </p>
@@ -46,7 +46,18 @@ export default function Footer() {
                 >
                   <h6 className="fw-bold text-white">Localisation</h6>
                   <p className="text-white-50">
-                    Passez nous voir au studio, on vous attend !
+                    <p data-aos="fade-right" data-aos-duration="600">
+                      Villa 9 x RUE KA 5 - Sicap Karak <br />   en face ecole de police à <br /> l’angle de l’Ambassade de l’Afrique du Sud
+                    </p>
+                    <a
+                      href="https://maps.app.goo.gl/e2BTgUVvN5TJj19F6"
+                      target="_blank" rel="noopener noreferrer"
+                      className="btn btn-secondary btn-lg rounded-pill"
+                      data-aos="fade-right"
+                      data-aos-duration="600"
+                    >
+                      Notre localisation
+                    </a>
                   </p>
                 </div>
               </div>
@@ -56,7 +67,7 @@ export default function Footer() {
       </footer>
 
       {/* Partie bas du footer */}
-      <div className="pt-4 pb-5" style={{backgroundColor:"#0b0823"}}>
+      <div className="pt-4 pb-5" style={{ backgroundColor: "#0b0823" }}>
         <div className="container">
           <div className="row align-items-center justify-content-between py-4">
             {/* Liens de navigation */}
