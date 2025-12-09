@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { writeFile } from "fs/promises";
-import path from "path";
+import { put } from "@vercel/blob";
 
 export async function POST(req) {
   try {
@@ -11,20 +10,21 @@ export async function POST(req) {
       return NextResponse.json({ error: "Aucun fichier envoyé" }, { status: 400 });
     }
 
-    // Convertir le fichier en buffer
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
-    // Définir le chemin
-    const fileName = `${Date.now()}-${file.name}`;
-    const uploadDir = path.join(process.cwd(), "public/uploads");
-
-    // Sauvegarder le fichier
-    await writeFile(path.join(uploadDir, fileName), buffer);
-
-    const url = `/uploads/${fileName}`;
+    // 🔹 On passe le token ici
+    const { url } = await put(
+      `uploads/${Date.now()}-${file.name}`,
+      buffer,
+      {
+        access: "public",
+        token: process.env.BLOB_READ_WRITE_TOKEN, 
+      }
+    );
 
     return NextResponse.json({ url });
+
   } catch (error) {
     console.error("Erreur Upload API :", error);
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
