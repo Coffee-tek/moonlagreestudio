@@ -212,9 +212,8 @@ model Reservation {
   user   User   @relation(fields: [userId], references: [id])
   userId String
 
-  seance   Seance @relation(fields: [seanceId], references: [id])
+  seance   Seance @relation(fields: [seanceId], references: [id], onDelete: Cascade)
   seanceId Int
 
   @@map("reservations")
 }
-
