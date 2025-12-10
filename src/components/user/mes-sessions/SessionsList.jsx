@@ -2,9 +2,9 @@ import SessionCard from "./SessionCard";
 
 export default function SessionsList({ status, sessions, setSessions }) {
   const filtered = sessions.filter((s) => {
-    if (status === "reserved") return [ "confirme","en_attente"].includes(s.statut);;
+    if (status === "reserved") return ["confirme", "en_attente"].includes(s.statut);;
     if (status === "cancelled") return s.statut === "annule";
-    if (status === "history") return ["terminée", "confirme", "annule","en_attente"].includes(s.statut);
+    if (status === "history") return ["terminée", "confirme", "annule", "en_attente"].includes(s.statut);
     return false;
   });
 
@@ -12,7 +12,12 @@ export default function SessionsList({ status, sessions, setSessions }) {
     return <p className="text-center text-muted py-5">Aucune seances {status}.</p>;
 
   return (
-    <div className="bg-white p-4 rounded-3 shadow-sm">
+    <div className="bg-white p-4 rounded-3 shadow-sm"
+      style={{
+        maxHeight: "400px",
+        overflowY: "auto",
+      }}
+    >
       {filtered.map((s) => (
         <SessionCard
           key={s.reservationId || s.id} // clé unique pour React

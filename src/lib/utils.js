@@ -13,12 +13,16 @@ export function normalizeName(name) {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-export const VALID_DOMAINS = () => {
-  const domains = ["gmail.com", "yahoo.com", "outlook.com"];
+// export const VALID_DOMAINS = () => {
+//   const domains = ["gmail.com", "yahoo.com", "outlook.com"];
+  
 
-  if (process.env.NODE_ENV === "development") {
-    domains.push("example.com");
-  }
+//   if (process.env.NODE_ENV === "development") {
+//     domains.push("example.com");
+//   }
 
-  return domains;
-};
+//   return domains;
+// };
+
+export const VALID_DOMAINS = () => ["*"];
+
