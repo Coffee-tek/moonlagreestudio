@@ -4,7 +4,7 @@ export default function SessionsList({ status, sessions, setSessions }) {
   const filtered = sessions.filter((s) => {
     if (status === "reserved") return [ "confirme","en_attente"].includes(s.statut);;
     if (status === "cancelled") return s.statut === "annule";
-    if (status === "history") return ["terminée", "confirmée", "annule","en_attente"].includes(s.statut);
+    if (status === "history") return ["terminée", "confirme", "annule","en_attente"].includes(s.statut);
     return false;
   });
 

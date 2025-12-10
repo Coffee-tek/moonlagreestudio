@@ -135,8 +135,8 @@ export default function PackPackCardRemake({ pack, user }) {
 
                         <li>Rechargement instantané</li>
                         <li>Crédits valables {pack.duree} jours</li>
-                        <li>Support client 24/7</li>
-                        <li>Le nombre de crédits est égal au <br/> nombre de séances</li>
+                        <li>Support client </li>
+                        <li> 1 Crédit = 1 Séance</li>
                     </ul>
                     <button
                         className="btn-buy-custom"

@@ -66,7 +66,7 @@ export default async function PricingPage() {
       <div className="py-5">
         <div className="container py-5">
           <div className="row g-4">
-            <div className="col-lg-6 col-12">
+            <div className="col-lg-12 col-12" style={{ textAlign: "center" }}>
               <div className="mb-5">
                 <h1
                   className="fw-bold display-4 pb-3"
@@ -78,10 +78,29 @@ export default async function PricingPage() {
                 <p className="fw-bold fs-5" data-aos="fade-right" data-aos-duration="600">
                   Credits & Reservations
                 </p>
+                <p className="fw-bold fs-5" data-aos="fade-right" data-aos-duration="600">
+                  Chez Moon Lagree Studio, chaque séance se réserve en ligne, grâce à un système de crédits.
+                </p>
               </div>
             </div>
-
-            <div className="col-lg-6 col-12">
+            <div className="col-lg-6 col-6" style={{ textAlign: "justify", paddingRight: "30px" }}>
+              <span
+                className="text-dark"
+                data-aos="fade-left"
+                data-aos-duration="700"
+              >
+                <span className="fw-bold"> Comment Acheter des credits ? </span>  <br />
+                <p> Consultez les differents pack de credits disponible sur la page “Achat credits”
+                  Choisissez votre pack, et reglez via Mobile money
+                  Vos credits sont automatiquement ajoutes a votre portefeuille
+                  Vous pouvez desormais effectuer vos reservations </p>
+                <ul style={{ listStyleType: "disc" }}>
+                  <li>⁠1 crédit = 1 séance sur Microformer. (Sauf cours particuliers)</li>
+                  <li> ⁠Vos crédits sont valables pendant une période définie (selon le pack choisi).</li>
+                  <li>⁠Plus le pack est important, plus le prix par séance est avantageux.</li>
+                </ul>
+              </span>
+              <p>  Le système de crédits vous permet de réserver vos cours selon votre rythme, sans abonnement obligatoire.</p>
               <span
                 className="text-dark"
                 data-aos="fade-left"
@@ -96,6 +115,10 @@ export default async function PricingPage() {
                   <li>confirmer la reservation.</li>
                 </ol>
               </span>
+
+            </div>
+
+            <div className="col-lg-6 col-6" style={{ textAlign: "justify", paddingLeft: "30px" }}>
 
 
               <span

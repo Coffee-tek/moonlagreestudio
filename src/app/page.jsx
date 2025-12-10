@@ -145,9 +145,7 @@ export default function Home() {
                                         Rejoignez notre studio où chaque séance est un moment pour vous,
                                         pour évoluer, pour respirer, vous transformer, lâcher prise,
                                         vous dépasser et célébrer votre puissance.
-                                        Rejoignez notre studio où chaque séance est un moment pour vous,
-                                        pour évoluer, pour respirer, vous transformer, lâcher prise,
-                                        vous dépasser et célébrer votre puissance.
+                                        
                                     </p>
 
                                     {/* Gros guillemet fermant */}
