@@ -1,10 +1,17 @@
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  try {
-    const { userId, packId, amount, userTelephone, userName } = await req.json();
+  console.log("📩 [API] Requête reçue sur /api/paytech/request-payment");
 
+  try {
+    const data = await req.json();
+    console.log("📝 [API] Body reçu :", data);
+
+    const { userId, packId, amount, userTelephone, userName } = data;
+
+    console.log("🔍 [API] Vérification des paramètres...");
     if (!userId || !packId || !amount) {
+      console.log("❌ [API] Paramètres manquants !");
       return NextResponse.json({ error: "Paramètres manquants" }, { status: 400 });
     }
 
@@ -18,8 +25,12 @@ export async function POST(req) {
       ipn_url: process.env.PAYTECH_CALLBACK_URL,
       success_url: process.env.PAYTECH_SUCCESS_URL,
       cancel_url: process.env.PAYTECH_CANCEL_URL,
-      target_payment: "Orange Money, Wave, Carte Bancaire, Free Money" // toutes les méthodes
+      target_payment: "Orange Money, Wave, Carte Bancaire, Free Money"
     };
+
+    console.log("📦 [API] Payload envoyé à PayTech :", body);
+
+    console.log("🌐 [API] Envoi de la requête à PayTech :", `${process.env.PAYTECH_BASE_URL}/payment/request-payment`);
 
     const response = await fetch(`${process.env.PAYTECH_BASE_URL}/payment/request-payment`, {
       method: "POST",
@@ -31,19 +42,28 @@ export async function POST(req) {
       body: JSON.stringify(body),
     });
 
+    console.log("📨 [API] Réponse brute PayTech reçue :", response);
+
     const result = await response.json();
+    console.log("📄 [API] JSON PayTech :", result);
 
     if (!result.success) {
+      console.log("❌ [API] Erreur PayTech :", result);
       return NextResponse.json({ error: "PayTech error", details: result }, { status: 400 });
     }
 
-    // On renvoie juste l'URL de redirection
+    console.log("✅ [API] Paiement créé avec succès :", {
+      redirect_url: result.redirect_url,
+      token: result.token
+    });
+
     return NextResponse.json({
       redirect_url: result.redirect_url,
       token: result.token,
     });
 
   } catch (error) {
+    console.error("🔥 [API] Erreur interne :", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
