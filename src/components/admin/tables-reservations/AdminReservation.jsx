@@ -61,7 +61,7 @@ export default function AdminReservation({ reservation }) {
       r.user?.email,
       r.seance?.titre,
       r.modePaiement,
-      r.statut,  
+      r.statut,
     ]
       .filter(Boolean) // 🔒 évite les erreurs si un champ est null/undefined
       .some((field) =>
@@ -145,15 +145,18 @@ export default function AdminReservation({ reservation }) {
       }
     });
   };
-
   const handleConfirmation = (reservationId) => {
+    const ok = window.confirm("Voulez-vous vraiment confirmer cette réservation ?");
+
+    if (!ok) return; // Annulé
+
     startTransition(async () => {
       try {
         const result = await confirmerReservationAction(reservationId);
 
         if (result.error) throw new Error(result.error);
 
-        toast.success("Réservation confirmer !");
+        toast.success("Réservation confirmée !");
         window.location.reload();
 
       } catch (err) {
@@ -162,6 +165,7 @@ export default function AdminReservation({ reservation }) {
       }
     });
   };
+
 
   return (
     <>

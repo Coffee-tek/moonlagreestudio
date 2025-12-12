@@ -38,7 +38,8 @@ export const achatPackService = {
                     walletId: updatedWallet.id,
                     type: "debit",
                     montant: 0,
-                    description: "Crédits expirés automatiquement"
+                    description: "Crédits expirés automatiquement",
+                    category: "credits"
                 }
             });
 
@@ -71,6 +72,7 @@ export const achatPackService = {
             where: { id: wallet.id },
             data: {
                 credit: wallet.credit + pack.credits,
+                //raoute les points 1 credit pour 100 points
                 expiryDate
             }
         });
@@ -81,7 +83,8 @@ export const achatPackService = {
                 walletId: updatedWallet.id,
                 type: "credit",
                 montant: pack.credits,
-                description: `Achat du pack ${pack.titre}`
+                description: `Achat du pack ${pack.titre}`,
+                category: "credits"
             }
         });
 
@@ -107,7 +110,8 @@ export const achatPackService = {
                 walletId: updatedWallet.id,
                 type: "credit",
                 montant,
-                description
+                description,
+                category: "credits"
             }
         });
 
@@ -138,7 +142,8 @@ export const achatPackService = {
                 walletId: updatedWallet.id,
                 type: "debit",
                 montant,
-                description
+                description,
+                category: "credits"
             }
         });
 
@@ -149,19 +154,25 @@ export const achatPackService = {
     /**
      * Ajouter ou retirer des points
      */
-    async modifierPoints({ userId, montant, type = "POINT_CREDIT", description = "Modification de points" }) {
+    async modifierPoints({ userId, montant, type = "credit", description = "Modification de points" }) {
         const wallet = await prisma.wallet.findUnique({ where: { userId } });
         if (!wallet) throw new Error("Wallet introuvable");
 
         let newPoint = wallet.point;
 
-        if (type === "POINT_CREDIT") {
+        if (type === "credit") {
             newPoint += montant;
-        } else if (type === "POINT_DEBIT") {
+
+            description = description || "Points ajoutés";
+
+        } else if (type === "debit") {
             if (wallet.point < montant) throw new Error("Points insuffisants");
+
             newPoint -= montant;
+            description = description || "Points retirés";
         } else {
             throw new Error("Type de transaction points invalide");
+
         }
 
         const updatedWallet = await prisma.wallet.update({
@@ -169,7 +180,21 @@ export const achatPackService = {
             data: { point: newPoint }
         });
 
+        await prisma.transaction.create({
+            data: {
+                userId,
+                walletId: updatedWallet.id,
+                type,              // credit ou debit
+                montant,
+                description,       // Points ajoutés / Points retirés
+                category: "points"
+
+            }
+        });
+
         return updatedWallet;
-    }
+    },
+
+
 
 };

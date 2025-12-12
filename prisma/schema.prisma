@@ -123,6 +123,7 @@ model Transaction {
   type        TransactionType
   montant     Int
   description String?
+  category    String?
 
   user   User   @relation(fields: [userId], references: [id])
   wallet Wallet @relation(fields: [walletId], references: [id])

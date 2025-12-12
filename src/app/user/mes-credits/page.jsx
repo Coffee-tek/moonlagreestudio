@@ -24,6 +24,7 @@ export default async function MesCreditsPage() {
       wallet: {
         include: {
           transactions: {
+            where: { category: "credits" },
             orderBy: { createdAt: "desc" },
           },
         },

@@ -21,7 +21,7 @@ export default function Footer() {
                 height={200}
 
               />
-              <p className="fs-5 text-white pt-1 pt-3 mb-0">
+              <p className="fs-5 text-white pt-3 mb-0">
                 moonlagree@gmail.com
               </p>
             </div>
@@ -52,9 +52,10 @@ export default function Footer() {
                     <a
                       href="https://maps.app.goo.gl/e2BTgUVvN5TJj19F6"
                       target="_blank" rel="noopener noreferrer"
-                      className="btn btn-secondary btn-lg rounded-pill"
+                      className="btn btn-secondary btn-lg rounded-pill mt-4"
                       data-aos="fade-right"
                       data-aos-duration="600"
+                   
                     >
                       Notre localisation
                     </a>

@@ -40,13 +40,13 @@ export default function UserWalletModal({ user, onClose, onSaveWallet }) {
 
     if (addAmount > 0 && removeAmount > 0) {
       montant = addAmount - removeAmount;
-      type = montant >= 0 ? "POINT_CREDIT" : "POINT_DEBIT";
+      type = montant >= 0 ? "credit" : "debit";
       montant = Math.abs(montant);
     } else if (addAmount > 0) {
-      type = "POINT_CREDIT";
+      type = "credit";
       montant = addAmount;
     } else if (removeAmount > 0) {
-      type = "POINT_DEBIT";
+      type = "debit";
       montant = removeAmount;
     } else {
       toast.error("Aucun montant renseigné pour ajouter ou retirer des points !");
@@ -61,7 +61,7 @@ export default function UserWalletModal({ user, onClose, onSaveWallet }) {
         userId: user.id,
         montant,
         type,
-        description: type === "POINT_CREDIT" ? "Points ajoutés par admin" : "Points retirés par admin"
+        description: type === "credit" ? "Points ajoutés par admin" : "Points retirés par admin"
       });
 
       // Mettre à jour le wallet local
