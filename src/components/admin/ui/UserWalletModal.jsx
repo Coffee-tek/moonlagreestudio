@@ -9,7 +9,7 @@ import { modifierPointsAction, modifierWalletAction } from "../../../actions/ach
 
 
 export default function UserWalletModal({ user, onClose, onSaveWallet }) {
-  const [activeTab, setActiveTab] = useState("points");
+  const [activeTab, setActiveTab] = useState("credit");
   const [pointsData, setPointsData] = useState({ add: 0, remove: 0 });
   const [creditData, setCreditData] = useState({ add: 0, remove: 0 });
   const [wallet, setWallet] = useState({ points: 0, credit: 0 });
@@ -158,18 +158,18 @@ export default function UserWalletModal({ user, onClose, onSaveWallet }) {
             <ul className="nav nav-tabs mb-3">
               <li className="nav-item">
                 <button
-                  className={`nav-link ${activeTab === "points" ? "active-tab" : ""}`}
-                  onClick={() => setActiveTab("points")}
-                >
-                  Gestion des Points
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
                   className={`nav-link ${activeTab === "credit" ? "active-tab" : ""}`}
                   onClick={() => setActiveTab("credit")}
                 >
                   Gestion des Crédits
+                </button>
+              </li>
+              <li className="nav-item">
+                <button
+                  className={`nav-link ${activeTab === "points" ? "active-tab" : ""}`}
+                  onClick={() => setActiveTab("points")}
+                >
+                  Gestion des Points
                 </button>
               </li>
             </ul>

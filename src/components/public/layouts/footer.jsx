@@ -46,9 +46,9 @@ export default function Footer() {
                 >
                   <h6 className="fw-bold text-white">Localisation</h6>
                   <p className="text-white-50">
-                    <p data-aos="fade-right" data-aos-duration="600">
+                    <span data-aos="fade-right" data-aos-duration="600">
                       Villa 9 x RUE KA 5 - Sicap Karak <br />   en face ecole de police à <br /> l’angle de l’Ambassade de l’Afrique du Sud
-                    </p>
+                    </span>
                     <a
                       href="https://maps.app.goo.gl/e2BTgUVvN5TJj19F6"
                       target="_blank" rel="noopener noreferrer"

@@ -3,27 +3,31 @@ import prisma from "@/lib/prisma";
 
 // Fonction utilitaire pour calculer le status et remainingPlaces
 function getStatus(s) {
+  // Calcul des places restantes
   const remainingPlaces = (s.places || 0) - (s.place_reserver || 0);
 
+  // Déterminer le statut basé sur les places
   let status = "Disponible";
   if (remainingPlaces === 0) status = "Complet";
   else if (remainingPlaces <= 3 && remainingPlaces > 0) status = "Presque complet";
 
-  // Comparer uniquement la date (sans l'heure)
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  // Comparer la date et l'heure de la séance avec maintenant
+  const now = new Date();              // Date et heure actuelles
+  const seanceDateTime = new Date(s.heure); // La date + heure de la séance
 
-  const seanceDate = new Date(s.date);
-  seanceDate.setHours(0, 0, 0, 0);
+  if (seanceDateTime < now) {
+    status = "Expirée"; // Si la séance est passée → expirée
+  }
 
-  if (seanceDate < today) status = "Expirée";
-
+  // Retourner l'objet avec remainingPlaces et status
   return { ...s, remainingPlaces, status };
 }
 
+
+
 export const seanceService = {
   getAll: async () => {
-    const allSeances = await prisma.seance.findMany({ orderBy: { date: "asc" } });
+    const allSeances = await prisma.seance.findMany({ orderBy: { heure: "asc" } });
 
     const updatedSeances = await Promise.all(
       allSeances.map(async (s) => {
@@ -42,6 +46,31 @@ export const seanceService = {
     );
 
     return updatedSeances;
+  },
+
+  getByUserId: async (userId) => {
+    // Récupérer d'abord toutes les séances avec statut à jour
+    const allSeances = await seanceService.getAll();
+
+    // Filtrer les séances où l'utilisateur a une réservation
+    const userSeances = await Promise.all(
+      allSeances.map(async (s) => {
+        const reservation = await prisma.reservation.findFirst({
+          where: {
+            seanceId: s.id,
+            userId: userId,
+          },
+        });
+
+        if (reservation) {
+          // Inclure la réservation dans la séance
+          return { ...s, reservations: [reservation] };
+        }
+        return null;
+      })
+    );
+
+    return userSeances.filter(Boolean); // supprimer les null
   },
 
   getById: async (id) => {

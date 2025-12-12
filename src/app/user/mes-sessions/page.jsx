@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { auth } from "../../../lib/auth";
 import { redirect } from "next/navigation";
 import { Sidebar } from "../../../components/user/sidebar";
+import { seanceService } from "../../../services/ seanceService";
 
 // import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -19,19 +20,21 @@ export default async function MesSessionsPage() {
     }
 
     // Récupère les séances réservées par le client
-    const seances = await prisma.seance.findMany({
-        where: {
-            reservations: {
-                some: {
-                    userId: session.user.id,
-                },
-            },
-        },
-        include: {
-            reservations: true, // inclut les réservations
-        },
-        orderBy: { date: "desc" },
-    });
+    // const seances = await prisma.seance.findMany({
+    //     where: {
+    //         reservations: {
+    //             some: {
+    //                 userId: session.user.id,
+    //             },
+    //         },
+    //     },
+    //     include: {
+    //         reservations: true, // inclut les réservations
+    //     },
+    //     orderBy: { date: "desc" },
+    // });
+
+     const seances = await seanceService.getByUserId(session.user.id);
 
     console.log("donnes seances:", seances);
 

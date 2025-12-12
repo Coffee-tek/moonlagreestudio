@@ -173,11 +173,11 @@ export default function CalendarBookingSystemClient({ seances, user }) {
                         <div className="space-y-4">
                             {getSelectedDayClasses().map(s => (
                                 <div key={s.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                                    <div className="text-sm text-gray-500 w-20">
+                                    <div className="text-lg text-gray-500 w-20">
                                         {new Date(s.heure).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                                     </div>
                                     <div className="flex items-center flex-1 mx-4">
-                                        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white text-xs font-semibold mr-4 ${s.status === 'Disponible' ? 'bg-secondary' : 'bg-gray-400'}`}>
+                                        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white text-md font-semibold mr-4 ${s.status === 'Disponible' ? 'bg-secondary' : 'bg-gray-400'}`}>
                                             {s.place_reserver}/{s.places}
                                         </div>
                                         <div>

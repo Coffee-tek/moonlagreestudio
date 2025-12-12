@@ -47,8 +47,8 @@ export default function PlanningTable({
                     ) : sessions.map(s => (
                         <tr
                             key={s.id}
-                            // className={`transition-all ${s.status === "Expirée" ? "opacity-50 pointer-events-none" : ""
-                            //     }`}
+                        // className={`transition-all ${s.status === "Expirée" ? "opacity-50 pointer-events-none" : ""
+                        //     }`}
                         >
                             <td><input type="checkbox" checked={selectedSessions.includes(s.id)} onChange={() => handleSelectSession(s.id)} /></td>
                             <td>{s.titre}</td>
@@ -94,6 +94,8 @@ export default function PlanningTable({
                                         className="btn btn-sm btn-danger"
                                         onClick={() => handleDeleteSessionClick(s)}
                                         title="Supprimer"
+                                        disabled={s.place_reserver > 0 && s.status !== "Expirée"}
+
                                     >
                                         <i className="bi bi-trash3"></i>
                                     </button>

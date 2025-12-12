@@ -7,6 +7,8 @@ import prisma from "../../../lib/prisma";
 import { headers } from "next/headers";
 import { auth } from "../../../lib/auth";
 import { redirect } from "next/navigation";
+import { seanceService } from "../../../services/ seanceService";
+
 
 async function fetchClassesData() {
   return {
@@ -31,10 +33,12 @@ export default async function CalendarBookingSystemServer() {
   const h = await headers();
   const session = await auth.api.getSession({ headers: h });
 
-  const seances = await prisma.seance.findMany({
-    include: { reservations: true },
-    orderBy: { date: 'asc' },
-  });
+  // const seances = await prisma.seance.findMany({
+  //   include: { reservations: true },
+  //   orderBy: { heure: 'asc' },
+  // });
+
+  const seances = await seanceService.getAll();
 
   // ⚠️ Si l'utilisateur n'est pas connecté
   if (!session) {
@@ -53,6 +57,8 @@ export default async function CalendarBookingSystemServer() {
       </>
     );
   }
+  console.log(seances);
+
 
   // ✔️ Si l'utilisateur est connecté
   return (

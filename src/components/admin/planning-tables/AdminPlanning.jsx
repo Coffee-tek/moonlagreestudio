@@ -42,7 +42,7 @@ export default function AdminPlanning({ seances }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [teacherFilter, setTeacherFilter] = useState("All");
   const [statusFilter, setStatusFilter] = useState("All");
-  const [rowsPerPage, setRowsPerPage] = useState(8);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedSessions, setSelectedSessions] = useState([]);
   const [selectAll, setSelectAll] = useState(false);

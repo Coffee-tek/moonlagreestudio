@@ -130,6 +130,7 @@ export default function PackPackCardRemake({ pack, user }) {
                         )}
                         <div className="price-label">Prix</div>
                     </div>
+                    
 
                     <ul className="features-list">
 
@@ -138,6 +139,16 @@ export default function PackPackCardRemake({ pack, user }) {
                         <li>Support client </li>
                         <li> 1 Crédit = 1 Séance</li>
                     </ul>
+
+                    <div style={{ color: pack?.theme_color ?? "000" }}>
+                        {pack.description && (
+                            <p>
+                                {pack.description}
+                            </p>
+                        )
+                        }
+                    
+                    </div>
                     <button
                         className="btn-buy-custom"
                         style={{ backgroundColor: pack?.theme_color ?? "000" }}
