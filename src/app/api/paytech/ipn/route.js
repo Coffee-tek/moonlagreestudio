@@ -6,36 +6,53 @@ export async function POST(req) {
   try {
     const data = await req.json();
 
-    /*
-      PayTech renvoie typiquement :
-      {
-        "ref_command": "CMD_1735234567890",
-        "status": "success",
-        "custom_field": {
-            "userId": "",
-            "packId": ""
-        }
-      }
-    */
+    const { status, custom_field, ref_command } = data;
 
-    const { status, custom_field } = data;
-
-    if (!custom_field) {
-      return NextResponse.json({ message: "Missing custom fields" }, { status: 400 });
+    if (!ref_command) {
+      return NextResponse.json({ message: "ref_command manquant" }, { status: 200 });
     }
 
     if (status !== "success") {
       return NextResponse.json({ message: "Paiement non validé" }, { status: 200 });
     }
 
-    const { userId, packId } = custom_field;
+    // 🔐 Anti double paiement
+    const alreadyProcessed = await prisma.transaction.findFirst({
+      where: {
+        description: {
+          contains: ref_command,
+        },
+      },
+    });
 
-    // Appel du service métier : crédit du wallet + création transaction
+    if (alreadyProcessed) {
+      return NextResponse.json({ message: "Paiement déjà traité" }, { status: 200 });
+    }
+
+    // 🔐 Parsing sécurisé du custom_field
+    let customData;
+    try {
+      customData =
+        typeof custom_field === "string"
+          ? JSON.parse(custom_field)
+          : custom_field;
+    } catch {
+      return NextResponse.json({ message: "custom_field invalide" }, { status: 200 });
+    }
+
+    const { userId, packId } = customData;
+
+    if (!userId || !packId) {
+      return NextResponse.json({ message: "Données métier manquantes" }, { status: 200 });
+    }
+
+    // 👉 Appel métier
     await achatPackService.acheterPack({ userId, packId });
 
     return NextResponse.json({ message: "Paiement validé & pack crédité" }, { status: 200 });
 
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("IPN PayTech error:", error);
+    return NextResponse.json({ message: "Erreur IPN" }, { status: 200 });
   }
 }

@@ -46,7 +46,7 @@ export default async function MesPoints() {
         <div className="row">
 
             {/* Sidebar */}
-            <Sidebar />
+            <Sidebar users={session.user}  />
 
             {/* Main content */}
             <div className="col-lg-8 ps-lg-0">
