@@ -57,6 +57,42 @@ export default function PackPackCardRemake({ pack, user }) {
     //     }
     // };
 
+    // const payerPack = async () => {
+    //     if (!user) {
+    //         return toast.error("Veuillez vous connecter pour acheter un pack.");
+    //     }
+
+    //     setIsPending(true);
+    //     try {
+    //         const res = await fetch("/api/paytech/create-payment", {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify({
+    //                 userId: user.id,
+    //                 packId: pack.id,
+    //                 amount: pack.prix,
+    //                 userTelephone: user.telephone,
+    //                 userName: user.name,
+    //             }),
+    //         });
+
+    //         const data = await res.json();
+
+    //         if (data.redirect_url) {
+    //             toast.info("Redirection vers la page de paiement...");
+    //             window.location.href = data.redirect_url;
+    //         } else {
+    //             toast.error(data.message || "Erreur lors de la création du paiement");
+    //         }
+    //     } catch (error) {
+    //         console.error(error);
+    //         toast.error("Erreur réseau lors de la création du paiement");
+    //     } finally {
+    //         setIsPending(false);
+    //     }
+    // };
+
+
     const payerPack = async () => {
         if (!user) {
             return toast.error("Veuillez vous connecter pour acheter un pack.");
@@ -78,7 +114,23 @@ export default function PackPackCardRemake({ pack, user }) {
 
             const data = await res.json();
 
-            if (data.redirect_url) {
+            if (data.token) {
+                // Création du paiement via le SDK PayTech
+                new PayTech({ idTransaction: data.token })
+                    .withOption({
+                        requestTokenUrl: "/api/paytech/create-payment", // ton endpoint
+                        method: "POST",
+                        presentationMode: PayTech.OPEN_IN_POPUP, // ouvre dans un popup
+                        didReceiveError: (error) => {
+                            toast.error("Erreur PayTech: " + error);
+                        },
+                        didReceiveNonSuccessResponse: (response) => {
+                            toast.error("Erreur PayTech: " + response.message);
+                        }
+                    })
+                    .send();
+            } else if (data.redirect_url) {
+                // fallback si pas de popup possible
                 toast.info("Redirection vers la page de paiement...");
                 window.location.href = data.redirect_url;
             } else {
@@ -91,6 +143,7 @@ export default function PackPackCardRemake({ pack, user }) {
             setIsPending(false);
         }
     };
+
 
 
 
@@ -130,7 +183,7 @@ export default function PackPackCardRemake({ pack, user }) {
                         )}
                         <div className="price-label">Prix</div>
                     </div>
-                    
+
 
                     <ul className="features-list">
 
@@ -147,7 +200,7 @@ export default function PackPackCardRemake({ pack, user }) {
                             </p>
                         )
                         }
-                    
+
                     </div>
                     <button
                         className="btn-buy-custom"
