@@ -2,11 +2,11 @@
 import { toast } from "sonner";
 import { acheterPackAction } from "../../../actions/achatPackActions";
 import "./../styles/PackPackCardRemake.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function PackPackCardRemake({ pack, user }) {
-    const [isPending, setIsPending] = useState(false);
+    // const [isPending, setIsPending] = useState(false);
 
     const getThemeColor = (theme) => {
         switch (theme?.toLowerCase()) {
@@ -26,6 +26,21 @@ export default function PackPackCardRemake({ pack, user }) {
                 return "#000"; // couleur par défaut
         }
     };
+
+    const [PayTechLoaded, setPayTechLoaded] = useState(false);
+    const [isPending, setIsPending] = useState(false);
+
+    // Charger le SDK PayTech côté client
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://paytech.sn/cdn/paytech.min.js";
+        script.async = true;
+        script.onload = () => setPayTechLoaded(true);
+        document.body.appendChild(script);
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
 
     // 🚀 Acheter un pack
     // const handleSavePack = async (e) => {
@@ -57,42 +72,6 @@ export default function PackPackCardRemake({ pack, user }) {
     //     }
     // };
 
-    // const payerPack = async () => {
-    //     if (!user) {
-    //         return toast.error("Veuillez vous connecter pour acheter un pack.");
-    //     }
-
-    //     setIsPending(true);
-    //     try {
-    //         const res = await fetch("/api/paytech/create-payment", {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify({
-    //                 userId: user.id,
-    //                 packId: pack.id,
-    //                 amount: pack.prix,
-    //                 userTelephone: user.telephone,
-    //                 userName: user.name,
-    //             }),
-    //         });
-
-    //         const data = await res.json();
-
-    //         if (data.redirect_url) {
-    //             toast.info("Redirection vers la page de paiement...");
-    //             window.location.href = data.redirect_url;
-    //         } else {
-    //             toast.error(data.message || "Erreur lors de la création du paiement");
-    //         }
-    //     } catch (error) {
-    //         console.error(error);
-    //         toast.error("Erreur réseau lors de la création du paiement");
-    //     } finally {
-    //         setIsPending(false);
-    //     }
-    // };
-
-
     const payerPack = async () => {
         if (!user) {
             return toast.error("Veuillez vous connecter pour acheter un pack.");
@@ -114,23 +93,7 @@ export default function PackPackCardRemake({ pack, user }) {
 
             const data = await res.json();
 
-            if (data.token) {
-                // Création du paiement via le SDK PayTech
-                new PayTech({ idTransaction: data.token })
-                    .withOption({
-                        requestTokenUrl: "/api/paytech/create-payment", // ton endpoint
-                        method: "POST",
-                        presentationMode: PayTech.OPEN_IN_POPUP, // ouvre dans un popup
-                        didReceiveError: (error) => {
-                            toast.error("Erreur PayTech: " + error);
-                        },
-                        didReceiveNonSuccessResponse: (response) => {
-                            toast.error("Erreur PayTech: " + response.message);
-                        }
-                    })
-                    .send();
-            } else if (data.redirect_url) {
-                // fallback si pas de popup possible
+            if (data.redirect_url) {
                 toast.info("Redirection vers la page de paiement...");
                 window.location.href = data.redirect_url;
             } else {
@@ -144,7 +107,52 @@ export default function PackPackCardRemake({ pack, user }) {
         }
     };
 
+    // const payerPack = async () => {
+    //     if (!user) return toast.error("Veuillez vous connecter.");
+    //     if (!PayTechLoaded) return toast.error("Le SDK PayTech n'est pas encore chargé.");
 
+    //     setIsPending(true);
+
+    //     try {
+    //         // 1️⃣ Créer le paiement côté serveur et récupérer le token / redirect_url
+    //         const res = await fetch("/api/paytech/create-payment", {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify({
+    //                 userId: user.id,
+    //                 packId: pack.id,
+    //                 amount: pack.prix,
+    //                 userTelephone: user.telephone,
+    //                 userName: user.name,
+    //             }),
+    //         });
+
+    //         const data = await res.json();
+
+    //         if (data.token) {
+    //             // Utiliser directement le token, PAS besoin de requestTokenUrl
+    //             new PayTech({ idTransaction: data.token })
+    //                 .withOption({
+    //                     presentationMode: PayTech.OPEN_IN_POPUP,
+    //                     didReceiveError: (error) => toast.error("Erreur PayTech: " + error),
+    //                     didReceiveNonSuccessResponse: (resp) => toast.error(resp.message),
+    //                 })
+    //                 .send();
+
+    //         } else if (data.redirect_url) {
+    //             // Fallback si le token n'existe pas ou pour mobile
+    //             toast.info("Redirection vers la page de paiement...");
+    //             window.location.href = data.redirect_url;
+    //         } else {
+    //             toast.error(data.message || "Erreur lors de la création du paiement");
+    //         }
+    //     } catch (err) {
+    //         console.error("Erreur réseau / serveur:", err);
+    //         toast.error("Erreur lors de la création du paiement");
+    //     } finally {
+    //         setIsPending(false);
+    //     }
+    // };
 
 
     //une fonction qui recupere le pack.theme et remvoie la couleur pour le style
