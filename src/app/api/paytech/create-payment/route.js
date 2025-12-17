@@ -15,17 +15,27 @@ export async function POST(req) {
       return NextResponse.json({ error: "Paramètres manquants" }, { status: 400 });
     }
 
+    const refCommand = `CMD_${Date.now()}`;
+
     const body = {
       item_name: `Pack #${packId}`,
       item_price: amount,
       currency: "XOF",
-      ref_command: `CMD_${Date.now()}`,
-      command_name: `PACK_${packId}_${Date.now()}`,
+
+      ref_command: refCommand,
+      command_name: `PACK_${packId}_${refCommand}`,
+
+      custom_field: JSON.stringify({
+        userId,
+        packId,
+      }),
+
       env: process.env.PAYTECH_ENV,
       ipn_url: process.env.PAYTECH_CALLBACK_URL,
       success_url: process.env.PAYTECH_SUCCESS_URL,
       cancel_url: process.env.PAYTECH_CANCEL_URL,
-      target_payment: "Orange Money, Wave, Carte Bancaire, Free Money"
+
+      target_payment: "Orange Money, Wave, Carte Bancaire, Free Money",
     };
 
     console.log("📦 [API] Payload envoyé à PayTech :", body);
