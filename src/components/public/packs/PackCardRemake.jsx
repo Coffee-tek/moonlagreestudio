@@ -78,6 +78,7 @@ export default function PackPackCardRemake({ pack, user }) {
         }
 
         setIsPending(true);
+
         try {
             const res = await fetch("/api/paytech/create-payment", {
                 method: "POST",
@@ -93,12 +94,16 @@ export default function PackPackCardRemake({ pack, user }) {
 
             const data = await res.json();
 
-            if (data.redirect_url) {
-                toast.info("Redirection vers la page de paiement...");
-                window.location.href = data.redirect_url;
-            } else {
-                toast.error(data.message || "Erreur lors de la création du paiement");
+            // ⛔ Achat bloqué AVANT PayTech
+            if (!data.success) {
+                toast.error(data.message || "Achat impossible");
+                return;
             }
+
+            // ✅ OK → redirection
+            toast.info("Redirection vers la page de paiement...");
+            window.location.href = data.redirect_url;
+
         } catch (error) {
             console.error(error);
             toast.error("Erreur réseau lors de la création du paiement");
@@ -106,6 +111,7 @@ export default function PackPackCardRemake({ pack, user }) {
             setIsPending(false);
         }
     };
+
 
     // const payerPack = async () => {
     //     if (!user) return toast.error("Veuillez vous connecter.");
