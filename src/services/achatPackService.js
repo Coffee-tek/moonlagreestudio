@@ -61,7 +61,7 @@ export const achatPackService = {
         }
 
         if (wallet.credit > 2) {
-            throw new Error("Vous avez encore des crédits disponibles. Veuillez les utiliser avant de souscrire à un nouvel achat.");
+            throw new Error("Vous avez encore des crédits disponibles. Veuillez les utiliser avant de souscrire à un nouvel achat. ");
         }
 
         return true;
@@ -90,7 +90,7 @@ export const achatPackService = {
             where: { id: wallet.id },
             data: {
                 credit: wallet.credit + pack.credits,
-                points: wallet.points + pack.credits * 100, // 1 crédit = 100 points
+                point: wallet.point + pack.credits * 100, // 1 crédit = 100 points
                 expiryDate
             }
         });
@@ -105,13 +105,13 @@ export const achatPackService = {
                 category: "credits"
             }
         });
-        await prisma.transaction.create({
+         await prisma.transaction.create({
             data: {
                 userId,
                 walletId: updatedWallet.id,
                 type: "credit",
                 montant: pack.credits * 100,
-                description: `Vous gagnez ${pack.credits * 100 } points de fidélité`,
+                description: `Vous gagnez ${pack.credits * 100} points`,
                 category: "points"
             }
         });
