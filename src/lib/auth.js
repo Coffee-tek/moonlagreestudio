@@ -56,13 +56,13 @@ export const auth = betterAuth({
     before: createAuthMiddleware(async (ctx) => {
       if (ctx.path === "/sign-up/email") {
         const email = String(ctx.body.email);
-        const domain = email.split("@")[1];
+        // const domain = email.split("@")[1];
 
-        if (!VALID_DOMAINS().includes(domain)) {
-          throw new APIError("BAD_REQUEST", {
-            message: "Domaine invalide.",
-          });
-        }
+        // if (!VALID_DOMAINS().includes(domain)) {
+        //   throw new APIError("BAD_REQUEST", {
+        //     message: "Domaine invalide.",
+        //   });
+        // }
 
         const name = normalizeName(ctx.body.name);
 
