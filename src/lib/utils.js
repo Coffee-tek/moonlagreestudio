@@ -14,11 +14,7 @@ export function normalizeName(name) {
 }
 
 /**
- * Validation email : accepte TOUS les domaines
- * (gmail, yahoo, entreprise, etc.)
+ * VALID_DOMAINS doit exister
+ * null = aucun filtrage → TOUS les domaines sont acceptés
  */
-export function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-
+export const VALID_DOMAINS = () => null;
