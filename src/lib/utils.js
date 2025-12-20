@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -13,8 +13,16 @@ export function normalizeName(name) {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-/**
- * VALID_DOMAINS doit exister
- * null = aucun filtrage → TOUS les domaines sont acceptés
- */
-export const VALID_DOMAINS = () => null;
+// export const VALID_DOMAINS = () => {
+//   const domains = ["gmail.com", "yahoo.com", "outlook.com"];
+  
+
+//   if (process.env.NODE_ENV === "development") {
+//     domains.push("example.com");
+//   }
+
+//   return domains;
+// };
+
+export const VALID_DOMAINS = () => [];
+
