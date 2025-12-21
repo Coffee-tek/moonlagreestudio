@@ -7,10 +7,32 @@ import { annulerReservationAction } from "../../../actions/reservationActions";
 export default function SessionCard({ session, sessions, setSessions }) {
   const [isPending, startTransition] = useTransition();
 
-  const handleCancel = (reservationId) => {
+  const canCancelSession = (heure) => {
+    if (!heure) return false;
+
+    const sessionDateTime = new Date(heure); // ✅ heure contient déjà date + heure
+    const now = new Date();
+
+    const diffInMs = sessionDateTime - now;
+    const diffInHours = diffInMs / (1000 * 60 * 60);
+
+    return diffInHours >= 12;
+  };
+
+
+  const handleCancel = (session) => {
+
+    // ⛔ Vérification 12h
+    if (!canCancelSession(session.heure)) {
+      toast.error(
+        "Impossible d’annuler une séance moins de 12h avant son début"
+      );
+      return;
+    }
+
     startTransition(async () => {
       try {
-        const result = await annulerReservationAction(reservationId);
+        const result = await annulerReservationAction(session.reservationId);
 
         if (result.error) throw new Error(result.error);
 
@@ -19,7 +41,7 @@ export default function SessionCard({ session, sessions, setSessions }) {
         // Met à jour le state côté parent
         setSessions((prev) =>
           prev.map((s) =>
-            s.reservationId === reservationId
+            s.reservationId === session.reservationId
               ? { ...s, statut: "annule" }
               : s
           )
@@ -86,7 +108,7 @@ export default function SessionCard({ session, sessions, setSessions }) {
               (session.statut === "en_attente" || session.statut === "confirme") && (
                 <button
                   className="btn btn-danger rounded-pill"
-                  onClick={() => handleCancel(session.reservationId)}
+                  onClick={() => handleCancel(session)}
                   disabled={isPending}
                 >
                   {isPending ? "Annulation..." : "Annuler"}
