@@ -14,7 +14,8 @@ export default function ReservationTable({
   onEdit,
   onDelete,
   handleCancel,
-  handleConfirmation
+  handleConfirmation,
+  confirmCancel
 }) {
   const toggleSelect = (id) => {
     setSelectedDatas((prev) =>
@@ -143,7 +144,8 @@ export default function ReservationTable({
                     className="btn btn-sm"
                     style={{ backgroundColor: "#212529", color: "white" }}
                     // onClick={() => onDelete(r)}
-                    onClick={() => handleCancel(r.id)}
+                    // onClick={() => handleCancel(r.id)}
+                     onClick={() => confirmCancel(r)}
                     disabled={r.seance?.status === "Expirée"} // 👈 désactive aussi
                     title="Annulée la reservation "
                   >

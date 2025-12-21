@@ -11,6 +11,7 @@ import ReservationPagination from "./ReservationPagination";
 import { deleteUserAction } from "../../../actions/delete-user.action";
 import { annulerReservationAction, confirmerReservationAction } from "../../../actions/reservationActions";
 import { toast } from "sonner";
+import ConfirmModal from "./ConfirmModal";
 
 const generateFakeUsers = (count = 50) => {
   const roles = ["Project Manager", "Developer", "Support Lead", "Security Officer"];
@@ -46,6 +47,10 @@ export default function AdminReservation({ reservation }) {
   const [selectedData, SetSelectedData] = useState(null);
   const [deleteModal, setDeleteModal] = useState({ show: false, multiple: false, reservation: null });
   const [selectAll, setSelectAll] = useState(false);
+
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [selectedReservation, setSelectedReservation] = useState(null);
+
 
 
   useEffect(() => {
@@ -119,6 +124,11 @@ export default function AdminReservation({ reservation }) {
   };
 
 
+  const confirmCancel = (session) => {
+    setSelectedReservation(session);
+    setShowConfirmModal(true);
+  };
+
   const handleAddReservation = (reservation) => {
     setData([reservation, ...data]);
     setShowAddModal(false);
@@ -129,10 +139,14 @@ export default function AdminReservation({ reservation }) {
     setShowEditModal(false);
   };
 
-  const handleCancel = (reservationId) => {
+  const handleCancel = () => {
+    if (!selectedReservation) return;
+
+    setShowConfirmModal(false);
+
     startTransition(async () => {
       try {
-        const result = await annulerReservationAction(reservationId);
+        const result = await annulerReservationAction(selectedReservation.id);
 
         if (result.error) throw new Error(result.error);
 
@@ -140,7 +154,7 @@ export default function AdminReservation({ reservation }) {
         window.location.reload();
 
       } catch (err) {
-        toast.error("Échec de l’annulation");
+        toast.error("Réservation déjà annulée");
         console.error(err);
       }
     });
@@ -204,6 +218,8 @@ export default function AdminReservation({ reservation }) {
           }
           handleCancel={handleCancel}
           handleConfirmation={handleConfirmation}
+          confirmCancel={confirmCancel}
+
         />
 
 
@@ -242,6 +258,14 @@ export default function AdminReservation({ reservation }) {
               deleteModal.multiple ? selectedDatas : [deleteModal.reservation.id]
             )
           }
+        />
+      )}
+      {showConfirmModal && (
+        <ConfirmModal
+          title="Confirmer l'annulation"
+          message="Êtes-vous sûr de vouloir annuler cette séance ?"
+          onConfirm={handleCancel}
+          onCancel={() => setShowConfirmModal(false)}
         />
       )}
     </>
