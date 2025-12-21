@@ -59,7 +59,20 @@ export default function SessionCard({ session, sessions, setSessions }) {
                 </small>
                 <small className="text-secondary">Crédits : {session.credits}</small>
               </div>
-              <h6 className="fw-semibold mt-2">Coach : {session.coatch || "N/A"}</h6>
+              <h6 className="fw-semibold mt-2">
+                Coach : {session.coatch || "N/A"}
+              </h6>
+              {session.modePaiement === "sur_place" && (
+                <span className="badge bg-danger text-white mt-2 d-inline-block">
+                  Séance à payer sur place
+                </span>
+              )}
+
+              {session.modePaiement === "en_ligne" && (
+                <span className="badge bg-success text-white mt-2 d-inline-block">
+                  Séance déjà payée
+                </span>
+              )}
             </div>
 
             {session.status === "Expirée" ? (

@@ -138,6 +138,7 @@ export const reservationService = {
           type: "debit",
           montant: reservation.montant,
           description: `Confirmation réservation séance ${reservation.seance.titre}`,
+          category:"credits"
         },
       });
 
@@ -178,6 +179,7 @@ export const reservationService = {
             type: "credit",
             montant: reservation.montant,
             description: `Annulation réservation séance ${reservation.seance.titre}`,
+            category:"credits"
           },
         });
       }
