@@ -47,6 +47,7 @@ export const reservationService = {
             type: "debit",
             montant: seance.credits,
             description: `Réservation séance ${seance.titre}`,
+            category:"credits"
           },
         });
 
