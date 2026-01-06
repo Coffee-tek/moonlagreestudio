@@ -21,9 +21,9 @@ export default function Footer() {
                 height={200}
 
               />
-              <p className="fs-5 text-white pt-3 mb-0">
+              {/* <p className="fs-5 text-white pt-3 mb-0">
                 moonlagree@gmail.com
-              </p>
+              </p> */}
             </div>
 
             {/* Colonne droite */}
@@ -35,9 +35,13 @@ export default function Footer() {
                   data-aos-duration="600"
                 >
                   <h6 className="fw-bold text-white">Contact</h6>
-                  <p className="text-white-50">
-                    Nous sommes à votre écoute, contactez-nous dès aujourd’hui.
+                  <p className="text-white-50 flex items-center gap-2">
+                    <i className="bi bi-telephone-fill"></i> +221768206066
                   </p>
+                  <p className="text-white-50 flex items-center gap-2">
+                    <i className="bi bi-envelope-fill"></i> moonlagree@gmail.com
+                  </p>
+
                 </div>
                 <div
                   className="col-6"
@@ -49,13 +53,14 @@ export default function Footer() {
                     <span data-aos="fade-right" data-aos-duration="600">
                       Villa 9 x RUE KA 5 - Sicap Karak <br />   en face ecole de police à <br /> l’angle de l’Ambassade de l’Afrique du Sud
                     </span>
+                    <br />
                     <a
                       href="https://maps.app.goo.gl/e2BTgUVvN5TJj19F6"
                       target="_blank" rel="noopener noreferrer"
                       className="btn btn-secondary btn-lg rounded-pill mt-4"
                       data-aos="fade-right"
                       data-aos-duration="600"
-                   
+
                     >
                       Notre localisation
                     </a>
@@ -91,15 +96,33 @@ export default function Footer() {
                 {currentYear}
               </p>
               <div className="d-flex align-items-center gap-4">
-                <a href="#" className="link-secondary">
+                {/* <a href="#" className="link-secondary">
                   <i className="ri-facebook-line ri-lg"></i>
+                </a> */}
+                <a
+                  href="https://wa.me/221768206066"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-secondary"
+                >
+                  <i className="ri-whatsapp-line ri-lg"></i>
                 </a>
+
                 {/* <a href="#" className="link-secondary">
                   <i className="ri-behance-line ri-lg"></i>
                 </a> */}
-                <a href="#" className="link-secondary">
+                {/* <a href="#" className="link-secondary">
+                  <i className="ri-instagram-line ri-lg"></i>
+                </a> */}
+                <a
+                  href="https://www.instagram.com/moon_lagree/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-secondary"
+                >
                   <i className="ri-instagram-line ri-lg"></i>
                 </a>
+
               </div>
             </div>
           </div>
