@@ -67,13 +67,20 @@ export default function AdminReservation({ reservation }) {
       r.seance?.titre,
       r.modePaiement,
       r.statut,
+      r.paye,
+      r.seance?.date,
     ]
-      .filter(Boolean) // 🔒 évite les erreurs si un champ est null/undefined
+      .filter(Boolean) // 🔒 évite les valeurs null/undefined
       .some((field) =>
-        field.toLowerCase().includes(searchQuery.toLowerCase())
+        String(field).toLowerCase().includes(searchQuery.toLowerCase())
       ) &&
-    (statusFilter === "All" || r.statut === statusFilter || r.modePaiement === statusFilter || r.paye === statusFilter)
+    (statusFilter === "All" ||
+      r.statut === statusFilter ||
+      r.modePaiement === statusFilter ||
+      r.paye === statusFilter ||
+      String(r.seance?.date) === statusFilter)
   );
+
 
 
   const sortReservations = [...filteredReservations].sort((a, b) => {
