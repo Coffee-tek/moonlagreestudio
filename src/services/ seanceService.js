@@ -60,6 +60,9 @@ export const seanceService = {
             seanceId: s.id,
             userId: userId,
           },
+          orderBy: {
+            createdAt: 'desc', // la plus récente en premier
+          },
         });
 
         if (reservation) {
