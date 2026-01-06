@@ -43,7 +43,7 @@ export default function CalendarBookingSystemClient({ seances, user }) {
 
     const today = new Date();
     const startOfCurrentWeek = moment.startOf(today, 'week');  // Fin de la 2ᵉ semaine autorisée
-    const maxAllowedWeek = moment.add(startOfCurrentWeek, 14, 'days');// rajouter pour bloquer le bouton suivant sur 2 semaines
+    const maxAllowedWeek = moment.add(startOfCurrentWeek, 28, 'days');// rajouter pour bloquer le bouton suivant sur 2 semaines
 
 
 

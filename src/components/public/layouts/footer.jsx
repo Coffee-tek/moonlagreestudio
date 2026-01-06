@@ -24,6 +24,29 @@ export default function Footer() {
               {/* <p className="fs-5 text-white pt-3 mb-0">
                 moonlagree@gmail.com
               </p> */}
+              <div style={{ marginTop:"30px",display:'flex', justifyContent:'start' }}>
+                <a
+                  href="https://wa.me/221768206066"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-secondary"
+                >
+                  <i className="ri-whatsapp-line ri-lg  mr-2"  style={{ fontSize:'35px' }}></i>
+                </a>
+
+                
+                <a
+                  href="https://www.instagram.com/moon_lagree/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-secondary"
+                 
+
+                >
+                  <i className="ri-instagram-line ri-lg"  style={{ fontSize:'35px' }}></i>
+                </a>
+              </div>
+
             </div>
 
             {/* Colonne droite */}
@@ -99,7 +122,7 @@ export default function Footer() {
                 {/* <a href="#" className="link-secondary">
                   <i className="ri-facebook-line ri-lg"></i>
                 </a> */}
-                <a
+                {/* <a
                   href="https://wa.me/221768206066"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -108,12 +131,6 @@ export default function Footer() {
                   <i className="ri-whatsapp-line ri-lg"></i>
                 </a>
 
-                {/* <a href="#" className="link-secondary">
-                  <i className="ri-behance-line ri-lg"></i>
-                </a> */}
-                {/* <a href="#" className="link-secondary">
-                  <i className="ri-instagram-line ri-lg"></i>
-                </a> */}
                 <a
                   href="https://www.instagram.com/moon_lagree/"
                   target="_blank"
@@ -121,7 +138,7 @@ export default function Footer() {
                   className="link-secondary"
                 >
                   <i className="ri-instagram-line ri-lg"></i>
-                </a>
+                </a> */}
 
               </div>
             </div>
