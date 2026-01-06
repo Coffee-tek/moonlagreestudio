@@ -4,7 +4,7 @@ import { createSeanceAction } from "../../../actions/ seanceActions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
+export default function SessionAddModal({ onClose, onAdd, teachers = [], sessionList = []}) {
   const [formData, setFormData] = useState({
     titre: "",
     coatch: "",
@@ -191,7 +191,7 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
                 {/* Formulaire principal */}
                 <div className="col-md-12">
                   {/* Nom de la session */}
-                  <div className="mb-3">
+                  {/* <div className="mb-3">
                     <label className="form-label fw-bold">
                       Nom de la session <span className="text-danger">*</span>
                     </label>
@@ -203,6 +203,30 @@ export default function SessionAddModal({ onClose, onAdd, teachers = [] }) {
                       onChange={handleChange}
                       placeholder="Ex: Pilates sur machine"
                     />
+                    {errors.titre && (
+                      <div className="invalid-feedback">{errors.titre}</div>
+                    )}
+                  </div> */}
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">
+                      Nom de la session <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      className={`form-control ${errors.titre ? "is-invalid" : ""}`}
+                      name="titre"
+                      value={formData.titre}
+                      onChange={handleChange}
+                      placeholder="Ex: Pilates sur machine"
+                      list="sessionList"
+                    />
+                    {sessionList.length > 0 && (
+                      <datalist id="sessionList">
+                        {sessionList.map((titre, index) => (
+                          <option key={index} value={titre} />
+                        ))}
+                      </datalist>
+                    )}
                     {errors.titre && (
                       <div className="invalid-feedback">{errors.titre}</div>
                     )}

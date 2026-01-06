@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker";
 import { toast } from "sonner";
 import { updateSeanceAction } from "../../../actions/ seanceActions";
 
-export default function SessionEditModal({ session, onClose, onSave, teachers = [] }) {
+export default function SessionEditModal({ session, onClose, onSave, teachers = [], sessionList = [] }) {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
 
@@ -227,11 +227,23 @@ export default function SessionEditModal({ session, onClose, onSave, teachers = 
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className={`form-control ${errors.titre ? "is-invalid" : ""}`}
+                      name="titre"
                       value={formData.titre || ""}
                       onChange={handleChange}
-                      name="titre"
+                      placeholder="Titre de la seance"
+                      list="sessionListEdit"
                     />
+                    {sessionList.length > 0 && (
+                      <datalist id="sessionListEdit">
+                        {sessionList.map((titre, index) => (
+                          <option key={index} value={titre} />
+                        ))}
+                      </datalist>
+                    )}
+                    {errors.titre && (
+                      <div className="invalid-feedback">{errors.titre}</div>
+                    )}
                   </div>
 
                   <div className="mb-3">

@@ -1,7 +1,114 @@
 import prisma from "@/lib/prisma";
 
 export const reservationService = {
-  
+
+  // async reserverSeance(userId, seanceId, modePaiement) {
+  //   const seance = await prisma.seance.findUnique({ where: { id: seanceId } });
+  //   if (!seance) throw new Error("Séance introuvable");
+  //   if (seance.place_reserver >= seance.places)
+  //     throw new Error("Aucune place disponible");
+
+  //   const isPaye = modePaiement === "en_ligne";
+  //   const statutReservation = isPaye ? "confirme" : "en_attente";
+
+  //   const reservationExistante = await prisma.reservation.findFirst({
+  //     where: {
+  //       seanceId: seanceId,
+  //       userId: userId,
+  //       statut: {
+  //         in: "annule", // autorise une nouvelle réservation si l’ancienne était annulée
+  //       },
+  //     },
+  //   });
+
+
+  //   if (reservationExistante) throw new Error("Vous avez déjà réservé cette séance.");
+
+
+  //   let reservation;
+
+  //   if (isPaye) {
+  //     const wallet = await prisma.wallet.findUnique({ where: { userId } });
+  //     if (!wallet) throw new Error("Wallet introuvable");
+  //     if (wallet.credit < seance.credits) throw new Error("Crédits insuffisants");
+
+  //     reservation = await prisma.$transaction(async (tx) => {
+  //       // Débiter le wallet
+  //       await tx.wallet.update({
+  //         where: { id: wallet.id },
+  //         data: { credit: { decrement: seance.credits } },
+  //       });
+
+  //       // Créer la transaction
+  //       await tx.transaction.create({
+  //         data: {
+  //           userId,
+  //           walletId: wallet.id,
+  //           type: "debit",
+  //           montant: seance.credits,
+  //           description: `Réservation séance ${seance.titre}`,
+  //           category:"credits"
+  //         },
+  //       });
+
+  //       // Créer la réservation confirmée
+  //       const res = await tx.reservation.create({
+  //         data: {
+  //           userId,
+  //           seanceId,
+  //           montant: seance.credits,
+  //           modePaiement,
+  //           paye: true,
+  //           statut: statutReservation,
+  //         },
+  //       });
+
+  //       // Mettre à jour la séance
+  //       await tx.seance.update({
+  //         where: { id: seance.id },
+  //         data: {
+  //           place_reserver: { increment: 1 },
+  //           status:
+  //             seance.place_reserver + 1 >= seance.places
+  //               ? "Complet"
+  //               : seance.status,
+  //         },
+  //       });
+
+  //       return res;
+  //     });
+  //   } else {
+  //     // Paiement sur place : réservation en attente, séance mise à jour
+  //     reservation = await prisma.$transaction(async (tx) => {
+  //       const res = await tx.reservation.create({
+  //         data: {
+  //           userId,
+  //           seanceId,
+  //           montant: seance.credits,
+  //           modePaiement,
+  //           paye: false,
+  //           statut: statutReservation,
+  //         },
+  //       });
+
+  //       await tx.seance.update({
+  //         where: { id: seance.id },
+  //         data: {
+  //           place_reserver: { increment: 1 },
+  //           status:
+  //             seance.place_reserver + 1 >= seance.places
+  //               ? "Complet"
+  //               : seance.status,
+  //         },
+  //       });
+
+  //       return res;
+  //     });
+  //   }
+
+  //   return reservation;
+  // },
+
   async reserverSeance(userId, seanceId, modePaiement) {
     const seance = await prisma.seance.findUnique({ where: { id: seanceId } });
     if (!seance) throw new Error("Séance introuvable");
@@ -11,22 +118,60 @@ export const reservationService = {
     const isPaye = modePaiement === "en_ligne";
     const statutReservation = isPaye ? "confirme" : "en_attente";
 
-    const reservationExistante = await prisma.reservation.findFirst({
+    // Vérifie s'il existe une réservation non annulée
+    const reservationActive = await prisma.reservation.findFirst({
       where: {
-        seanceId: seanceId,
-        userId: userId,
+        seanceId,
+        userId,
         statut: {
-          not: "annule", // autorise une nouvelle réservation si l’ancienne était annulée
+          not: "annule", // toutes les réservations actives
         },
       },
     });
 
+    if (reservationActive) {
+      throw new Error("Vous avez déjà réservé cette séance.");
+    }
 
-    if (reservationExistante) throw new Error("Vous avez déjà réservé cette séance.");
-
+    // Vérifie s'il existe une réservation annulée
+    let reservationExistante = await prisma.reservation.findFirst({
+      where: {
+        seanceId,
+        userId,
+        statut: "annule", // réservation annulée
+      },
+    });
 
     let reservation;
 
+    if (reservationExistante) {
+      // Mettre à jour la réservation annulée avec le nouveau statut
+      reservation = await prisma.reservation.update({
+        where: { id: reservationExistante.id },
+        data: {
+          statut: statutReservation,
+          modePaiement,
+          paye: isPaye,
+          montant: seance.credits,
+        },
+      });
+
+      // Mettre à jour la séance
+      await prisma.seance.update({
+        where: { id: seance.id },
+        data: {
+          place_reserver: { increment: 1 },
+          status:
+            seance.place_reserver + 1 >= seance.places
+              ? "Complet"
+              : seance.status,
+        },
+      });
+
+      return reservation;
+    }
+
+    // Sinon créer une nouvelle réservation
     if (isPaye) {
       const wallet = await prisma.wallet.findUnique({ where: { userId } });
       if (!wallet) throw new Error("Wallet introuvable");
@@ -47,7 +192,7 @@ export const reservationService = {
             type: "debit",
             montant: seance.credits,
             description: `Réservation séance ${seance.titre}`,
-            category:"credits"
+            category: "credits",
           },
         });
 
@@ -78,7 +223,6 @@ export const reservationService = {
         return res;
       });
     } else {
-      // Paiement sur place : réservation en attente, séance mise à jour
       reservation = await prisma.$transaction(async (tx) => {
         const res = await tx.reservation.create({
           data: {
@@ -138,7 +282,7 @@ export const reservationService = {
           type: "debit",
           montant: reservation.montant,
           description: `Confirmation réservation séance ${reservation.seance.titre}`,
-          category:"credits"
+          category: "credits"
         },
       });
 
@@ -179,7 +323,7 @@ export const reservationService = {
             type: "credit",
             montant: reservation.montant,
             description: `Annulation réservation séance ${reservation.seance.titre}`,
-            category:"credits"
+            category: "credits"
           },
         });
       }

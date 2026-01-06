@@ -79,6 +79,9 @@ export default function SessionCard({ session, sessions, setSessions }) {
                 <small className="text-secondary me-3">
                   Heure : {new Date(session.heure).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </small>
+                  <small className="text-secondary me-3">
+                  Réserver le : {new Date(session.heure_reservation).toLocaleDateString()}
+                </small>
                 <small className="text-secondary">Crédits : {session.credits}</small>
               </div>
               <h6 className="fw-semibold mt-2">

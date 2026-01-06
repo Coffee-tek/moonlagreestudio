@@ -63,6 +63,8 @@ export default function AdminPlanning({ seances }) {
   }, []);
 
   const uniqueTeachers = [...new Set(sessions.map(s => s.coatch))];
+  const uniqueSessionTitre = [...new Set(sessions.map(s => s.titre))];
+
 
   // Filtrage
   const filteredSessions = sessions.filter((session) => {
@@ -266,14 +268,18 @@ export default function AdminPlanning({ seances }) {
         <SessionAddModal
           onClose={() => setShowAddModal(false)}
           onAdd={handleAddSession}
-          teachers={uniqueTeachers} />
+          teachers={uniqueTeachers}
+          sessionList={uniqueSessionTitre}
+        />
       }
       {showEditModal &&
         <SessionEditModal
           session={selectedSession}
           onClose={() => setShowEditModal(false)}
           onSave={handleSaveSession}
-          teachers={uniqueTeachers} />
+          teachers={uniqueTeachers}
+          sessionList={uniqueSessionTitre}
+        />
       }
 
       {showDeleteModal &&

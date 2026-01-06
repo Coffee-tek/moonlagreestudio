@@ -9,17 +9,6 @@ export default function MesSessionsClient({ seances }) {
     const [activeTab, setActiveTab] = useState("reserved");
     const [isPending, startTransition] = useTransition();
 
-    // Transforme les séances pour ajouter le statut de la réservation de ce client
-    // const sessions = seances.map((s) => {
-    //     const reservation = s.reservations[0]; // suppose 1 réservation par client
-    //     return {
-    //         ...s,
-    //         statut: reservation?.statut || "en_attente",
-    //         modePaiement: reservation?.modePaiement,
-    //         reservationId: reservation?.id,
-    //         heure_reservation: resevervation?.created_at,
-    //     };
-    // });
 
     const [sessions, setSessions] = useState(() => {
         return seances.flatMap((s) =>
