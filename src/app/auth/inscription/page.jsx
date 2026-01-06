@@ -15,7 +15,7 @@ export default function RegisterPage() {
               <div className="position-relative d-flex align-items-center gap-2 site-brand">
                 <div className="lh-1">
                   <Image
-                    src="/img/logo/LOGO_PRIMAIRE_COULEUR@4x.png"
+                    src="/img/logo/LOGO PRINCIPAL NOIR@4x.png"
                     alt="Profile"
                     width={100}
                     height={100}
@@ -52,15 +52,15 @@ export default function RegisterPage() {
               <RegisterForm />
 
               <p className="m-0 pt-4 small text-muted text-center">
-                © Tous droits réservés. Réalisé avec{" "}
-                <span className="text-danger mx-1">❤</span> par{" "}
+                © Tous droits réservés. 
+                {/* <span className="text-danger mx-1">❤</span> par{" "} */}
                 <a
                   className="text-black text-decoration-none d-inline fw-normal p-0"
-                  href="#"
-                  target="_blank"
+                  href="/"
+                  // target="_blank"
                   rel="noopener"
                 >
-                  Coffee Tek
+                  Moon Lagree Studio
                 </a>
               </p>
             </div>
@@ -73,10 +73,10 @@ export default function RegisterPage() {
                 <div className="text-center mb-5">
                   {/* <div className="small text-muted">OVERLINE</div> */}
                   <h1 className="fw-bold py-2 text-white display-5">
-                    Votre passerelle vers une exploration continue
+                    Rejoignez l’expérience Moon Lagree où chaque mouvement compte.
                   </h1>
                   <p className=" mb-4 lead text-white ">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing
+                    Découvrez des séances qui sculptent, renforcent et éveillent le corps comme l’esprit.
                   </p>
                   {/* <Link href="/account/orders" className="btn btn-purple btn-theme">
                     View More

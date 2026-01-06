@@ -9,7 +9,7 @@ function getStatus(s) {
   // Déterminer le statut basé sur les places
   let status = "Disponible";
   if (remainingPlaces === 0) status = "Complet";
-  else if (remainingPlaces <= 3 && remainingPlaces > 0) status = "Presque complet";
+  else if (remainingPlaces <= 2 && remainingPlaces > 0) status = "Presque complet";
 
   // Comparer la date et l'heure de la séance avec maintenant
   const now = new Date();              // Date et heure actuelles

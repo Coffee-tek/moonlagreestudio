@@ -178,7 +178,10 @@ export default function CalendarBookingSystemClient({ seances, user }) {
                     ))}
                 </div>
 
-                <div className="border-t pt-6" style={{ height:'500px', overflowY:'scroll' }}>
+                <div
+                    className="border-t pt-6"
+                    // style={{ height: '500px', overflowY: 'scroll' }}
+                >
                     <h2 className="text-lg font-medium text-gray-800 mb-6">
                         Disponibilité pour le {selectedDate.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
                     </h2>

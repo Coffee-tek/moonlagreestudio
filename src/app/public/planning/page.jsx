@@ -40,6 +40,7 @@ export default async function CalendarBookingSystemServer() {
 
   const seances = await seanceService.getAll();
 
+
   // ⚠️ Si l'utilisateur n'est pas connecté
   if (!session) {
     return (

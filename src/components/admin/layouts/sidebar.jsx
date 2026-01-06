@@ -38,7 +38,7 @@ export default function AdminSidebar() {
       <div className="app-brand demo">
         <Link href="/" className="app-brand-link">
           <Image
-            src="/img/logo/LOGO_PRIMAIRE_COULEUR@4x.png"
+            src="/img/logo/LOGO PRINCIPAL NOIR@4x.png"
             alt="Profile"
             width={100}
             height={100}

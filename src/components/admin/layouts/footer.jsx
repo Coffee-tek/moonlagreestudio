@@ -10,7 +10,7 @@ export default function AdminFooter(){
                     rel="noopener noreferrer"
                     className="footer-link fw-bolder"
                   >
-                    Coffee Tech
+                  Coffe tek
                   </a>
                 </div>
               </div>
