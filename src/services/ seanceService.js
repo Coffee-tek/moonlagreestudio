@@ -27,7 +27,7 @@ function getStatus(s) {
 
 export const seanceService = {
   getAll: async () => {
-    const allSeances = await prisma.seance.findMany({ orderBy: { date: "desc" } });
+    const allSeances = await prisma.seance.findMany({ orderBy: { heure: "desc" } });
 
     const updatedSeances = await Promise.all(
       allSeances.map(async (s) => {
