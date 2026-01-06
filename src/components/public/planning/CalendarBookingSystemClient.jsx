@@ -42,7 +42,11 @@ export default function CalendarBookingSystemClient({ seances, user }) {
     const [showModal, setShowModal] = useState(false);
 
     const today = new Date();
-    const startOfCurrentWeek = moment.startOf(today, 'week');
+    const startOfCurrentWeek = moment.startOf(today, 'week');  // Fin de la 2ᵉ semaine autorisée
+    const maxAllowedWeek = moment.add(startOfCurrentWeek, 14, 'days');// rajouter pour bloquer le bouton suivant sur 2 semaines
+
+
+
 
     const weekDays = ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'];
 
@@ -107,6 +111,8 @@ export default function CalendarBookingSystemClient({ seances, user }) {
 
     // ⚠️ Vérifier si le bouton "semaine précédente" doit être désactivé
     const isPrevDisabled = moment.add(currentDate, -7, 'days') < startOfCurrentWeek;
+    const isNextDisabled = moment.add(currentDate, 7, 'days') >= maxAllowedWeek; // rajouter pour bloquer le bouton suivant sur 2 semaines
+
 
     return (
         <div className="container py-5">
@@ -131,12 +137,24 @@ export default function CalendarBookingSystemClient({ seances, user }) {
 
                     <h1 className="text-2xl font-light text-gray-800 capitalize">{getCurrentWeekMonthYear()}</h1>
 
-                    <button
+                    {/* <button
                         onClick={() => setCurrentDate(moment.add(currentDate, 7, 'days'))}
                         className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                     >
                         <i className="bi bi-arrow-right" style={{ fontSize: "35px" }}></i>
+                    </button> */}
+
+                    <button
+                        onClick={() => !isNextDisabled && setCurrentDate(moment.add(currentDate, 7, 'days'))}
+                        disabled={isNextDisabled}
+                        className={`p-2 hover:bg-gray-100 rounded-full transition-colors
+        ${isNextDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    >
+                        <i className="bi bi-arrow-right" style={{ fontSize: "35px" }}></i>
                     </button>
+
+
+
                 </div>
 
                 <div className="grid grid-cols-7 gap-1 mb-4">
