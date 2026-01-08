@@ -48,6 +48,7 @@ export const seanceService = {
     return updatedSeances;
   },
 
+
   getByUserId: async (userId) => {
     // Récupérer d'abord toutes les séances avec statut à jour
     const allSeances = await seanceService.getAll();

@@ -38,7 +38,20 @@ export default async function CalendarBookingSystemServer() {
   //   orderBy: { heure: 'asc' },
   // });
 
-  const seances = await seanceService.getAll();
+  // const seances = await seanceService.getAll();
+
+  // const sortedSeances = [...seances].sort(
+  //   (a, b) =>
+  //     new Date(`${a.date} ${a.heure}`) - new Date(`${b.date} ${b.heure}`)
+  // );
+
+  const seancesRaw = await seanceService.getAll();
+
+  const seances = [...seancesRaw].sort(
+    (a, b) => new Date(a.heure) - new Date(b.heure)
+  );
+
+
 
 
   // ⚠️ Si l'utilisateur n'est pas connecté

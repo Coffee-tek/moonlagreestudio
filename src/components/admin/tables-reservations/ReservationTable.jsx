@@ -135,7 +135,7 @@ export default function ReservationTable({
                     // onClick={() => onEdit(r)}
                     onClick={() => handleConfirmation(r.id)}
                     title="Valider la reservation"
-                    disabled={r.statut === "annule" || r.seance?.status === "Expirée"} // 👈 désactive pour admin
+                    disabled={r.statut === "annule" || r.seance?.status === "Expirée" || r.modePaiement === "en_ligne"} // 👈 désactive pour admin
                   >
                     <i className="bi bi-check2-square"></i>
                   </button>

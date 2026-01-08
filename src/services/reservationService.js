@@ -264,36 +264,61 @@ export const reservationService = {
 
 
     const wallet = reservation.user.wallet;
-    if (wallet.credit < reservation.montant)
-      throw new Error("Crédits insuffisants pour confirmer");
+    // if (wallet.credit < reservation.montant) throw new Error("Crédits insuffisants pour confirmer");
 
     const result = await prisma.$transaction(async (tx) => {
-      // Débiter le wallet
+      // 1️⃣ Crédit admin (paiement sur place)
       await tx.wallet.update({
         where: { id: wallet.id },
-        data: { credit: { decrement: reservation.montant } },
+        data: {
+          credit: {
+            increment: reservation.montant,
+          },
+        },
       });
 
-      // Créer la transaction
+      await tx.transaction.create({
+        data: {
+          userId: reservation.user.id,
+          walletId: wallet.id,
+          type: "credit",
+          montant: reservation.montant,
+          description: "Paiement sur place – crédit admin",
+          category: "credits",
+        },
+      });
+
+      // 2️⃣ Débit système (réservation)
+      await tx.wallet.update({
+        where: { id: wallet.id },
+        data: {
+          credit: {
+            decrement: reservation.montant,
+          },
+        },
+      });
+
       await tx.transaction.create({
         data: {
           userId: reservation.user.id,
           walletId: wallet.id,
           type: "debit",
           montant: reservation.montant,
-          description: `Confirmation réservation séance ${reservation.seance.titre}`,
-          category: "credits"
+          description: `Paiement réservation – ${reservation.seance.titre}`,
+          category: "credits",
         },
       });
 
-      // Mettre à jour la réservation
-      const res = await tx.reservation.update({
+      // 3️⃣ Confirmation réservation
+      return await tx.reservation.update({
         where: { id: reservation.id },
-        data: { paye: true, statut: "confirme" },
+        data: {
+          paye: true,
+          statut: "confirme",
+        },
       });
-
-      return res;
     });
+
 
     return result;
   },

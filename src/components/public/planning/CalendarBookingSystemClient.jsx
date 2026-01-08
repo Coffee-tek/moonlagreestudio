@@ -45,9 +45,6 @@ export default function CalendarBookingSystemClient({ seances, user }) {
     const startOfCurrentWeek = moment.startOf(today, 'week');  // Fin de la 2ᵉ semaine autorisée
     const maxAllowedWeek = moment.add(startOfCurrentWeek, 28, 'days');// rajouter pour bloquer le bouton suivant sur 2 semaines
 
-
-
-
     const weekDays = ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'];
 
     const generateWeekDays = () => {
@@ -76,8 +73,11 @@ export default function CalendarBookingSystemClient({ seances, user }) {
         setSelectedSeance(seance);
         setShowModal(true);
     };
+  
 
     const confirmReservation = async (typePaiement) => {
+
+
         try {
             if (!selectedSeance || !user) return;
 
