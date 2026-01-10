@@ -47,7 +47,7 @@ enum TransactionType {
 // ---------------------------
 
 model User {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -76,7 +76,7 @@ model User {
 }
 
 model Wallet {
-  id String @id @default(uuid())
+  id String @id @default(cuid())
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -112,7 +112,7 @@ model Pack {
 }
 
 model Transaction {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -146,7 +146,7 @@ model Session {
 }
 
 model Account {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -167,7 +167,7 @@ model Account {
 }
 
 model Verification {
-  id         String   @id @default(uuid())
+  id         String   @id @default(cuid())
   identifier String
   value      String
   expiresAt  DateTime
@@ -198,7 +198,7 @@ model Seance {
 }
 
 model Reservation {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
