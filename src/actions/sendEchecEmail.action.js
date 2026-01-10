@@ -10,7 +10,7 @@ export async function sendEchecEmail({to}) {
     from: process.env.NODEMAILER_USER,
     to,
     subject: "Echec de créditation - Moon Lagree Studio",
-    html: echecAchatEmailTemplate,
+    html: echecAchatEmailTemplate(),
   };
 
   try {

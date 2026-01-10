@@ -74,10 +74,17 @@ export default function PackPackCardRemake({ pack, user }) {
 
     const payerPack = async () => {
         if (!user) {
-            return toast.error("Veuillez vous connecter pour acheter un pack.");
+            toast.error("Veuillez vous connecter pour acheter un pack.");
+            return;
         }
 
         setIsPending(true);
+
+        // ✅ Calcul du montant
+        const amount =
+            pack.promotion && pack.promotion > 0
+                ? pack.promotion
+                : pack.prix;
 
         try {
             const res = await fetch("/api/paytech/create-payment", {
@@ -86,7 +93,7 @@ export default function PackPackCardRemake({ pack, user }) {
                 body: JSON.stringify({
                     userId: user.id,
                     packId: pack.id,
-                    amount: pack.prix,
+                    amount,
                     userTelephone: user.telephone,
                     userName: user.name,
                 }),
@@ -111,6 +118,7 @@ export default function PackPackCardRemake({ pack, user }) {
             setIsPending(false);
         }
     };
+
 
 
     // const payerPack = async () => {

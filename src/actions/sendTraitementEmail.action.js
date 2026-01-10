@@ -10,7 +10,7 @@ export async function sendTraitementEmail({to}) {
     from: process.env.NODEMAILER_USER,
     to,
     subject: "Traitement en cours - Moon lagree Studio",
-    html: traitementAchatEmailTemplate,
+    html: traitementAchatEmailTemplate(),
   };
 
   try {

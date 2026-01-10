@@ -17,8 +17,7 @@ function DeleteAccount() {
                 Voulez-vous supprimer votre compte ?
             </p>
             <p className="mb-4 text-muted">
-                Supprimer votre compte va retirer toutes vos sessions et tous
-                les détails.
+                Supprimer votre compte entraînera l’annulation de toutes vos sessions à venir ainsi que la perte de tout vos crédits.
             </p>
             <button
                 onClick={() => setShowDeleteModal(true)}
