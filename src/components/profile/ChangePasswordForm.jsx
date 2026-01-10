@@ -91,7 +91,7 @@ function ChangePasswordForm() {
             <div className="col-12">
                 <p className="mb-4 text-muted">
                     Vous avez oublié votre mot de passe ?
-                    <Link href="/forgot-password" className="text-primary text-decoration-none ms-1">
+                    <Link href="/auth/forgot-password" className="text-primary text-decoration-none ms-1">
                         Réinitialiser votre mot de passe.
                     </Link>
                 </p>

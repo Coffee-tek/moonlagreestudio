@@ -65,9 +65,9 @@ export default function ForgotPassword() {
               <div className="ps-lg-0 pe-lg-5">
                 <div className="py-3">
                   <div className="fw-bold display-4">Moon Lagree Studio</div>
-                  <p className="py-4 lead">
+                  {/* <p className="py-4 lead">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, quas. Laudantium temporibus placeat.
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
