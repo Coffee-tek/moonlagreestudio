@@ -2,7 +2,8 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { achatPackService } from "../../../../services/achatPackService";
-import { sendEmailAction } from "../../../../actions/send-email.action";
+import { sendEchecEmail } from "../../../../actions/sendEchecEmail.action";
+import { sendTraitementEmail } from "../../../../actions/sendTraitementEmail.action";
 
 export async function POST(req) {
   try {
@@ -103,13 +104,8 @@ export async function POST(req) {
       updatedWallet = await achatPackService.acheterPack({ userId, packId });
 
       // ✅ Paiement + crédit OK → email confirmation
-      await sendEmailAction({
-        to: user.email,
-        subject: "Confirmation d'achat de crédit",
-        meta: {
-          description: `Votre achat du pack a été confirmé. Vous avez maintenant ${updatedWallet.credit} crédits disponibles.`,
-          link: `${process.env.NEXT_PUBLIC_URL}/mon-wallet`,
-        },
+      await  sendTraitementEmail({
+        to: user.email, 
       });
 
       console.log("📧 Email confirmation envoyé :", user.email);
@@ -118,13 +114,8 @@ export async function POST(req) {
       console.error("❌ Paiement OK mais échec créditation :", err);
 
       // 🔹 Email échec → contacter support
-      await sendEmailAction({
+      await sendEchecEmail({
         to: user.email,
-        subject: "Problème lors de la créditation",
-        meta: {
-          description: `Votre paiement a été reçu mais nous n'avons pas pu créditer votre compte automatiquement. Veuillez contacter le support pour finaliser votre crédit.`,
-          link: `${process.env.NEXT_PUBLIC_URL}/support`,
-        },
       });
 
       // Optionnel : loguer ou créer alerte pour support

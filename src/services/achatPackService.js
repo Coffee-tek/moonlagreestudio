@@ -1,5 +1,6 @@
 // services/achatPackService.js
 import prisma from "@/lib/prisma";
+import { sendAchatCreditEmail } from "../actions/sendAchatCreditEmail.action";
 
 export const achatPackService = {
 
@@ -71,8 +72,9 @@ export const achatPackService = {
      * Acheter un pack
      */
     async acheterPack({ userId, packId }) {
-
         const wallet = await this.verifierExpirationWallet(userId);
+        const user = await prisma.user.findUnique({ where: { id: userId } });
+        if (!user) throw new Error("Utilisateur introuvable");
 
         const pack = await prisma.pack.findUnique({ where: { id: packId } });
         if (!pack) throw new Error("Pack introuvable");
@@ -82,20 +84,18 @@ export const achatPackService = {
         }
 
         let expiryDate = null;
-        if (pack.duree) {
-            expiryDate = new Date(Date.now() + pack.duree * 86400000);
-        }
+        if (pack.duree) expiryDate = new Date(Date.now() + pack.duree * 86400000);
 
         const updatedWallet = await prisma.wallet.update({
             where: { id: wallet.id },
             data: {
                 credit: wallet.credit + pack.credits,
-                point: wallet.point + pack.credits * 100, // 1 crédit = 100 points
+                point: wallet.point + pack.credits * 100,
                 expiryDate
             }
         });
 
-        await prisma.transaction.create({
+        const creditTransaction = await prisma.transaction.create({
             data: {
                 userId,
                 walletId: updatedWallet.id,
@@ -105,7 +105,8 @@ export const achatPackService = {
                 category: "credits"
             }
         });
-         await prisma.transaction.create({
+
+        await prisma.transaction.create({
             data: {
                 userId,
                 walletId: updatedWallet.id,
@@ -114,6 +115,17 @@ export const achatPackService = {
                 description: `Vous gagnez ${pack.credits * 100} points`,
                 category: "points"
             }
+        });
+
+        await sendAchatCreditEmail({
+            to: user.email,
+            transaction: {
+                nomPack: pack.titre,
+                credits: pack.credits,
+                expiration: expiryDate,
+                prix:pack.prix,
+                transaction: creditTransaction.id,
+            },
         });
 
         return updatedWallet;

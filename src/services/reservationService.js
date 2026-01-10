@@ -99,7 +99,7 @@ export const reservationService = {
           date: formatDateFR(seance.date),
           time: formatTimeFR(seance.heure),
           location: "Moon Lagree Studio",
-          date_reservation: formatDateTimeFR(seance.createdAt),
+          // date_reservation: formatDateTimeFR(reservation.createdAt),
           instructor: seance.coatch,
         },
       });
@@ -166,7 +166,7 @@ export const reservationService = {
             date: formatDateFR(seance.date),
             time: formatTimeFR(seance.heure),
             location: "Moon Lagree Studio",
-            date_reservation: formatDateTimeFR(seance.createdAt),
+            // date_reservation: formatDateTimeFR(seance.createdAt),
             instructor: seance.coatch,
           },
         });
@@ -207,7 +207,7 @@ export const reservationService = {
             date: formatDateFR(seance.date),
             time: formatTimeFR(seance.heure),
             location: "Moon Lagree Studio",
-            date_reservation: formatDateTimeFR(seance.createdAt),
+            // date_reservation: formatDateTimeFR(seance.createdAt),
             instructor: seance.coatch,
           },
         });
