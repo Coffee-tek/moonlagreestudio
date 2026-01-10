@@ -6,20 +6,24 @@ import Footer from './public/layouts/footer';
 
 export default function ConditionalLayout({ children }) {
   const pathname = usePathname();
-  
+
   // Pages qui n'ont pas besoin du layout complet
   const noLayoutPages = [
-    '/auth/connexion', 
-    '/auth/inscription', 
-    '/auth/forgot-password', 
-    '/auth/reset-password', 
-    '/auth/new-password', 
-    '/admin', 
-    '/admin/profile', 
+    '/auth/connexion',
+    '/auth/inscription',
+    '/auth/forgot-password',
+    '/auth/forgot-password/success',
+    '/auth/reset-password',
+    '/auth/verify',
+    '/auth/verify/success',
+    '/auth/inscription/success',
+    '/admin',
+    '/admin/profile',
     '/admin/users',
     '/admin/plannings',
     '/admin/reservations',
     '/admin/packs',
+
   ];
   const hideLayout = noLayoutPages.includes(pathname);
 

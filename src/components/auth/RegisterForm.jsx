@@ -26,8 +26,10 @@ export const RegisterForm = () => {
 
             setIsPending(false);
         } else {
-            toast.success("Inscription terminée. Tout est en ordre.");
-            router.push("/auth/connexion");
+            toast.success("Inscription terminée. Svp vérifiez vos mails");
+            // router.push("/auth/connexion");
+            router.push("/auth/inscription/success");
+
         }
 
     }

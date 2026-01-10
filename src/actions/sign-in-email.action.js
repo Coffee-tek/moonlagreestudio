@@ -28,7 +28,7 @@ export async function signInEmailAction(formData) {
     return { error: null };
   } catch (err) {
     if (err instanceof Error) {
-      return { error: "Oups ! Une erreur s'est produite lors de la connexion." };
+      return { error: err.message };
     }
 
     return { error: "Erreur interne du serveur" };

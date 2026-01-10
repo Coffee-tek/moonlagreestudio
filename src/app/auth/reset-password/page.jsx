@@ -1,8 +1,19 @@
-// pages/resetPassword.jsx
+
 import Link from "next/link";
 import Image from "next/image";
+import ResetPasswordForm from "../../../components/auth/ResetPasswordForm";
+import { redirect } from "next/navigation";
 
-export default function ResetPassword() {
+
+export default  async function ResetPassword({ searchParams }) {
+
+  // Résolution de la Promise pour récupérer le token
+  const params = await searchParams;
+  const token = params.token;
+
+  // Si pas de token, on redirige
+  if (!token) redirect("/auth/connexion");
+
   return (
     <>
 
@@ -10,7 +21,7 @@ export default function ResetPassword() {
         className="hero-section position-relative overflow-hidden vh-100 d-flex align-items-center flex-column bg-light px-lg-5"
         id="welcome"
         style={{
-          backgroundImage: "url('/img/new/3.jpeg')", 
+          backgroundImage: "url('/img/new/3.jpeg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "relative",
@@ -34,13 +45,13 @@ export default function ResetPassword() {
           <div className="container px-lg-5">
             <div className="position-relative d-flex align-items-center gap-2 site-brand">
               <div className="lh-1">
-                 <Image
-                    src="/img/logo/LOGO_PRIMAIRE_BLANC@4x.png"
-                    alt="Profile"
-                    width={200}
-                    height={200}
-                    
-                    />
+                <Image
+                  src="/img/logo/LOGO_PRIMAIRE_BLANC@4x.png"
+                  alt="Profile"
+                  width={200}
+                  height={200}
+
+                />
               </div>
               <Link href="/" className="stretched-link"></Link>
             </div>
@@ -59,7 +70,7 @@ export default function ResetPassword() {
 
         <div className="container m-auto px-lg-5" style={{ zIndex: 2 }}>
           <div className="row align-items-center px-lg-5">
-            <div className="col-lg-7 col-12 text-white">
+            <div className="col-lg-5 col-12 text-white">
               <div className="ps-lg-0 pe-lg-5">
                 <div className="py-3">
                   <div className="fw-bold display-4">Moon Lagree Studio</div>
@@ -70,39 +81,23 @@ export default function ResetPassword() {
               </div>
             </div>
 
-            <div className="col-lg-5 col-12 py-3">
-              <div className="p-5 bg-white rounded-4 shadow">
-                <h2 className="fw-bold mb-3">Mot de passe oublié</h2>
-                <p className="lead mb-4">Entre votre adresse mail et réinitialiser votre mot de passe</p>
-                <form action="account-orders.html" className="d-grid gap-3 input-group-lg">
-                  <input
-                    type="email"
-                    className="form-control bg-light border-0 px-3 py-2"
-                    id="exampleInputPassword1"
-                    placeholder="Email"
-                  />
-                  <button type="submit" className="btn btn-purple btn-theme w-100">
-                    Réinitialiser mot de passe
-                  </button>
-                </form>
-              </div>
-            </div>
+            <ResetPasswordForm token={token} />
           </div>
         </div>
 
         <footer className="py-4 mt-auto w-100 px-lg-5" style={{ zIndex: 2 }}>
           <div className="container text-center d-flex py-3 px-lg-5">
             <p className="m-0 text-white small">
-              © Tous droits réservés. Réalisé avec <span className="text-danger mx-1">❤</span> par{" "}
-              <a className="text-white text-decoration-none d-inline fw-normal p-0" href="#" target="_blank" rel="noopener noreferrer">
+              © Tous droits réservés. Moon Lagree studio
+              {/* <a className="text-white text-decoration-none d-inline fw-normal p-0" href="#" target="_blank" rel="noopener noreferrer">
                 Coffee Tech
-              </a>
+              </a> */}
             </p>
             <div className="d-flex align-items-center gap-4 ms-auto">
               <a href="#" className="link-secondary">
                 <i className="ri-facebook-circle-fill ri-lg"></i>
               </a>
-             
+
               <a href="#" className="link-secondary">
                 <i className="ri-instagram-fill ri-lg"></i>
               </a>

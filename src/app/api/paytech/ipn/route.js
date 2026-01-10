@@ -74,15 +74,64 @@ export async function POST(req) {
       return NextResponse.json({ ok: false }, { status: 200 });
     }
 
-    // 👉 Logique métier
-    console.log("🚀 Appel achatPackService:", { userId, packId });
-    await achatPackService.acheterPack({ userId, packId });
+    // // 👉 Logique métier
+    // console.log("🚀 Appel achatPackService:", { userId, packId });
+    // await achatPackService.acheterPack({ userId, packId });
 
-    console.log("🎉 Pack crédité avec succès :", {
-      ref_command,
-      userId,
-      packId,
-    });
+    // console.log("🎉 Pack crédité avec succès :", {
+    //   ref_command,
+    //   userId,
+    //   packId,
+    // });
+
+    ////// debut 
+
+    // 🔹 Logique métier + email
+    console.log("🚀 Appel achatPackService:", { userId, packId });
+
+    // Récupérer l'utilisateur pour envoyer email
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (!user?.email) {
+      console.log("❌ Utilisateur ou email introuvable");
+      return NextResponse.json({ ok: false, error: "Email introuvable" });
+    }
+
+    let updatedWallet;
+    try {
+      // 🔹 Tenter d’acheter/créditer le pack
+      updatedWallet = await achatPackService.acheterPack({ userId, packId });
+
+      // ✅ Paiement + crédit OK → email confirmation
+      await sendEmailAction({
+        to: user.email,
+        subject: "Confirmation d'achat de crédit",
+        meta: {
+          description: `Votre achat du pack a été confirmé. Vous avez maintenant ${updatedWallet.credit} crédits disponibles.`,
+          link: `${process.env.NEXT_PUBLIC_URL}/mon-wallet`,
+        },
+      });
+
+      console.log("📧 Email confirmation envoyé :", user.email);
+
+    } catch (err) {
+      console.error("❌ Paiement OK mais échec créditation :", err);
+
+      // 🔹 Email échec → contacter support
+      await sendEmailAction({
+        to: user.email,
+        subject: "Problème lors de la créditation",
+        meta: {
+          description: `Votre paiement a été reçu mais nous n'avons pas pu créditer votre compte automatiquement. Veuillez contacter le support pour finaliser votre crédit.`,
+          link: `${process.env.NEXT_PUBLIC_URL}/support`,
+        },
+      });
+
+      // Optionnel : loguer ou créer alerte pour support
+    }
+
+    console.log("🎉 Traitement IPN terminé :", { ref_command, userId, packId });
+
+    ////// fin 
 
     return NextResponse.json({ ok: true }, { status: 200 });
 

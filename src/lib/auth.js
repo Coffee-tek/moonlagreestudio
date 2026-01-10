@@ -4,6 +4,7 @@ import { PrismaClient } from "../../lib/generated/prisma/client.js";
 import { nextCookies } from "better-auth/next-js";
 import { createAuthMiddleware, APIError } from "better-auth/api";
 import { normalizeName, VALID_DOMAINS } from "./utils.js";
+import { sendEmailAction } from "../actions/send-email.action.js";
 
 const prisma = new PrismaClient();
 
@@ -17,11 +18,65 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
 
+  emailVerification: {
+    sendOnSignUp: true,
+    expiresIn: 60 * 60,
+    autoSignInAfterVerification: true,
+    sendVerificationEmail: async ({ user, url }) => {
+      // const email = user.email.endsWith("@example.com")
+      //   ? "destocotz@yahoo.com"
+      //   : user.email;
+
+      const link = new URL(url);
+      link.searchParams.set("callbackURL", "/auth/verify");
+
+      await sendEmailAction({
+        to: user.email,
+        subject: "Vérifiez votre adresse e-mail",
+        meta: {
+          description:
+            "Veuillez vérifier votre adresse courriel pour finaliser votre inscription.",
+          link: String(link),
+        },
+      });
+    },
+  },
+
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 6,
     autoSignIn: false,
+    requireEmailVerification: true,
+
+    // resetPassword: {
+    //   enabled: true, // Active le reset password
+    //   sendResetEmail: async ({ user, url }) => {
+    //     console.log("sendResetEmail called for:", user.email, "url:", url);
+    //     await sendEmailAction({
+    //       to: user.email,
+    //       subject: "Réinitialisez votre mot de passe",
+    //       meta: {
+    //         description: "Veuillez cliquer sur le lien ci-dessous pour réinitialiser votre mot de passe.",
+    //         link: String(url),
+    //       },
+    //     });
+    //   },
+    // },
+    sendResetPassword: async ({ user, url }) => {
+      console.log("sendResetPassword called for:", user.email, url); // debug
+
+      await sendEmailAction({
+        to: user.email,
+        subject: "Réinitialisez votre mot de passe",
+        meta: {
+          description:
+            "Veuillez cliquer sur le lien ci-dessous pour réinitialiser votre mot de passe.",
+          link: String(url),
+        },
+      });
+    },
   },
+
 
   user: {
     additionalFields: {

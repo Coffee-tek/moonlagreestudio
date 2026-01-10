@@ -67,7 +67,7 @@ export const LoginForm = () => {
                         Se souvenir de moi
                     </label>
                 </div>
-                <Link href="/auth/reset-password" className="text-decoration-none small">
+                <Link href="/auth/forgot-password" className="text-decoration-none small">
                     Mot de passe oublié
                 </Link>
             </div>
