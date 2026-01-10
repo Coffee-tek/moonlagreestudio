@@ -13,7 +13,7 @@ export default function ContactPage() {
   const contactInfo = {
     address: "Villa 9 x RUE KA 5 - Sicap Karak en face ecole de police à l’angle de l’Ambassade de l’Afrique du Sud",
     emails: ["Moon.Lagree@gmail.com",],
-    phones: ["+1800-954-852", "+1800-954-852"],
+    phones: ["+221768206066"],
     info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   };
 

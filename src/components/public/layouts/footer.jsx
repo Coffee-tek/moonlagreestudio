@@ -62,7 +62,7 @@ export default function Footer() {
                     <i className="bi bi-telephone-fill"></i> +221768206066
                   </p>
                   <p className="text-white-50 flex items-center gap-2">
-                    <i className="bi bi-envelope-fill"></i> moonlagree@gmail.com
+                    <i className="bi bi-envelope-fill"></i> moon.lagree@gmail.com
                   </p>
 
                 </div>
