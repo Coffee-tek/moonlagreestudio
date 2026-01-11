@@ -42,35 +42,54 @@ export default function PackPackCardRemake({ pack, user }) {
         };
     }, []);
 
-    // 🚀 Acheter un pack
-    // const handleSavePack = async (e) => {
-    //     e.preventDefault();
 
+    // const payerPack = async () => {
     //     if (!user) {
-    //         return toast.error("Veuillez vous connecter pour acheter un pack.");
+    //         toast.error("Veuillez vous connecter pour acheter un pack.");
+    //         return;
     //     }
+
+    //     setIsPending(true);
+
+    //     // ✅ Calcul du montant
+    //     const amount =
+    //         pack.promotion && pack.promotion > 0
+    //             ? pack.promotion
+    //             : pack.prix;
 
     //     try {
-    //         setIsPending(true);
-    //         // Appel de ton server action
-    //         const result = await acheterPackAction({
-    //             userId: user.id,
-    //             packId: pack.id
+    //         const res = await fetch("/api/paytech/create-payment", {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify({
+    //                 userId: user.id,
+    //                 packId: pack.id,
+    //                 amount,
+    //                 userTelephone: user.telephone,
+    //                 userName: user.name,
+    //             }),
     //         });
 
-    //         toast.success("Pack acheté avec succès !");
-    //         // console.log("Wallet mis à jour :", result);
-    //         setTimeout(() => {
-    //             window.location.href = "/user/mes-credits";
-    //         }, 1000);
+    //         const data = await res.json();
+
+    //         // ⛔ Achat bloqué AVANT PayTech
+    //         if (!data.success) {
+    //             toast.error(data.message || "Achat impossible");
+    //             return;
+    //         }
+
+    //         // ✅ OK → redirection
+    //         toast.info("Redirection vers la page de paiement...");
+    //         window.location.href = data.redirect_url;
 
     //     } catch (error) {
-    //         // console.error("Erreur achat pack :", error);
-    //         toast.error(error.message || "Une erreur est survenue pendant l'achat");
+    //         console.error(error);
+    //         toast.error("Erreur réseau lors de la création du paiement");
     //     } finally {
-    //         setIsPending(false); // 🔥 Désactive le chargement
+    //         setIsPending(false);
     //     }
     // };
+
 
     const payerPack = async () => {
         if (!user) {
@@ -85,88 +104,8 @@ export default function PackPackCardRemake({ pack, user }) {
             pack.promotion && pack.promotion > 0
                 ? pack.promotion
                 : pack.prix;
-
-        try {
-            const res = await fetch("/api/paytech/create-payment", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    userId: user.id,
-                    packId: pack.id,
-                    amount,
-                    userTelephone: user.telephone,
-                    userName: user.name,
-                }),
-            });
-
-            const data = await res.json();
-
-            // ⛔ Achat bloqué AVANT PayTech
-            if (!data.success) {
-                toast.error(data.message || "Achat impossible");
-                return;
-            }
-
-            // ✅ OK → redirection
-            toast.info("Redirection vers la page de paiement...");
-            window.location.href = data.redirect_url;
-
-        } catch (error) {
-            console.error(error);
-            toast.error("Erreur réseau lors de la création du paiement");
-        } finally {
-            setIsPending(false);
-        }
+        console.log(amount);
     };
-
-
-
-    // const payerPack = async () => {
-    //     if (!user) return toast.error("Veuillez vous connecter.");
-    //     if (!PayTechLoaded) return toast.error("Le SDK PayTech n'est pas encore chargé.");
-
-    //     setIsPending(true);
-
-    //     try {
-    //         // 1️⃣ Créer le paiement côté serveur et récupérer le token / redirect_url
-    //         const res = await fetch("/api/paytech/create-payment", {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify({
-    //                 userId: user.id,
-    //                 packId: pack.id,
-    //                 amount: pack.prix,
-    //                 userTelephone: user.telephone,
-    //                 userName: user.name,
-    //             }),
-    //         });
-
-    //         const data = await res.json();
-
-    //         if (data.token) {
-    //             // Utiliser directement le token, PAS besoin de requestTokenUrl
-    //             new PayTech({ idTransaction: data.token })
-    //                 .withOption({
-    //                     presentationMode: PayTech.OPEN_IN_POPUP,
-    //                     didReceiveError: (error) => toast.error("Erreur PayTech: " + error),
-    //                     didReceiveNonSuccessResponse: (resp) => toast.error(resp.message),
-    //                 })
-    //                 .send();
-
-    //         } else if (data.redirect_url) {
-    //             // Fallback si le token n'existe pas ou pour mobile
-    //             toast.info("Redirection vers la page de paiement...");
-    //             window.location.href = data.redirect_url;
-    //         } else {
-    //             toast.error(data.message || "Erreur lors de la création du paiement");
-    //         }
-    //     } catch (err) {
-    //         console.error("Erreur réseau / serveur:", err);
-    //         toast.error("Erreur lors de la création du paiement");
-    //     } finally {
-    //         setIsPending(false);
-    //     }
-    // };
 
 
     //une fonction qui recupere le pack.theme et remvoie la couleur pour le style
