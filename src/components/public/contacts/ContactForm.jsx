@@ -25,7 +25,7 @@ export default function ContactForm() {
     });
 
     // optionnel : reset formulaire
-    // setForm({ nom: "", email: "", sujet: "", message: "" });
+    setForm({ nom: "", email: "", sujet: "", message: "" });
   };
 
   return (

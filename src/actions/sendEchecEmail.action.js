@@ -1,6 +1,6 @@
 "use server";
 
-import { echecAchatEmailTemplate } from "../emails/";
+import { echecAchatEmailTemplate } from "../emails/echecAchatEmailTemplate";
 import transporter from "../lib/nodemailer";
 
 export async function sendEchecEmail({to}) {
