@@ -1,12 +1,11 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "../../lib/generated/prisma/client.js";
+import prisma  from "@/lib/prisma";
 import { nextCookies } from "better-auth/next-js";
 import { createAuthMiddleware, APIError } from "better-auth/api";
 import { normalizeName, VALID_DOMAINS } from "./utils.js";
 import { sendEmailAction } from "../actions/send-email.action.js";
 
-const prisma = new PrismaClient();
 
 export const auth = betterAuth({
   // 🔥 OBLIGATOIRE : secret, baseURL, origin
