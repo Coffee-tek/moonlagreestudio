@@ -35,7 +35,7 @@ export default async function DashboardPlanning() {
   //   orderBy: { date: "desc" },
   // });
   const seances = await seanceService.getAll();
-  console.log("donnee du serveur:",seances);
+  // console.log("donnee du serveur:",seances);
   
 
   return (

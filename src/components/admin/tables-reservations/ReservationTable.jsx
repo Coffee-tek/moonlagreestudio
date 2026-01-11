@@ -31,7 +31,7 @@ export default function ReservationTable({
     }
   };
 
-  console.log(data);
+  // console.log(data);
 
 
   return (

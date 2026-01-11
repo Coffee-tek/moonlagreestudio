@@ -19,7 +19,7 @@ export default async function ProfilSettings() {
   // if (session.user.role.toLowerCase() === "admin") {
   //   redirect("/admin"); // redirige les admins vers leur dashboard
   // }
-  console.log("aaahhh",session.user);
+  // console.log("aaahhh",session.user);
 
 
   return (

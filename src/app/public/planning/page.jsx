@@ -71,7 +71,7 @@ export default async function CalendarBookingSystemServer() {
       </>
     );
   }
-  console.log(seances);
+  // console.log(seances);
 
 
   // ✔️ Si l'utilisateur est connecté

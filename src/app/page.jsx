@@ -181,14 +181,14 @@ export default function Home() {
                                     }`}
                             >
                                 <div className="relative overflow-hidden rounded-2xl shadow-2xl group">
-                                    <Image
+                                    <img
                                         src="/img/new/7.jpeg"
                                         alt="Best Yoga Studio - Peaceful yoga practice"
-                                        width={600}
-                                        height={400}
+                                        // width={600}
+                                        // height={400}
                                         className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
                                         priority
-                                        // sizes="(max-width: 768px) 40px, 60px"
+                                        sizes="(max-width: 768px) 40px, 60px"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>

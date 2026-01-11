@@ -36,7 +36,7 @@ export default async function MesSessionsPage() {
 
      const seances = await seanceService.getByUserId(session.user.id);
 
-    console.log("donnes seances:", seances);
+    // console.log("donnes seances:", seances);
 
 
     return (

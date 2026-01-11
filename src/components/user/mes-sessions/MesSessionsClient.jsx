@@ -21,7 +21,7 @@ export default function MesSessionsClient({ seances }) {
             }))
         );
     });
-    console.log("donnee flitre", sessions);
+    // console.log("donnee flitre", sessions);
 
     // Action : annuler une séance
 

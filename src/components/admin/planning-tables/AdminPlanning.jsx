@@ -221,7 +221,7 @@ export default function AdminPlanning({ seances }) {
     return "bg-success";
   };
 
-  console.log(seances);
+  // console.log(seances);
 
 
   return (

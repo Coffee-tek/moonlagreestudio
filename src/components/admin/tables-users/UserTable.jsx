@@ -23,7 +23,7 @@ export default function UserTable({
       setSelectedUsers([]);
     }
   };
-  console.log(users);
+  // console.log(users);
 
   
 

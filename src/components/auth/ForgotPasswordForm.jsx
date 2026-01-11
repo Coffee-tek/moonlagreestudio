@@ -20,7 +20,7 @@ export default function ForgotPasswordForm() {
 
         try {
             setIsPending(true);
-            console.log("Requesting password reset for:", email);
+            // console.log("Requesting password reset for:", email);
             await requestPasswordReset({
                 email,
                 redirectTo: "/auth/reset-password",

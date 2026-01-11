@@ -125,7 +125,7 @@ export default function SessionEditModal({ session, onClose, onSave, teachers = 
     if (!validateForm()) return;
 
 
-    console.log(formData);
+    // console.log(formData);
 
 
     try {

@@ -14,7 +14,7 @@ export default function Footer() {
               data-aos="fade-up"
               data-aos-duration="500"
             >
-              <Image
+              <img
                 src="/img/logo/LOGO_PRIMAIRE_BLANC@4x.png"
                 alt="Profile"
                 width={200}

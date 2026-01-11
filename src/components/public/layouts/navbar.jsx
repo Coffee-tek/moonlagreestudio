@@ -13,7 +13,7 @@ export default function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  console.log(session);
+  // console.log(session);
 
 
   const pathname = usePathname(); // récupère l'URL actuelle
@@ -50,7 +50,7 @@ export default function Navbar() {
             <div className="lh-1">
               {/* <h5 className="fw-bold m-0 text-success">MOON</h5>
               <small className="text-dark-50">Studio</small> */}
-              <Image
+              <img
                 src="/img/logo/LOGO PRINCIPAL NOIR.svg"
                 alt="Profile"
                 width={130}
