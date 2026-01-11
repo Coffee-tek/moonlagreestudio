@@ -1,4 +1,4 @@
-import { PrismaClient } from "../../lib/generated/prisma";
+import { PrismaClient } from "@prisma/client";
 
 // Empêche Prisma de créer plusieurs instances pendant le développement (Hot Reload)
 const globalForPrisma = globalThis;
