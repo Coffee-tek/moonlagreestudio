@@ -1,11 +1,10 @@
-export function reservationEmailTemplate({ clientName, date, time, location, instructor, nameSeance, date_reservation }) {
+export function contactEmailTemplate({nom , sujet ,email , message}) {
   return `
-
-  <!doctype html>
-<html lang="fr">
+ <!DOCTYPE html>
+  <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Confirmation de Contact</title>
     <style>
       body {
@@ -59,7 +58,7 @@ export function reservationEmailTemplate({ clientName, date, time, location, ins
         height: 80px;
         margin: 0 auto 20px;
         border-radius: 50%;
-        background-color: #36e28c33;
+        background-color: #f1f5f9;
         line-height: 80px;
         font-size: 40px;
         color: #94a3b8;
@@ -112,10 +111,13 @@ export function reservationEmailTemplate({ clientName, date, time, location, ins
         border-radius: 8px;
         border: 1px solid #e2e8f0;
       }
-
+      .ii a[href] {
+        color: none; 
+       }
       .buttons {
         padding: 24px;
-        text-align: center;
+        text-align: center
+   
       }
 
       .btns-primary {
@@ -145,74 +147,58 @@ export function reservationEmailTemplate({ clientName, date, time, location, ins
   <body>
     <div class="wrapper">
       <div class="container">
+
         <div class="header">
-          <div class="logo">Moon Lagree Studio</div>
+          <div class="logo">
+            Moon Lagree Studio
+          </div>
         </div>
+
         <div class="card">
           <div class="card-header">
-            <div class="icon-circle">✅</div>
-            <h1>C’est confirmé !</h1>
+            <div class="icon-circle">📨</div>
+            <h1>Message reçu !</h1>
             <p class="subtitle">
-              ${clientName}! Prépare-toi pour ta séance 😃.
+              Merci de nous avoir contactés. Notre équipe reviendra vers vous dans les plus brefs délais.
             </p>
           </div>
 
           <div class="content">
             <div class="box">
               <div class="row">
-                <div class="label">Séance</div>
-                <div class="value">${nameSeance}</div>
+                <div class="label">Nom</div>
+                <div class="value">${nom}</div>
               </div>
               <div class="row">
-                <div class="label">Date</div>
-                <div class="value">${date}</div>
+                <div class="label">Email</div>
+                <div class="value">${email}</div>
               </div>
               <div class="row">
-                <div class="label">Heure</div>
-                <div class="value">${time}</div>
+                <div class="label">Sujet</div>
+                <div class="value">${sujet}</div>
               </div>
               <div class="row">
-                <div class="label">Instructeur</div>
-                <div class="value">${instructor}</div>
+                <div class="label">Message</div>
+                <div class="message">"${message}"</div>
               </div>
-              
             </div>
           </div>
 
           <div class="buttons">
-            <div>
-              <a
-                href="${process.env.NEXT_PUBLIC_API_URL}/user/mes-sessions"
-                class="btns-primary"
-                >Mes seances</a
-              >
-            </div>
-            <br />
-            <div>
-              <a
-                href="${process.env.NEXT_PUBLIC_API_URL}/public/planning"
-                class="btns-secondary"
-                >Reserver un cours</a
-              >
-            </div>
+           <div><a href="${process.env.NEXT_PUBLIC_API_URL}/" class="btns-primary">Retour au site</a></div> 
+             <br/>
+            <div><a href="${process.env.NEXT_PUBLIC_API_URL}/public/planning" class="btns-secondary">Reserver un cours</a></div>
           </div>
         </div>
 
         <div class="footer">
-          Une question ? Contactez-nous à<br />
-          <a
-            href="mailto:moon.lagree@gmail.com"
-            style="color: #0b0823; text-decoration: none"
-          >
-            moon.lagree@gmail.com
-          </a>
-          © 2026 MOON LAGREE STUDIO
+          Ceci est un message automatique, merci de ne pas y répondre directement.<br/>
+         © 2026 MOON LAGREE STUDIO
         </div>
+
       </div>
     </div>
   </body>
-</html>
-
- 
+  </html>
   `;
 }

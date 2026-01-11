@@ -1,7 +1,4 @@
-export function reservationEmailTemplate({ clientName, date, time, location, instructor, nameSeance, date_reservation }) {
-  return `
-
-  <!doctype html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -153,38 +150,41 @@ export function reservationEmailTemplate({ clientName, date, time, location, ins
             <div class="icon-circle">✅</div>
             <h1>C’est confirmé !</h1>
             <p class="subtitle">
-              ${clientName}! Prépare-toi pour ta séance 😃.
+              Votre achat de crédits a été effectué avec succès.
             </p>
           </div>
 
           <div class="content">
             <div class="box">
               <div class="row">
-                <div class="label">Séance</div>
-                <div class="value">${nameSeance}</div>
+                <div class="label">Montant</div>
+                <div class="value">${prix}</div>
               </div>
               <div class="row">
-                <div class="label">Date</div>
-                <div class="value">${date}</div>
+                <div class="label">Nom du pack</div>
+                <div class="value">${nomPack}</div>
               </div>
               <div class="row">
-                <div class="label">Heure</div>
-                <div class="value">${time}</div>
+                <div class="label">Crédits ajoutés</div>
+                <div class="value">+${credits} crédits</div>
               </div>
               <div class="row">
-                <div class="label">Instructeur</div>
-                <div class="value">${instructor}</div>
+                <div class="label">Date d’expiration</div>
+                <div class="value">${expiration}</div>
               </div>
-              
+              <div class="row">
+                <div class="label">Transaction</div>
+                <div class="value">#${transaction}</div>
+              </div>
             </div>
           </div>
 
           <div class="buttons">
             <div>
               <a
-                href="${process.env.NEXT_PUBLIC_API_URL}/user/mes-sessions"
+                href="${process.env.NEXT_PUBLIC_API_URL}/user/mes-credits"
                 class="btns-primary"
-                >Mes seances</a
+                >Voir mes crédits</a
               >
             </div>
             <br />
@@ -199,6 +199,7 @@ export function reservationEmailTemplate({ clientName, date, time, location, ins
         </div>
 
         <div class="footer">
+          🔒 Paiement sécurisé <br /><br />
           Une question ? Contactez-nous à<br />
           <a
             href="mailto:moon.lagree@gmail.com"
@@ -212,7 +213,3 @@ export function reservationEmailTemplate({ clientName, date, time, location, ins
     </div>
   </body>
 </html>
-
- 
-  `;
-}

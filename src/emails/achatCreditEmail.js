@@ -1,112 +1,223 @@
-export function achatCreditEmailTemplate({ nomPack, credits, expiration, transaction,prix }) {
+export function achatCreditEmailTemplate({ nomPack, credits, expiration, transaction, prix }) {
   return `
-  <!DOCTYPE html>
+  
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Confirmation d'achat</title>
-</head>
-<body style="margin:0;padding:0;background-color:#f6f8f7;font-family:Arial,Helvetica,sans-serif;">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmation de Contact</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f8fafc;
+        font-family: Arial, sans-serif;
+        color: #0f172a;
+      }
+      .wrapper {
+        width: 100%;
+        padding: 24px;
+      }
+      .container {
+        max-width: 450px;
+        margin: 0 auto;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        background-color: #1e293b;
+        color: #ffffff;
+        border-radius: 8px;
+        text-align: center;
+        line-height: 32px;
+        font-size: 18px;
+      }
+      .card {
+        background-color: #ffffff;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+      }
+      .card-header {
+        padding: 32px 24px 24px;
+        text-align: center;
+      }
+      .icon-circle {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        background-color: #36e28c33;
+        line-height: 80px;
+        font-size: 40px;
+        color: #94a3b8;
+      }
+      h1 {
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        font-size: 14px;
+        color: #64748b;
+      }
+      .content {
+        padding: 0 24px 24px;
+      }
+      .box {
+        background-color: #f8fafc;
+        border-radius: 12px;
+        padding: 16px;
+      }
+      .row {
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .row:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+      .label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #94a3b8;
+        font-weight: bold;
+      }
+      .value {
+        font-size: 14px;
+        color: #1e293b;
+        margin-top: 4px;
+        font-weight: 500;
+      }
+      .message {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #475569;
+        font-style: italic;
+        background-color: #ffffff;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+      }
 
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f6f8f7;padding:20px 0;">
-    <tr>
-      <td align="center">
+      .buttons {
+        padding: 24px;
+        text-align: center;
+      }
 
-        <!-- Container -->
-        <table width="500" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.08);">
+      .btns-primary {
+        background-color: #0f172a;
+        color: #ffffff !important;
+        text-decoration: none;
+        text-align: center;
+        padding: 14px;
+        border-radius: 12px;
+        font-weight: bold;
+      }
+      .btns-secondary {
+        text-align: center;
+        text-decoration: none;
+        font-size: 13px;
+        color: #64748b !important;
+      }
+      .footer {
+        text-align: center;
+        font-size: 11px;
+        color: #94a3b8;
+        margin-top: 32px;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="header">
+          <div class="logo">Moon Lagree Studio</div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="icon-circle">✅</div>
+            <h1>C’est confirmé !</h1>
+            <p class="subtitle">
+              Votre achat de crédits a été effectué avec succès.
+            </p>
+          </div>
 
-          <!-- Header -->
-          <tr>
-            <td align="center" style="padding:32px 24px 16px;">
-              <div style="width:96px;height:96px;background:#36e28c33;border-radius:50%;display:flex;align-items:center;justify-content:center;">
-                <span style="font-size:48px;">✅</span>
+          <div class="content">
+            <div class="box">
+              <div class="row">
+                <div class="label">Montant</div>
+                <div class="value">${prix}</div>
               </div>
-              <h1 style="margin:24px 0 8px;font-size:24px;color:#112119;">
-                C’est confirmé !
-              </h1>
-              <p style="margin:0;font-size:15px;color:#4e5e56;">
-                Votre achat de crédits a été effectué avec succès.
-              </p>
-            </td>
-          </tr>
+              <div class="row">
+                <div class="label">Nom du pack</div>
+                <div class="value">${nomPack}</div>
+              </div>
+              <div class="row">
+                <div class="label">Crédits ajoutés</div>
+                <div class="value">+${credits} crédits</div>
+              </div>
+              <div class="row">
+                <div class="label">Date d’expiration</div>
+                <div class="value">${expiration}</div>
+              </div>
+              <div class="row">
+                <div class="label">Transaction</div>
+                <div class="value">#${transaction}</div>
+              </div>
+            </div>
+          </div>
 
-          <!-- Card -->
-          <tr>
-            <td style="padding:24px;">
-              <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-radius:10px;">
-                <tr>
-                  <td style="padding:20px;">
-                    <p style="margin:0 0 6px;color:#0b0823;font-size:12px;font-weight:bold;text-transform:uppercase;">
-                      Achat effectué : ${prix} cfa
-                    </p>
-                    <h3 style="margin:0 0 16px;font-size:18px;color:#112119;">
-                     ${nomPack}
-                    </h3>
+          <div class="buttons">
+            <div>
+              <a
+                href="${process.env.NEXT_PUBLIC_API_URL}/user/mes-credits"
+                class="btns-primary"
+                >Voir mes crédits</a
+              >
+            </div>
+            <br />
+            <div>
+              <a
+                href="${process.env.NEXT_PUBLIC_API_URL}/public/planning"
+                class="btns-secondary"
+                >Reserver un cours</a
+              >
+            </div>
+          </div>
+        </div>
 
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td style="padding:8px 0;color:#4e5e56;font-size:14px;">
-                          ➕ Crédits ajoutés
-                        </td>
-                        <td align="right" style="padding:8px 0;font-weight:bold;color:#112119;">
-                          +${credits} crédits
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding:8px 0;color:#4e5e56;font-size:14px;">
-                          📅 Date d’expiration
-                        </td>
-                        <td align="right" style="padding:8px 0;color:#112119;">
-                         ${expiration}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding:8px 0;color:#4e5e56;font-size:14px;">
-                          🔢 Transaction
-                        </td>
-                        <td align="right" style="padding:8px 0;font-family:monospace;font-size:12px;">
-                          #${transaction}
-                        </td>
-                      </tr>
-                    </table>
-
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- CTA -->
-          <tr>
-            <td align="center" style="padding:12px 24px 28px;">
-              <a href="${process.env.NEXT_PUBLIC_API_URL}/user/mes-credits" style="display:block;width:100%;max-width:260px;margin-bottom:12px;padding:14px 0;background:#0b0823;color:#fff;text-decoration:none;border-radius:999px;font-weight:bold;">
-                Voir mes crédits
-              </a>
-              <a href="${process.env.NEXT_PUBLIC_API_URL}/public/planning" style="display:block;width:100%;max-width:260px;padding:12px 0;border:1px solid #d1d5db;color:#112119;text-decoration:none;border-radius:999px;">
-                Réserver un cours
-              </a>
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td align="center" style="padding:16px 24px 24px;color:#6b7280;font-size:11px;">
-              🔒 Paiement sécurisé <br/><br/>
-              Une question ? Contactez-nous à<br/>
-              <a href="mailto:moon.lagree@gmail.com" style="color:#0b0823;text-decoration:none;">
-                moon.lagree@gmail.com
-              </a>
-            </td>
-          </tr>
-
-        </table>
-
-      </td>
-    </tr>
-  </table>
-
-</body>
+        <div class="footer">
+          🔒 Paiement sécurisé <br /><br />
+          Une question ? Contactez-nous à<br />
+          <a
+            href="mailto:moon.lagree@gmail.com"
+            style="color: #0b0823; text-decoration: none"
+          >
+            moon.lagree@gmail.com
+          </a>
+          © 2026 MOON LAGREE STUDIO
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
+
 
   `;
 }
+

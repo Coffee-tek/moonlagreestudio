@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-// import { test } from "../../../lib";
+import { sendContactEmail } from "../../../actions/sendContactEmail.action";
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -17,9 +17,15 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // console.log("Formulaire envoyé :", form);
-    // await test();
+    await sendContactEmail({
+      nom: form.nom,
+      email: form.email,
+      sujet: form.sujet,
+      message: form.message,
+    });
 
+    // optionnel : reset formulaire
+    // setForm({ nom: "", email: "", sujet: "", message: "" });
   };
 
   return (
