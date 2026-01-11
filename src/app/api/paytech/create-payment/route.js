@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { achatPackService } from "../../../../services/achatPackService";
 
 export async function POST(req) {
+  console.log("hey");
+
   try {
     const data = await req.json();
     const { userId, packId, amount } = data;
@@ -43,6 +45,14 @@ export async function POST(req) {
       custom_field: JSON.stringify({ userId, packId }),
     };
 
+    //log pour debugger
+    console.log("📤 Requête PayTech:", {
+      url: `${process.env.PAYTECH_BASE_URL}/payment/request-payment`,
+      hasApiKey: !!process.env.PAYTECH_API_KEY,
+      hasApiSecret: !!process.env.PAYTECH_API_SECRET,
+      body
+    });
+
     const response = await fetch(
       `${process.env.PAYTECH_BASE_URL}/payment/request-payment`,
       {
@@ -58,12 +68,22 @@ export async function POST(req) {
 
     const result = await response.json();
 
+    // 🔍 LOG DE LA RÉPONSE
+    console.log("📥 Réponse PayTech:", {
+      status: response.status,
+      success: result.success,
+      redirect_url: result.redirect_url,
+      fullResult: result
+    });
+
     if (!result.success) {
       return NextResponse.json(
         { success: false, message: "Erreur PayTech", details: result },
         { status: 400 }
       );
     }
+
+    console.log("📥 Réponse complète PayTech:", JSON.stringify(result, null, 2));
 
     return NextResponse.json({
       success: true,

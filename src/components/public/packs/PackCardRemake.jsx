@@ -80,9 +80,9 @@ export default function PackPackCardRemake({ pack, user }) {
 
             // ✅ OK → redirection
             toast.info("Redirection vers la page de paiement...");
-            console.log(data.redirect_url);
+            // console.log(data.redirect_url);
             
-            // window.location.href = data.redirect_url;
+            window.location.href = data.redirect_url;
 
         } catch (error) {
             console.error(error);
