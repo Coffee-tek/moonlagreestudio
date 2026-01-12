@@ -8,7 +8,10 @@ import ConditionalLayout from "../components/ConditionalLayout";
 
 
 export const metadata = {
-  title: "Moon Lagree Studio",
+  title: {
+    default: "Moon Lagree Studio",
+    template: "%s | Moon Lagree Studio",
+  },
   description: "Moon Lagree Studio – Dakar Studio de Lagree à Dakar. Cours intensifs, rapides et efficaces pour sculpter et renforcer le corps. Réservez en ligne et vivez l’expérience Moon.",
   icons: {
     icon: "/favicon.svg",
