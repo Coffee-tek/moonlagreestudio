@@ -60,7 +60,7 @@ export default function SessionCard({ session, sessions, setSessions }) {
           <img
             src={session.image || "/img/seances/5.png"}
             className="img-fluid rounded-3"
-            style={{ height: "100%", objectFit: "cover" }}
+            style={{ objectFit: "cover" }}
             alt={session.titre}
           />
         </div>
